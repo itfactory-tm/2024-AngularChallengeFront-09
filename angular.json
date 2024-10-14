@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "LaserLlama": {
+    "2024-AngularChallengeFront-09": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/laser-llama",
+            "outputPath": "dist/2024-angular-challenge-front-09",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "LaserLlama:build:production"
+              "buildTarget": "2024-AngularChallengeFront-09:build:production"
             },
             "development": {
-              "buildTarget": "LaserLlama:build:development"
+              "buildTarget": "2024-AngularChallengeFront-09:build:development"
             }
           },
           "defaultConfiguration": "development"
