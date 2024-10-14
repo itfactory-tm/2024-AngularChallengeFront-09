@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'LaserLlama' title`, () => {
+  it(`should have the '2024-AngularChallengeFront-09' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('LaserLlama');
+    expect(app.title).toEqual('2024-AngularChallengeFront-09');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, LaserLlama');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, 2024-AngularChallengeFront-09');
   });
 });
