@@ -38,7 +38,8 @@
     font-weight: 700;
     font-style: italic;
   }
+
   body{
     font-family: "Open Sans";
-
+	background-color: hotpink;
   }
