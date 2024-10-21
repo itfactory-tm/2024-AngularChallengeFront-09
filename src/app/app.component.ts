@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
+
 import { LoginButtonComponent } from './login/login-button';
 import { LogoutButtonComponent } from './login/logout-button';
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoginButtonComponent, LogoutButtonComponent],
+  imports: [RouterOutlet, NavComponent, FooterComponent, LoginButtonComponent, LogoutButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
