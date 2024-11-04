@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { UserProfileComponent } from '../login/user-profile';
-import { AuthService } from '@auth0/auth0-angular';
+import { UserProfileComponent } from '../../components/login/user-profile';
 import { CommonModule } from '@angular/common';
 
 @Component({

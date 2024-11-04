@@ -1,10 +1,10 @@
 import { RouterOutlet } from '@angular/router';
-import { NavComponent } from './nav/nav.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import { Component } from '@angular/core';
-import { LoginButtonComponent } from './login/login-button';
-import { LogoutButtonComponent } from './login/logout-button';
+import { LoginButtonComponent } from './components/login/login-button';
+import { LogoutButtonComponent } from './components/login/logout-button';
 
 @Component({
   selector: 'app-root',

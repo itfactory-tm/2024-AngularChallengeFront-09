@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 
-import { HomePageComponent } from './home-page/home-page.component';
-import { LineUpComponent } from './line-up/line-up.component';
-import { StagesComponent } from './stages/stages.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { ContactComponent } from './contact/contact.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LineUpComponent } from './pages/line-up/line-up.component';
+import { StagesComponent } from './pages/stages/stages.component';
+import { TicketsComponent } from './pages/tickets/tickets.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
     {path:'', component:HomePageComponent},
