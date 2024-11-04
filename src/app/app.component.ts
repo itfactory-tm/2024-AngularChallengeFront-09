@@ -1,9 +1,11 @@
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { Component } from '@angular/core';
 import { LoginButtonComponent } from './login/login-button';
 import { LogoutButtonComponent } from './login/logout-button';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,4 +15,7 @@ import { LogoutButtonComponent } from './login/logout-button';
 })
 
 export class AppComponent {
+
+	title = '2024-AngularChallengeFront-09';
+
 }
