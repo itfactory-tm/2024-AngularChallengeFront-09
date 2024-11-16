@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArtistDto } from '../../api/dtos/artist-dto';
+import { ArtisResponsetDto } from '../../api/dtos/artist-response-dto';
 import { SpotifyService } from '../../api/services/spotify.service';
 import { Router } from '@angular/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
@@ -13,8 +13,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   styleUrl: './line-up.component.css'
 })
 export class LineUpComponent implements OnInit {
-  artistList$: Observable<ArtistDto[]> = new Observable<ArtistDto[]>();
-  artists: ArtistDto[] = [];
+  artistList$: Observable<ArtisResponsetDto[]> = new Observable<ArtisResponsetDto[]>();
 
   constructor(private service : SpotifyService, private router: Router) { }
 

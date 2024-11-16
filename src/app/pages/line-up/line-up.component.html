@@ -2,7 +2,7 @@
     @for (artist of artistList$ | async; track $index) {
         <div class="artist-card">
             <img
-                [src]="artist.spotifyResponse?.image?.url"
+                [src]="artist.spotifyImages?.[0]?.url"
                 alt="{{ artist.name }}"
                 class="artist-image"
             />
@@ -10,12 +10,11 @@
 
             <div class="artist-genres">
                 <ul>
-                    @for (genre of artist.spotifyResponse?.genres; track $index ) {
-                        <li>{{ genre }}</li>
+                    @for (genre of artist?.genres; track $index ) {
+                        <li>{{ genre.name }}</li>
                     }
                 </ul>
               </div>
-
         </div>
     }
 </div>
