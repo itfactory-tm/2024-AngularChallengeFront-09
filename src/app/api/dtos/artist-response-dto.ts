@@ -5,5 +5,5 @@ export interface ArtisResponsetDto {
     name: string;
     biography: string;
     genres?: GenreDto[];
-    spotifyImages?: Image[]
+    spotifyImage?: Image
 }
