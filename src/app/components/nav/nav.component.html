@@ -1,4 +1,4 @@
-<nav>
+<nav [class.nav-blur]="isScrolled">
     <ul class="nav-list">
         <li><a routerLink="/line-up" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Line Up</a></li>    
         <li><a routerLink="/stages" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Stages</a></li>

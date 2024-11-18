@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary: #3F0A73; /* Licht paars */
+    --secondary: #EF35F2; /* Donker paars */
+    --tertiary: #601BA6; /* Middel paars */
+    --text: #601BA6; /* Tekst */
+    --accent: #6BF2E5; /* Accent */
+  }
+

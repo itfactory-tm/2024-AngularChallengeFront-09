@@ -1,75 +1,84 @@
 /* Color Palette */
 :root {
-    --light-purple: #EF35F2;
-    --dark-purple: #3F0A73;
-    --medium-purple: #601BA6;
-    --text-color: #601BA6;
-    --accent-color: #6BF2E5;
-  }
-  
-  footer {
-    background-color: var(--dark-purple);
-    color: var(--text-color);
-    padding: 40px 20px;
-  }
-  
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-section {
-    flex: 1 1 200px;
-    margin: 20px;
-  }
-  
-  .footer-section h4 {
-    font-size: 1.2em;
-    color: var(--light-purple);
-    margin-bottom: 15px;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    margin: 10px 0;
-  }
-  
-  .footer-section ul li a {
-    color: var(--text-color);
-    text-decoration: none;
-  }
-  
-  .footer-section ul li a:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-  }
-  
-  .sponsors .sponsor-logos {
-    display: flex;
-    gap: 15px;
-  }
-  
-  .sponsors .sponsor-logos img {
-    width: 80px;
-    height: auto;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    color: var(--medium-purple);
-    border-top: 1px solid var(--light-purple);
-    margin-top: 20px;
-  }
-  
-  .footer-bottom p {
-    margin: 0;
-  }
-      
+  --light-purple: #EF35F2;
+  --dark-purple: #3F0A73;
+  --medium-purple: #601BA6;
+  --accent-color: #6BF2E5;
+}
+.wave,footer{
+  background-color: var(--light-purple)!important;
+
+}
+.wave{
+  clip-path: polygon(100% 100%, 0% 100% , 0.00% 70.00%, 2.00% 69.65%, 4.00% 68.60%, 6.00% 66.89%, 8.00% 64.58%, 10.00% 61.76%, 12.00% 58.52%, 14.00% 54.97%, 16.00% 51.26%, 18.00% 47.49%, 20.00% 43.82%, 22.00% 40.36%, 24.00% 37.25%, 26.00% 34.59%, 28.00% 32.47%, 30.00% 30.98%, 32.00% 30.16%, 34.00% 30.04%, 36.00% 30.63%, 38.00% 31.90%, 40.00% 33.82%, 42.00% 36.31%, 44.00% 39.28%, 46.00% 42.64%, 48.00% 46.25%, 50.00% 50.00%, 52.00% 53.75%, 54.00% 57.36%, 56.00% 60.72%, 58.00% 63.69%, 60.00% 66.18%, 62.00% 68.10%, 64.00% 69.37%, 66.00% 69.96%, 68.00% 69.84%, 70.00% 69.02%, 72.00% 67.53%, 74.00% 65.41%, 76.00% 62.75%, 78.00% 59.64%, 80.00% 56.18%, 82.00% 52.51%, 84.00% 48.74%, 86.00% 45.03%, 88.00% 41.48%, 90.00% 38.24%, 92.00% 35.42%, 94.00% 33.11%, 96.00% 31.40%, 98.00% 30.35%, 100.00% 30.00%);
+    height: 20vh;
+  width: 100%;
+
+}
+footer {
+  color: white;
+  position: relative;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin: 20px;
+}
+
+.footer-section h4 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 10px 0;
+}
+
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.sponsors .sponsor-logos {
+  display: flex;
+  gap: 15px;
+}
+
+.sponsors .sponsor-logos img {
+  width: 80px;
+  height: auto;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+ 
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.main-content {
+  flex-grow: 1;
+}

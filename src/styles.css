@@ -1,10 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --light-purple: #EF35F2;
+  --dark-purple: #3F0A73;
+  --medium-purple: #601BA6;
+  --text-color: #601BA6;
+  --accent-color: #6BF2E5;
+}
+
 
 *{
     padding : 0;
     margin: 0;
     box-sizing: border-box;
-    /* background-color: #601BA6; */
 
   }
 
@@ -133,6 +139,9 @@
     src: local('Impacted Regular'), url('/assets/fonts/Impact/Impacted.woff') format('woff');
     }
 
-  	body {
-   		font-family: "Open Sans";
-  	}
+  	
+    body{
+      background-color: var(--dark-purple);
+      font-family: 'open sans', sans-serif;
+  }
+  
