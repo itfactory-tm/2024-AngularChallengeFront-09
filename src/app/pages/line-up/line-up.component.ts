@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ArtisResponsetDto } from '../../api/dtos/artist-response-dto';
-import { DbService } from '../../api/services/db.service';
+import { ArtistService } from '../../api/services/artist.service';
 import { Router } from '@angular/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +22,7 @@ export class LineUpComponent implements OnInit {
     spotifyId: ""
   }
 
-  constructor(private service : DbService, private router: Router) { }
+  constructor(private service : ArtistService, private router: Router) { }
 
   ngOnInit(): void {
     this.artistList$ = this.service.getArtists();

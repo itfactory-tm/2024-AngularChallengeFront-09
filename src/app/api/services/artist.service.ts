@@ -7,7 +7,7 @@ import { ArtistRequestDto } from '../dtos/artist-request-dto';
 @Injectable({
   providedIn: 'root'
 })
-export class DbService {
+export class ArtistService {
   private baseUrl: string = "https://localhost:7091";
 
   constructor(private http: HttpClient) { }
