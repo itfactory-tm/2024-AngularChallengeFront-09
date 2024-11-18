@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { StageDto } from '../../api/dtos/stage-dto';
+
 
 @Component({
   selector: 'app-stage',
   standalone: true,
   imports: [],
   templateUrl: './stage.component.html',
-  styleUrl: './stage.component.css'
+  styleUrls: ['./stage.component.css']
 })
-export class StageComponent {
 
+export class StageComponent {
+ @Input()
+ stage!:StageDto;
 }

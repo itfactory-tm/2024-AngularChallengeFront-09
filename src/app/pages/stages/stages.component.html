@@ -1,1 +1,6 @@
-<p>stages works!</p>
+<div class="stages-container">
+    @for (stage of stageList$ | async; track $index) {
+      <app-stage [stage]="stage"></app-stage>
+    }
+</div>
+  
