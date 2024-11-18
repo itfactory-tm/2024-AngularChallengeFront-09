@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ArtisResponsetDto } from '../../dtos/Artist/artist-response-dto';
+import { ArtistResponseDto } from '../../dtos/Artist/artist-response-dto';
 import { ArtistRequestDto } from '../../dtos/Artist/artist-request-dto';
 
 @Injectable({
@@ -12,12 +12,12 @@ export class ArtistService {
 
   constructor(private http: HttpClient) { }
 
-  getArtists(): Observable<ArtisResponsetDto[]> {
-    return this.http.get<ArtisResponsetDto[]>(this.baseUrl);
+  getArtists(): Observable<ArtistResponseDto[]> {
+    return this.http.get<ArtistResponseDto[]>(this.baseUrl);
   }
 
-  getARtistsByDay(id: string): Observable<ArtisResponsetDto[]> {
-    return this.http.get<ArtisResponsetDto[]>(this.baseUrl + "/day" + id);
+  getARtistsByDay(id: string): Observable<ArtistResponseDto[]> {
+    return this.http.get<ArtistResponseDto[]>(`${this.baseUrl}/day/${id}`);
   }
 
   addArtist(artist: ArtistRequestDto): Observable<ArtistRequestDto> {
