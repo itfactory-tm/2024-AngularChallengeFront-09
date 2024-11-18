@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TicketDto } from '../../api/dtos/ticket-dto';
 
 @Component({
   selector: 'app-ticket',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './ticket.component.css'
 })
 export class TicketComponent {
-
+ticket!: TicketDto
 }

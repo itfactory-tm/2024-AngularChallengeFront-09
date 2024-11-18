@@ -1,1 +1,10 @@
-<p>tickets works!</p>
+<h1>Tickets</h1>
+<div class="tickets">
+    @for (ticket of TicketList$ | async; track $index) {
+        <div class="ticketCard">
+            <h2>{{ ticket.name }}</h2>
+            <p>€{{ ticket.price }}</p>
+            <p>{{ ticket.description }}</p>
+        </div>
+    }
+</div>
