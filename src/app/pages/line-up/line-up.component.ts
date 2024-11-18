@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArtisResponsetDto } from '../../api/dtos/artist-response-dto';
-import { ArtistService } from '../../api/services/artist.service';
+import { ArtisResponsetDto } from '../../api/dtos/Artist/artist-response-dto';
+import { ArtistService } from '../../api/services/Artist/artist.service';
 import { Router } from '@angular/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ArtistRequestDto } from '../../api/dtos/artist-request-dto';
+import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 
 @Component({
   selector: 'app-line-up',

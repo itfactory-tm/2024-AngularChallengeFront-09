@@ -1,4 +1,4 @@
-import { GenreDto } from "./genre-dto";
+import { GenreDto } from "../genre-dto";
 import { Image } from "./image";
 
 export interface ArtisResponsetDto {
