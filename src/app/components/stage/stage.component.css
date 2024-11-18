@@ -1,0 +1,31 @@
+.stage-card {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #601ba6;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .stage-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .stage-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .stage-title {
+    color: #ef35f2;
+    margin-bottom: 8px;
+  }
+  
+  .stage-capacity {
+    color: #6bf2e5;
+    font-size: 1rem;
+  }
+  
