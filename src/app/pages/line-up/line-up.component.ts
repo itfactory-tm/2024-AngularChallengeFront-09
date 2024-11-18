@@ -1,37 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ArtistComponent } from '../../components/artist/artist.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
-import { Router } from '@angular/router';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
+
 
 @Component({
   selector: 'app-line-up',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, FormsModule],
+  imports: [ArtistComponent, AsyncPipe, RouterModule],
   templateUrl: './line-up.component.html',
   styleUrl: './line-up.component.css'
 })
-export class LineUpComponent implements OnInit {
-  artistList$: Observable<ArtistResponseDto[]> = new Observable<ArtistResponseDto[]>();
-  newArtist: ArtistRequestDto = {
-    name: "",
-    biography: "",
-    spotifyId: ""
-  }
+export class  LineUpComponent implements OnInit {
+  artistList!: ArtistResponseDto[];
+  artistList$!: Observable<ArtistResponseDto[]>; 
 
-  constructor(private service : ArtistService, private router: Router) { }
+  constructor(private artistService : ArtistService) { }
 
   ngOnInit(): void {
-    this.artistList$ = this.service.getArtists();
-  }
-
-  submitForm() {
-    this.service.addArtist(this.newArtist).subscribe({
-      next: () => this.router.navigate([""]),
-      error: (error: Error) => alert(error.message)
-    });
+    this.artistList$ = this.artistService.getArtists();
+  
+    
   }
 }

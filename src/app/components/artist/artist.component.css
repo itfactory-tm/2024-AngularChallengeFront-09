@@ -1,0 +1,77 @@
+.artist-card {
+    background-color: #601ba6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.artist-card:hover {
+    transform: translateY(-10px);
+}
+
+.artist-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1; /* Makes container square */
+}
+
+.artist-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.artist-biography {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(96, 27, 166, 0.95);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: flex-start; /* Align to top */
+    justify-content: flex-start;
+    padding: 20px;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto; /* Enable scrolling */
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Customize scrollbar */
+.artist-biography::-webkit-scrollbar {
+    width: 6px;
+}
+
+.artist-biography::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.artist-biography::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.image-container:hover .artist-biography {
+    opacity: 1;
+}
+

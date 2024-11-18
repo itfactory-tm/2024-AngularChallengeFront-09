@@ -1,33 +1,6 @@
-<div>
+<div class="artists-container">
     @for (artist of artistList$ | async; track $index) {
-        <div class="artist-card">
-            <img
-                [src]="artist.spotifyImage?.url"
-                alt="{{ artist.name }}"
-                class="artist-image"
-            />
-            <h3 class="artist-name">{{ artist.name }}</h3>
-
-            <div class="artist-genres">
-                <ul>
-                    @for (genre of artist?.genres; track $index ) {
-                        <li>{{ genre.name }}</li>
-                    }
-                </ul>
-              </div>
-        </div>
+      <app-artist [artist]="artist"></app-artist>
     }
 </div>
-
-<form (ngSubmit)="submitForm()" #artistForm="ngForm" >
-    <label for="name">Name</label>
-    <input id="name" required type="text" name="name" [(ngModel)]="newArtist.name">
-
-    <label for="spotifyId">SpotifyId</label>
-    <input id="spotifyId" required type="text" name="spotifyId" [(ngModel)]="newArtist.spotifyId">
-
-    <label for="biography">Biography</label>
-    <input id="biography" required type="text" name="biography" [(ngModel)]="newArtist.biography">
-
-    <input type="submit" value="add" [disabled]="!artistForm.form.valid">
-</form>
+  
