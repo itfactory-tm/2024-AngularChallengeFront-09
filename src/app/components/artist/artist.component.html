@@ -1,12 +1,10 @@
 <div class="artist-card">
-    <p class="artist-name">{{ artist.name }}</p>
-    <div class="image-container">
+    
         <img 
             [src]="artist.spotifyImage?.url" 
             alt="{{ artist.name }}" 
             class="artist-image"
         />
-        <p class="artist-biography">{{ artist.biography }}</p>
-    </div>
-   
+    <p class="artist-name">{{ artist.name }}</p>
+
 </div>

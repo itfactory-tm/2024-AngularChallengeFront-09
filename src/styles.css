@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   --light-purple: #EF35F2;
   --dark-purple: #3F0A73;

@@ -5,11 +5,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { Component } from '@angular/core';
 import { LoginButtonComponent } from './components/login/login-button';
 import { LogoutButtonComponent } from './components/login/logout-button';
+import { SpinnerComponent } from './components/loading-spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent, FooterComponent, LoginButtonComponent, LogoutButtonComponent],
+  imports: [RouterOutlet, NavComponent, FooterComponent, LoginButtonComponent, LogoutButtonComponent, SpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

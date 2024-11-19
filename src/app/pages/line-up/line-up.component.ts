@@ -15,14 +15,13 @@ import { ArtistService } from '../../api/services/Artist/artist.service';
   styleUrl: './line-up.component.css'
 })
 export class  LineUpComponent implements OnInit {
-  artistList!: ArtistResponseDto[];
-  artistList$!: Observable<ArtistResponseDto[]>; 
+  artistList$!: Observable<ArtistResponseDto[]>;
+ 
 
   constructor(private artistService : ArtistService) { }
 
   ngOnInit(): void {
     this.artistList$ = this.artistService.getArtists();
-  
     
   }
 }
