@@ -1,77 +1,40 @@
 .artist-card {
-    background-color: #601ba6;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    padding: 20px;
+    max-width: 400px;
+    max-height: 400px;
     text-align: center;
-    transition: transform 0.3s ease;
-    color: white;
-}
-
-.artist-card:hover {
-    transform: translateY(-10px);
-}
-
-.artist-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.image-container {
     position: relative;
-    width: 100%;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 1 / 1; /* Makes container square */
+    display: flex;
+
+
 }
+
 
 .artist-image {
-    width: 100%;
-    height: 100%;
+    max-width: 400px;
+    height: auto;
     object-fit: cover;
     display: block;
     border-radius: 8px;
+    aspect-ratio: 1 1;
 }
 
-.artist-biography {
+.artist-name{
     position: absolute;
-    top: 0;
-    left: 0;
+    background-color:rgba(239, 53, 242);
+    clip-path: polygon(0 34%, 100% 0, 100% 100%, 0% 100%);
+
+    color: white;
+    font-weight: bold;
+    font-size: 21px;
     width: 100%;
-    height: 100%;
-    background: rgba(96, 27, 166, 0.95);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: flex-start; /* Align to top */
-    justify-content: flex-start;
-    padding: 20px;
-    margin: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    overflow-y: auto; /* Enable scrolling */
-    font-size: 0.9rem;
-    line-height: 1.4;
-    text-align: left;
+    padding: 2rem;
+    bottom: 0;
+    transition: all ease 0.3s;
 }
+.artist-card:hover .artist-name{
+    clip-path: polygon(0 0, 100% 33%, 100% 100%, 0% 100%);
+    background-color:rgba(239, 53, 242,0.6);
 
-/* Customize scrollbar */
-.artist-biography::-webkit-scrollbar {
-    width: 6px;
 }
-
-.artist-biography::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.artist-biography::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-}
-
-.image-container:hover .artist-biography {
-    opacity: 1;
-}
-

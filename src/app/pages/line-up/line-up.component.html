@@ -1,6 +1,11 @@
+<div class="container">
+
 <div class="artists-container">
     @for (artist of artistList$ | async; track $index) {
       <app-artist [artist]="artist"></app-artist>
     }
 </div>
-  
+
+
+
+</div>
