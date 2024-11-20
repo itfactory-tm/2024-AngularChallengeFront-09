@@ -2,14 +2,11 @@
   <nav class="nav-bar">
     <button (click)="filterArtists('all')" [class.active]="activeFilter === 'all'">All artists</button>
     <button (click)="filterArtists('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
+    <button (click)="filterArtists('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
   </nav>
   
-  
-  
-  
-
   @for (title of artistSchedule.keys(); track $index) {
-    <h2 class="day-title">{{ title | formatDate }}</h2>
+    <h2 class="day-title">{{ title | formatLineUpTitle }}</h2>
 
     <div class="artists-container">
       @for (artist of artistSchedule.get(title) | async; track $index) {

@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'formatDate',
+  name: 'formatLineUpTitle',
   standalone: true
 })
-export class FormatDatePipe implements PipeTransform {
+export class FormatLineUpTitlePipe implements PipeTransform {
   transform(value: string): string {
    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
