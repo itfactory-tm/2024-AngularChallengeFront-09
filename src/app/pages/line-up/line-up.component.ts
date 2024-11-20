@@ -6,24 +6,22 @@ import { ArtistComponent } from '../../components/artist/artist.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { DayService } from '../../api/services/Day/day.service';
-import { FormatDatePipe } from '../../pipes/format-date.pipe';
+import { FormatLineUpTitlePipe } from '../../pipes/format-line-up-title.pipe';
 
 @Component({
   selector: 'app-line-up',
   standalone: true,
-  imports: [ArtistComponent, AsyncPipe, FormatDatePipe, RouterModule],
+  imports: [ArtistComponent, AsyncPipe, FormatLineUpTitlePipe, RouterModule],
   templateUrl: './line-up.component.html',
   styleUrl: './line-up.component.css'
 })
 export class  LineUpComponent implements OnInit {
-  artistList$!: Observable<ArtistResponseDto[]>;
   artistSchedule: Map<string, Observable<ArtistResponseDto[]>> = new Map();
   activeFilter: string = "all";
 
   constructor(private artistService : ArtistService, private dayService: DayService) { }
 
   ngOnInit(): void {
-    this.artistList$ = this.artistService.getArtists();
     let artists = this.artistService.getArtists();
     this.artistSchedule.set("All artists", artists);
   }
@@ -47,6 +45,9 @@ export class  LineUpComponent implements OnInit {
           });
         });
         break;
+      }
+
+      case "byGenre": {
       }
     }
   }
