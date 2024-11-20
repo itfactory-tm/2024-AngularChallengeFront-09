@@ -1,10 +1,21 @@
 <div class="container">
 
-<div class="artists-container">
+<!-- <div class="artists-container">
     @for (artist of artistList$ | async; track $index) {
       <app-artist [artist]="artist"></app-artist>
     }
-</div>
+</div> -->
+
+
+@for (date of artistSchedule.keys(); track $index) {
+  <h2 class="day-title">day {{ $index + 1 }} - {{ date | formatDate }}</h2>
+
+  <div class="artists-container">
+    @for (artist of artistSchedule.get(date) | async; track $index) {
+      <app-artist [artist]="artist"></app-artist>
+    }
+  </div>
+}
 
 
 

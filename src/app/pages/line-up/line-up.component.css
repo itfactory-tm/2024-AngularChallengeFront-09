@@ -3,5 +3,29 @@
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+  padding-bottom: 8rem;
   gap: 20px;
+}
+
+.day-title {
+  color: rgba(107, 242, 229, 255);
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.day-title::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background: rgba(107, 242, 229, 0.6);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
