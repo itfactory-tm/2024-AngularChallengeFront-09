@@ -3,5 +3,65 @@
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+  padding-bottom: 8rem;
   gap: 20px;
 }
+
+.day-title {
+  color: rgba(107, 242, 229, 255);
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.day-title::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background: rgba(107, 242, 229, 0.6);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 60px;
+  gap: 15px;
+  /* background-color: rgba(239, 53, 242, 0.05);
+  border-bottom: 1px solid rgba(239, 53, 242, 0.2); */
+}
+
+.nav-bar button {
+  padding: 8px 16px;
+  border: 1px solid rgba(239, 53, 242, 0.6);
+  border-radius: 20px;
+  background-color: transparent;
+  color: rgba(239, 53, 242, 0.8);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-bar button:hover {
+  background-color: rgba(239, 53, 242, 0.1);
+  color: rgba(239, 53, 242, 1);
+  border-color: rgba(239, 53, 242, 1);
+}
+
+.nav-bar button.active {
+  background-color: rgba(239, 53, 242, 0.2);
+  color: #ffffff;
+  border-color: rgba(239, 53, 242, 1);
+}
+
+

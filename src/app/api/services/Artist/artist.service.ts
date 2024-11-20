@@ -16,7 +16,7 @@ export class ArtistService {
     return this.http.get<ArtistResponseDto[]>(this.baseUrl);
   }
 
-  getARtistsByDay(id: string): Observable<ArtistResponseDto[]> {
+  getArtistsByDay(id: string): Observable<ArtistResponseDto[]> {
     return this.http.get<ArtistResponseDto[]>(`${this.baseUrl}/day/${id}`);
   }
 

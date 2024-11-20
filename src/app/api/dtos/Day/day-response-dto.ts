@@ -1,3 +1,4 @@
 export interface DayResponseDto {
-    date: string
+    id: string;
+    date: string;
 }
