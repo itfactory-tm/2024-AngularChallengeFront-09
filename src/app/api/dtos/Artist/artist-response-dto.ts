@@ -1,9 +1,9 @@
-import { GenreDto } from "../genre-dto";
+import { GenreResponseDto } from "../Genre/genre-response-dto";
 import { Image } from "./image";
 
 export interface ArtistResponseDto {
     name: string;
     biography: string;
-    genres?: GenreDto[];
+    genres?: GenreResponseDto[];
     spotifyImage?: Image
 }
