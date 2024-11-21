@@ -5,6 +5,14 @@
     <button (click)="filterArtists('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
   </nav>
 
+  <!-- subfilter -->
+  <nav class="sub-nav-bar">
+    @for (filterOption of subfilters; track $index) {
+      <button (click)="updateSubFilter($index)" [class.active]="activeSubFilterIndex === $index">{{ filterOption | formatLineUpTitle }}</button>
+    }
+  </nav>
+  <!-- subfilter -->
+
   @for (title of artistSchedule.keys(); track $index) {
     <h2 class="day-title">{{ title | formatLineUpTitle }}</h2>
 

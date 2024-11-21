@@ -8,6 +8,7 @@ import { ArtistService } from '../../api/services/Artist/artist.service';
 import { DayService } from '../../api/services/Day/day.service';
 import { FormatLineUpTitlePipe } from '../../pipes/format-line-up-title.pipe';
 import { GenreService } from '../../api/services/Genres/genre.service';
+import { DayResponseDto } from '../../api/dtos/Day/day-response-dto';
 
 @Component({
   selector: 'app-line-up',
@@ -19,6 +20,9 @@ import { GenreService } from '../../api/services/Genres/genre.service';
 export class  LineUpComponent implements OnInit {
   artistSchedule: Map<string, Observable<ArtistResponseDto[]>> = new Map();
   activeFilter: string = "all";
+
+  subfilters: Array<string> = [];
+  activeSubFilterIndex: number = 0;
 
   constructor(private artistService : ArtistService, private dayService: DayService,
               private genreService: GenreService) { }
@@ -34,22 +38,22 @@ export class  LineUpComponent implements OnInit {
     
     switch(value) {
       case "all": {
+        this.subfilters = [];
+
         let artists = this.artistService.getArtists();
         this.artistSchedule.set("All artists", artists);
         break;
       }
 
       case "byDay": {
-        this.dayService.getDays().subscribe(days => {
-          days.forEach(day => {
-            let artists = this.artistService.getArtistsByDay(day.id);
-            this.artistSchedule.set(day.date, artists);
-          });
-        });
+        this.activeSubFilterIndex = 0;
+        this.updateDayFilterContent();
         break;
       }
 
       case "byGenre": {
+        this.subfilters = [];
+
         this.genreService.getGenres().subscribe(genre => {
           genre.forEach(genre => {
             let artists = this.artistService.getArtistsByGenre(genre.id);
@@ -59,4 +63,21 @@ export class  LineUpComponent implements OnInit {
       }
     }
   }
+
+  updateSubFilter(n: number) {
+    this.activeSubFilterIndex = n;
+    this.updateDayFilterContent();
+  }
+
+  updateDayFilterContent() {
+    this.artistSchedule.clear();
+
+    this.dayService.getDays().subscribe(days => {
+      this.subfilters = days.map((day: DayResponseDto) => day.date);
+      let day = days[this.activeSubFilterIndex]
+      let artists = this.artistService.getArtistsByDay(day.id);
+      this.artistSchedule.set(day.date, artists);
+    });
+  }
+
 }
