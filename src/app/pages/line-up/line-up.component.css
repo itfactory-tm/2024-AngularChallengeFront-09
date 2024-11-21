@@ -63,3 +63,42 @@
   color: #ffffff;
   border-color: rgba(239, 53, 242, 1);
 }
+
+
+.sub-nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 5px 30px;
+  justify-content: flex-start;
+  padding-left: 4rem;
+  margin-bottom: 3rem;
+}
+
+.sub-nav-bar button {
+  background-color: transparent;
+  color: rgba(107, 242, 229, 0.8);
+  border: none;
+  padding: 6px 12px;  /* Kleinere padding voor de buttons */
+  font-size: 0.85rem;  /* Kleinere tekstgrootte */
+  font-weight: normal;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 150px;  /* Maak de buttons iets smaller */
+  white-space: nowrap;  /* Voorkom dat de tekst in meerdere regels komt */
+  overflow: hidden;  /* Verberg de tekst als het niet past */
+  text-overflow: ellipsis;  /* Voeg '...' toe als de tekst te lang is */
+  border-radius: 20px;
+}
+
+.sub-nav-bar button:hover {
+  background-color: rgba(107, 242, 229, 0.2);
+  color: rgba(107, 242, 229, 1);
+  border-color: rgba(107, 242, 229, 1);
+}
+
+.sub-nav-bar button.active {
+  background-color: rgba(107, 242, 229, 0.4);
+  color: #fff;
+}
+

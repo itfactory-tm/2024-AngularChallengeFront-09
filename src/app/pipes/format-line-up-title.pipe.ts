@@ -9,8 +9,8 @@ export class FormatLineUpTitlePipe implements PipeTransform {
    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
    if (dateRegex.test(value)) {
-     const [year, month, day] = value.split('-');
-     return `${day}/${month}/${year}`;
+    let betterDate: Date = new Date(value);
+    return `${betterDate.toLocaleString('en-GB', { weekday: 'short' })}`
    }
    
    return value;
