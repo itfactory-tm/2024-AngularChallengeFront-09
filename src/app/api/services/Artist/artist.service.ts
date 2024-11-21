@@ -20,6 +20,10 @@ export class ArtistService {
     return this.http.get<ArtistResponseDto[]>(`${this.baseUrl}/day/${id}`);
   }
 
+  getArtistsByGenre(id: string): Observable<ArtistResponseDto[]> {
+    return this.http.get<ArtistResponseDto[]>(`${this.baseUrl}/genre/${id}`);
+  }
+
   addArtist(artist: ArtistRequestDto): Observable<ArtistRequestDto> {
     return this.http.post<ArtistRequestDto>(this.baseUrl, artist).pipe(
       catchError(this.handleError)
