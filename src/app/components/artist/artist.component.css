@@ -6,13 +6,13 @@
     text-align: center;
     position: relative;
     display: flex;
-
+    cursor: grab;
 
 }
 
 
 .artist-image {
-    max-width: 400px;
+    
     height: auto;
     object-fit: cover;
     display: block;

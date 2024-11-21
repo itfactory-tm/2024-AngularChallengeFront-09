@@ -1,0 +1,113 @@
+  /* artist-info.component.css */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modal-content {
+    background-color: #eee;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 20px;
+    border-radius: 50%;
+    padding: 5px;
+  }
+  
+  .close-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .artist-header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .artist-modal-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  
+  .artist-title {
+    font-size: 2em;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .artist-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .biography h3, .genres h3 {
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  
+  .biography p {
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+  }
+  
+  .genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .genre-tag {
+    background-color: #f0f0f0;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: #555;
+    transition: background-color 0.2s;
+  }
+  
+  .genre-tag:hover {
+    background-color: #e0e0e0;
+  }
+  
+  @media (max-width: 600px) {
+    .artist-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+    }
+  
+    .artist-modal-image {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .artist-title {
+      font-size: 1.6em;
+    }
+  }
