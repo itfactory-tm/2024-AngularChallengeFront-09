@@ -1,8 +1,9 @@
 <div class="container mx-auto">
   <nav class="nav-bar">
-    <button (click)="filterArtists('all')" [class.active]="activeFilter === 'all'">All artists</button>
-    <button (click)="filterArtists('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
-    <button (click)="filterArtists('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
+    <button (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
+    <button (click)="updateFilterContent('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
+    <button (click)="updateFilterContent('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
+    <button (click)="updateFilterContent('byStage')" [class.active]="activeFilter === 'byStage'">Artists by stage</button>
   </nav>
 
   <!-- subfilter -->
@@ -14,7 +15,7 @@
   <!-- subfilter -->
 
   @for (title of artistSchedule.keys(); track $index) {
-    <h2 class="day-title">{{ title | formatLineUpTitle }}</h2>
+    <!-- <h2 class="day-title">Line up</h2> -->
 
     <div class="artists-container">
       @for (artist of artistSchedule.get(title) | async; track $index) {
