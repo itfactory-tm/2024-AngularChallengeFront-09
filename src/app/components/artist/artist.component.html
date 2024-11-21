@@ -1,10 +1,11 @@
-<div class="artist-card">
-    
-        <img 
-            [src]="artist.spotifyImage?.url" 
-            alt="{{ artist.name }}" 
-            class="artist-image"
-        />
+<div class="artist-card" (click)="showArtistInfo()">
+    <img [src]="artist.spotifyImage?.url" [alt]="artist.name" class="artist-image" />
     <p class="artist-name">{{ artist.name }}</p>
-
-</div>
+  </div>
+  
+  <app-artist-info
+    *ngIf="isModalOpen"
+    [artist]="artist"
+    (closeModal)="closeArtistInfo()"
+  ></app-artist-info>
+  

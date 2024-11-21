@@ -18,4 +18,8 @@ export class PerformanceService {
   getPerformancesByDay(id: string): Observable<PerformanceResponseDto[]> {
     return this.http.get<PerformanceResponseDto[]>(`${this.baseUrl}/day/${id}`);
   }
+  getPerformancesByArtist(id: string): Observable<PerformanceResponseDto[]> {
+    return this.http.get<PerformanceResponseDto[]>(`${this.baseUrl}/artist/${id}`);
+  }
+  
 }
