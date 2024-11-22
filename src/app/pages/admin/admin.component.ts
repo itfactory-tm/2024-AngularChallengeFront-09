@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { UserService } from '../../api/services/Users/user.service';
 import { UserRequestDto } from '../../api/dtos/User/user-request-dto';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [AdminButtonComponent, AsyncPipe],
+  imports: [AdminButtonComponent, AsyncPipe, RouterLink],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
