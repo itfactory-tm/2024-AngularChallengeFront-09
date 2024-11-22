@@ -22,7 +22,7 @@ import { StageDto } from '../../api/dtos/stage-dto';
   styleUrl: './line-up.component.css'
 })
 export class  LineUpComponent implements OnInit {
-  artistSchedule: Map<string, Observable<ArtistResponseDto[]>> = new Map();
+  artistSchedule: Observable<ArtistResponseDto[]> = new Observable<ArtistResponseDto[]>();
   activeFilter?: string = "all";
 
   subfilters: string[] = [];
@@ -37,7 +37,7 @@ export class  LineUpComponent implements OnInit {
 
   ngOnInit(): void {
     let artists = this.artistService.getArtists();
-    this.artistSchedule.set("All artists", artists);
+    this.artistSchedule = artists;
   }
 
   updateSubFilter(n: number) {
@@ -46,7 +46,6 @@ export class  LineUpComponent implements OnInit {
   }
 
   updateFilterContent(filterValue?: string) {
-    this.artistSchedule.clear();
     this.subfilters = [];
 
     if (filterValue) {
@@ -57,7 +56,7 @@ export class  LineUpComponent implements OnInit {
     switch (this.activeFilter) {
       case "all": {
         let artists = this.artistService.getArtists();
-        this.artistSchedule.set("All artists", artists);
+        this.artistSchedule = artists;
         break;
       }
 
@@ -67,7 +66,7 @@ export class  LineUpComponent implements OnInit {
           
           let day = days[this.activeSubFilterIndex]
           let artists = this.artistService.getArtistsByDay(day.id);
-          this.artistSchedule.set(day.date, artists);
+          this.artistSchedule = artists;
         });
         break;
       }
@@ -142,9 +141,10 @@ export class  LineUpComponent implements OnInit {
                   // Converteer de Map terug naar een array
                   return Array.from(uniqueArtistsMap.values());
                 })
-              );
+              );              
             }
-            this.artistSchedule.set(activeGenre.name, activeGenreArtists);
+            
+            this.artistSchedule = activeGenreArtists;
           });
         });
 
@@ -168,7 +168,7 @@ export class  LineUpComponent implements OnInit {
           )
           .subscribe(({ stageName, artists }) => {
             if (stageName === filter) {
-              this.artistSchedule.set(stageName, of(artists));
+              this.artistSchedule =  of(artists);
             }
           });
         });

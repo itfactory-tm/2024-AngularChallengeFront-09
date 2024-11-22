@@ -14,13 +14,12 @@
   </nav>
   <!-- subfilter -->
 
-  @for (title of artistSchedule.keys(); track $index) {
-    <!-- <h2 class="day-title">Line up</h2> -->
 
-    <div class="artists-container">
-      @for (artist of artistSchedule.get(title) | async; track $index) {
-        <app-artist [artist]="artist"></app-artist>
-      }
-    </div>
-  }
+  <!-- <h2 class="day-title">Line up</h2> -->
+
+  <div class="artists-container">
+    @for (artist of artistSchedule | async; track $index) {
+      <app-artist [artist]="artist"></app-artist>
+    }
+  </div>
 </div>
