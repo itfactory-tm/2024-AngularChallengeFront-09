@@ -15,6 +15,5 @@ export const routes: Routes = [
   { path: 'tickets', component: TicketsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  //{path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
-  { path: 'admin', component: AdminComponent },
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
 ];
