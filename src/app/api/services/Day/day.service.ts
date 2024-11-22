@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DayResponseDto } from '../../dtos/Day/day-response-dto';
+import { baseUrl } from '../../../lib/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DayService {
-  private baseUrl: string = "https://localhost:7091/api/Days";
+  private apiUrl = `${baseUrl}/Days`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getDays(): Observable<DayResponseDto[]> {
-    return this.http.get<DayResponseDto[]>(this.baseUrl);
+    return this.http.get<DayResponseDto[]>(this.apiUrl);
   }
 }

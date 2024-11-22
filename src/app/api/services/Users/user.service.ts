@@ -3,20 +3,20 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserResponseDto } from '../../dtos/User/user-response-dto';
 import { catchError, Observable, throwError } from 'rxjs';
+import { baseUrl } from '../../../lib/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  // TODO: Store base url for all api routes in .env file?
-  private baseUrl = 'https://localhost:7091';
+  apiUrl = `${baseUrl}/Users`;
   constructor(
     public auth: AuthService,
     private http: HttpClient
   ) {}
 
-  public getUsers(): Observable<UserResponseDto[]>{
-    return this.http.get<UserResponseDto[]>(this.baseUrl + "/api/Users");
+  public getUsers(): Observable<UserResponseDto[]> {
+    return this.http.get<UserResponseDto[]>(this.apiUrl);
   }
 
   // Method to sync user with the backend
@@ -30,7 +30,7 @@ export class UserService {
         };
 
         this.http
-          .post<UserResponseDto>(this.baseUrl + '/api/Users', newUser)
+          .post<UserResponseDto>(this.apiUrl, newUser)
           .pipe(catchError(this.handleError))
           .subscribe({
             next: response =>

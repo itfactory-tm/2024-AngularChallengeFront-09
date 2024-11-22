@@ -2,31 +2,35 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { TicketDto } from '../../dtos/ticket-dto';
+import { baseUrl } from '../../../lib/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketService {
-  private baseUrl: string = "https://localhost:7091";
+  private apiUrl = `${baseUrl}/Tickets`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getTickets(): Observable<TicketDto[]>{
-    return this.http.get<TicketDto[]>(this.baseUrl + "/api/Tickets");
+  getTickets(): Observable<TicketDto[]> {
+    return this.http.get<TicketDto[]>(this.apiUrl);
   }
 
-  getTicketById(id: TicketDto): Observable<TicketDto>{
-    return this.http.get<TicketDto>(this.baseUrl + "/api/Tickets/" + id)
+  getTicketById(id: TicketDto): Observable<TicketDto> {
+    return this.http.get<TicketDto>(`${this.apiUrl}/${id}`);
   }
 
-  addTicket(ticket: TicketDto): Observable<TicketDto>{
-    return this.http.post<TicketDto>(this.baseUrl + "/api/Tickets", ticket).pipe(
-      catchError(this.handleError)
-    )
+  addTicket(ticket: TicketDto): Observable<TicketDto> {
+    return this.http
+      .post<TicketDto>(this.apiUrl, ticket)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = (error.status === 400) ? error.error : "Er is een onverwachte fout opgetreden.";
+    const errorMessage =
+      error.status === 400
+        ? error.error
+        : 'Er is een onverwachte fout opgetreden.';
     return throwError(() => new Error(errorMessage));
   }
 }
