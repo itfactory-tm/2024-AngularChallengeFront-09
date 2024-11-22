@@ -15,10 +15,8 @@ export class UserService {
     private http: HttpClient
   ) {}
 
-  addUser(user: UserResponseDto): Observable<UserResponseDto> {
-    return this.http
-      .post<UserResponseDto>(this.baseUrl + '/api/Users', user)
-      .pipe(catchError(this.handleError));
+  public getUsers(): Observable<UserResponseDto[]>{
+    return this.http.get<UserResponseDto[]>(this.baseUrl + "/api/Users");
   }
 
   // Method to sync user with the backend
