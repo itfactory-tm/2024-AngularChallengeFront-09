@@ -1,3 +1,6 @@
+<app-admin-modal (userUpdated)="refreshUsers()" (userUpdateFailed)="notifyFail()" #userModal></app-admin-modal>
+<app-error-toast [message]="'Failed to update user.'" [timeout]="3000" #errorToast></app-error-toast>
+
 <div class="container mx-auto">
   <h2 class="py-4 text-center text-6xl my-8 text-white">User Info</h2>
   @if (user) {
@@ -40,16 +43,16 @@
             </tr>
           </thead>
           <tbody>
-            @for (user of users$ | async; track $index) {
+            @for (userObject of users$ | async; track $index) {
               <tr
                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  {{ user.email }}
+                  {{ userObject.email }}
                 </th>
                 <td class="px-6 py-4 flex items-center justify-center">
-                  @if (user.isAdmin) {
+                  @if (userObject.isAdmin) {
                     <i class="fa-solid fa-check text-green-500"></i>
                   } @else {
                     <i class="fa-solid fa-x text-red-500"></i>
@@ -58,7 +61,7 @@
                 <th
                   scope="row"
                   class="px-6 py-4 font-medium whitespace-nowrap text-center text-accent hover:underline">
-                  <a routerLink="/line-up">edit</a>
+                  <a (click)="userModal.show(userObject)">edit</a>
                 </th>
               </tr>
             }
