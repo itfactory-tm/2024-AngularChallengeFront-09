@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PerformanceResponseDto } from '../../dtos/Performance/performance-response-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PerformanceService {
-  private apiUrl = `${baseUrl}/Performances`;
+  private apiUrl = `${environment.baseUrl}/Performances`;
 
   constructor(private http: HttpClient) {}
 

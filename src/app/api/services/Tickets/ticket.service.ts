@@ -2,13 +2,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { TicketDto } from '../../dtos/ticket-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketService {
-  private apiUrl = `${baseUrl}/Tickets`;
+  private apiUrl = `${environment.baseUrl}/Tickets`;
 
   constructor(private http: HttpClient) {}
 

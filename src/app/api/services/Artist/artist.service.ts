@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ArtistResponseDto } from '../../dtos/Artist/artist-response-dto';
 import { ArtistRequestDto } from '../../dtos/Artist/artist-request-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArtistService {
-  private apiUrl = `${baseUrl}/Artists`;
+  private apiUrl = `${environment.baseUrl}/Artists`;
 
   constructor(private http: HttpClient) {}
 

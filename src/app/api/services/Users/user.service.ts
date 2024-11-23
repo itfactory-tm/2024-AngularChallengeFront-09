@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserResponseDto } from '../../dtos/User/user-response-dto';
 import { catchError, Observable, switchMap, take, throwError } from 'rxjs';
-import { baseUrl } from '../../../lib/constants';
 import { UserRequestDto } from '../../dtos/User/user-request-dto';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  apiUrl = `${baseUrl}/Users`;
+  apiUrl = `${environment.baseUrl}/Users`;
   constructor(
     public auth: AuthService,
     private http: HttpClient

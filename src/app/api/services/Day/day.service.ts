@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DayResponseDto } from '../../dtos/Day/day-response-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DayService {
-  private apiUrl = `${baseUrl}/Days`;
+  private apiUrl = `${environment.baseUrl}/Days`;
 
   constructor(private http: HttpClient) {}
 
