@@ -77,8 +77,11 @@ export class  LineUpComponent implements OnInit {
           let derivedFilters: Map<string, string[]> = new Map<string, string[]>();
 
           this.mainGenres.forEach(mainGenre => {
-            let derivedFiltersForGenre = this.subfilters.filter(subfilter => 
-              !this.mainGenres.includes(subfilter) && (subfilter.includes(mainGenre))
+            // Zorg ervoor dat bv 'trap' niet gemerged word met 'rap'
+            const regex = new RegExp(`\\b(${mainGenre})\\b`, 'i');
+            
+            let derivedFiltersForGenre = this.subfilters.filter(subfilter =>
+              !this.mainGenres.includes(subfilter) && (regex.test(subfilter))
             )
 
             // Enkel de hoofgenres die afgeleide genres hebben worden opgeslagen
