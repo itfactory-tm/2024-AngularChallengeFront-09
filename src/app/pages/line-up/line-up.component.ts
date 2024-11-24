@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { groupBy, map, mergeMap, Observable, of, toArray } from 'rxjs';
+import { combineLatest, forkJoin, groupBy, map, merge, mergeMap, Observable, of, toArray } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from '../../components/artist/artist.component';
@@ -22,11 +22,13 @@ import { StageDto } from '../../api/dtos/stage-dto';
   styleUrl: './line-up.component.css'
 })
 export class  LineUpComponent implements OnInit {
-  artistSchedule: Map<string, Observable<ArtistResponseDto[]>> = new Map();
+  artistSchedule: Observable<ArtistResponseDto[]> = new Observable<ArtistResponseDto[]>();
   activeFilter?: string = "all";
 
   subfilters: string[] = [];
   activeSubFilterIndex: number = 0;
+
+  mainGenres: string[] = ["rap", "pop", "hip hop"];
 
   constructor(private artistService : ArtistService, private dayService: DayService,
               private genreService: GenreService,
@@ -35,7 +37,7 @@ export class  LineUpComponent implements OnInit {
 
   ngOnInit(): void {
     let artists = this.artistService.getArtists();
-    this.artistSchedule.set("All artists", artists);
+    this.artistSchedule = artists;
   }
 
   updateSubFilter(n: number) {
@@ -44,7 +46,6 @@ export class  LineUpComponent implements OnInit {
   }
 
   updateFilterContent(filterValue?: string) {
-    this.artistSchedule.clear();
     this.subfilters = [];
 
     if (filterValue) {
@@ -55,7 +56,7 @@ export class  LineUpComponent implements OnInit {
     switch (this.activeFilter) {
       case "all": {
         let artists = this.artistService.getArtists();
-        this.artistSchedule.set("All artists", artists);
+        this.artistSchedule = artists;
         break;
       }
 
@@ -65,7 +66,7 @@ export class  LineUpComponent implements OnInit {
           
           let day = days[this.activeSubFilterIndex]
           let artists = this.artistService.getArtistsByDay(day.id);
-          this.artistSchedule.set(day.date, artists);
+          this.artistSchedule = artists;
         });
         break;
       }
@@ -73,10 +74,77 @@ export class  LineUpComponent implements OnInit {
       case "byGenre": {
         this.genreService.getGenres().subscribe(genres => {
           this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
+          let derivedFilters: Map<string, string[]> = new Map<string, string[]>();
 
-          let genre = genres[this.activeSubFilterIndex];
-          let artists = this.artistService.getArtistsByGenre(genre.id);
-          this.artistSchedule.set(genre.name, artists);
+          this.mainGenres.forEach(mainGenre => {
+            // Zorg ervoor dat bv 'trap' niet gemerged word met 'rap'
+            const regex = new RegExp(`\\b(${mainGenre})\\b`, 'i');
+            
+            let derivedFiltersForGenre = this.subfilters.filter(subfilter =>
+              !this.mainGenres.includes(subfilter) && (regex.test(subfilter))
+            )
+
+            // Enkel de hoofgenres die afgeleide genres hebben worden opgeslagen
+            if (derivedFiltersForGenre.length > 0) {
+              derivedFilters.set(mainGenre, derivedFiltersForGenre);
+            }
+          });
+
+          // Pas de subfilter aan zonder de afgeleide genres
+          this.subfilters = this.subfilters.filter(item => !Array.from(derivedFilters.values()).flat().includes(item));
+
+          // Haal all genres van de subfilters op
+          let filteredGenres = genres.filter(genre => this.subfilters.includes(genre.name));
+
+          // Bepaal het actieve genre
+          let activeGenre = filteredGenres[this.activeSubFilterIndex];
+          
+          let derivedArtistsMap = new Map<string, ArtistResponseDto[]>();
+
+          // Maak een lijst van observables aan die worden uitgevoerd voor elke mainGenre
+          const derivedArtistsRequests = Array.from(derivedFilters.entries()).map(([mainGenre, derivedFilters]) => {
+            let derivedGenreResponseDtos = genres.filter(g => derivedFilters.includes(g.name));
+          
+            // Combineer observables voor alle afgeleide genres van dit hoofdgenre
+            return combineLatest(
+              derivedGenreResponseDtos.map(genre => this.artistService.getArtistsByGenre(genre.id))
+            ).pipe(
+              map(arrays => arrays.flat()), // Combineer alle artiesten in één lijst
+              map(artists => ({ mainGenre, artists })) // Voeg de genre-informatie toe aan de output
+            );
+          });
+          
+          // Gebruik `forkJoin` om te wachten tot alle observables zijn afgerond
+          forkJoin(derivedArtistsRequests).subscribe(results => {
+            results.forEach(({ mainGenre, artists }) => {
+              derivedArtistsMap.set(mainGenre, artists);
+            });
+
+            // Neem alle artiesten van het actieve genre
+            let activeGenreArtists = this.artistService.getArtistsByGenre(activeGenre.id);
+
+            if (this.mainGenres.includes(activeGenre.name)) {
+              // Voeg alle afgeleide artiesten van het actieve genre samen in één observable
+              const derivedArtistsObservable = of(derivedArtistsMap.get(activeGenre.name)!);
+              
+              activeGenreArtists = combineLatest([activeGenreArtists, derivedArtistsObservable]).pipe(
+                map(([artists1, artists2]) => {
+                  const combinedArtists = artists2 ? [...artists1, ...artists2] : [...artists1];
+                  const uniqueArtists = new Map(combinedArtists.map(artist => [artist.name, artist]));
+                  return Array.from(uniqueArtists.values());
+                })
+              );
+            }
+
+            this.artistSchedule = activeGenreArtists;
+          });
+
+          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
+          // this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
+          // let genre = genres[this.activeSubFilterIndex]
+          // let activeGenreArtists = this.artistService.getArtistsByGenre(genre.id);
+          // this.artistSchedule = activeGenreArtists;
+          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
         });
 
         break;
@@ -99,7 +167,7 @@ export class  LineUpComponent implements OnInit {
           )
           .subscribe(({ stageName, artists }) => {
             if (stageName === filter) {
-              this.artistSchedule.set(stageName, of(artists));
+              this.artistSchedule =  of(artists);
             }
           });
         });
