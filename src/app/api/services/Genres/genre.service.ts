@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenreResponseDto } from '../../dtos/Genre/genre-response-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GenreService {
-  private apiUrl = `${baseUrl}/Genres`;
+  private apiUrl = `${environment.baseUrl}/Genres`;
 
   constructor(private http: HttpClient) {}
 

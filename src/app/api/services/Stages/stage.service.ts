@@ -2,13 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { StageDto } from '../../dtos/stage-dto';
-import { baseUrl } from '../../../lib/constants';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StageService {
-  private apiUrl = `${baseUrl}/Stages`;
+  private apiUrl = `${environment.baseUrl}/Stages`;
 
   constructor(private http: HttpClient) {}
 
