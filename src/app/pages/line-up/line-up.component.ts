@@ -28,7 +28,7 @@ export class  LineUpComponent implements OnInit {
   subfilters: string[] = [];
   activeSubFilterIndex: number = 0;
 
-  mainGenres: string[] = ["pop", "hip hop", "rock", "rap"];
+  mainGenres: string[] = ["rap", "pop", "hip hop"];
 
   constructor(private artistService : ArtistService, private dayService: DayService,
               private genreService: GenreService,
@@ -80,7 +80,7 @@ export class  LineUpComponent implements OnInit {
             let derivedFiltersForGenre = this.subfilters.filter(subfilter => 
               !this.mainGenres.includes(subfilter) && (subfilter.includes(mainGenre))
             )
-          
+
             // Enkel de hoofgenres die afgeleide genres hebben worden opgeslagen
             if (derivedFiltersForGenre.length > 0) {
               derivedFilters.set(mainGenre, derivedFiltersForGenre);
@@ -123,29 +123,25 @@ export class  LineUpComponent implements OnInit {
             if (this.mainGenres.includes(activeGenre.name)) {
               // Voeg alle afgeleide artiesten van het actieve genre samen in één observable
               const derivedArtistsObservable = of(derivedArtistsMap.get(activeGenre.name)!);
-                
+              
               activeGenreArtists = combineLatest([activeGenreArtists, derivedArtistsObservable]).pipe(
                 map(([artists1, artists2]) => {
-                  const uniqueArtistsMap = new Map<string, ArtistResponseDto>();
-              
-                  // Voeg de artiesten van de eerste lijst toe
-                  artists1.forEach(artist => uniqueArtistsMap.set(artist.name, artist));
-              
-                  // Voeg de artiesten van de tweede lijst toe als ze uniek zijn
-                  artists2.forEach(artist => {
-                    if (!uniqueArtistsMap.has(artist.name)) {
-                      uniqueArtistsMap.set(artist.name, artist);
-                    }
-                  });
-              
-                  // Converteer de Map terug naar een array
-                  return Array.from(uniqueArtistsMap.values());
+                  const combinedArtists = artists2 ? [...artists1, ...artists2] : [...artists1];
+                  const uniqueArtists = new Map(combinedArtists.map(artist => [artist.name, artist]));
+                  return Array.from(uniqueArtists.values());
                 })
-              );              
+              );
             }
-            
+
             this.artistSchedule = activeGenreArtists;
           });
+
+          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
+          // this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
+          // let genre = genres[this.activeSubFilterIndex]
+          // let activeGenreArtists = this.artistService.getArtistsByGenre(genre.id);
+          // this.artistSchedule = activeGenreArtists;
+          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
         });
 
         break;
