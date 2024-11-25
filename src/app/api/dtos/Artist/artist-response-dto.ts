@@ -6,5 +6,6 @@ export interface ArtistResponseDto {
     name: string;
     biography: string;
     genres?: GenreResponseDto[];
-    spotifyImage?: Image
+    spotifyImage?: Image;
+    spotifyId: string;
 }

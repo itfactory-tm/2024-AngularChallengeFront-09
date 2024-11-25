@@ -1,20 +1,53 @@
-<div class="form-container">
-    <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
-    <h1 class="form-title">Add Artist</h1>
-
-    <form (ngSubmit)="submitForm()" #artistForm="ngForm">
-        <div class="mb-5">
-            <label for="name">Name</label>
-            <input type="name" id="name" name="name" required [(ngModel)]="newArtist.name" />
+<app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
+<div class="container mx-auto mt-10">
+    <div class="flex justify-between gap-4 flex-wrap">
+      <!-- Artiestenlijst -->
+      <div class="artists-container list w-1/2 overflow-y-scroll max-h-[430px]">
+        <ul>
+          @for (artist of artists$ | async; track $index) {
+            <li class="list-item">
+              <img [src]="artist.spotifyImage?.url" [alt]="artist.name" class="thumbnail" />
+              <div class="details">
+                <h3>{{ artist.name }}</h3>
+                <p>{{ artist.biography }}</p>
+              </div>
+              <button (click)="deleteArtist(artist.id)"><i class="fa-regular fa-trash-can"></i></button>
+              <button (click)="editArtist(artist)" ><i class="fa-solid fa-pen"></i></button>
+            </li>
+          }
+        </ul>
+      </div>
+  
+      <!-- Formulier -->
+      <div class="form-container w-1/2 max-h-[430px]">  
+        <div>
+            <h1 class="form-title">{{ this.edit ? "Edit artist" : "Add artist" }}</h1>
+  
+            <form (ngSubmit)="submitForm()" #artistForm="ngForm">
+            <div class="mb-5">
+                <label for="name">Name</label>
+                <input type="name" id="name" name="name" required [(ngModel)]="newArtist.name" />
+            </div>
+            <div class="mb-5">
+                <label for="spotifyId">Spotify id</label>
+                <input type="spotifyId" id="spotifyId" name="spotifyId" required [(ngModel)]="newArtist.spotifyId" />
+            </div>
+            <div class="mb-5">
+                <label for="biography">Biography</label>
+                <input type="biography" id="biography" name="biography" [(ngModel)]="newArtist.biography" />
+            </div>
+            <div class="button-container">    
+              @if (edit) {
+                <button type="button" (click)="submitEdit()" [disabled]="!artistForm.form.valid">Edit artist</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+              }
+              @else {
+                <button type="submit" [disabled]="!artistForm.form.valid">Create artist</button>
+              }
+            </div>
+            </form>
         </div>
-        <div class="mb-5">
-            <label for="spotifyId">Spotify id</label>
-            <input type="spotifyId" id="spotifyId" name="spotifyId" required [(ngModel)]="newArtist.spotifyId" />
-        </div>
-        <div class="mb-5">
-            <label for="biography">Biography</label>
-            <input type="biography" id="biography" name="biography" [(ngModel)]="newArtist.biography" />
-        </div>
-        <button type="submit" [disabled]="!artistForm.form.valid">Create artist</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+  
