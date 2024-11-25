@@ -8,6 +8,7 @@ import { LogoutButtonComponent } from './components/login/logout-button';
 import { SpinnerComponent } from './components/loading-spinner/spinner/spinner.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from './api/services/Users/user.service';
+import { LoaderService } from './components/loading-spinner/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -30,8 +31,18 @@ export class AppComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private loaderService: LoaderService
   ) {
+    // Show spinner also for authentication
+    this.auth.isLoading$.subscribe(isLoading => {
+      if (isLoading) {
+        this.loaderService.setLoading(true);
+      } else {
+        this.loaderService.setLoading(false);
+      }
+    });
+
     this.auth.appState$.subscribe(appState => {
       if (appState && appState.target) {
         // Add user to backend or update it or nothing
