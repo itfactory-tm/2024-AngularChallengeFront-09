@@ -1,11 +1,11 @@
 <div class="artist-card" (click)="showArtistInfo()">
-    <img [src]="artist.spotifyImage?.url" [alt]="artist.name" class="artist-image" />
+    <img [src]="artist.spotifyImage ? artist.spotifyImage?.url : '/assets/placeholder.jpg'" [alt]="artist.name" class="artist-image" />
     <p class="artist-name">{{ artist.name }}</p>
   </div>
-  
+
   <app-artist-info
     *ngIf="isModalOpen"
     [artist]="artist"
     (closeModal)="closeArtistInfo()"
   ></app-artist-info>
-  
+
