@@ -19,9 +19,9 @@ export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
   errorMessage: string = "";
   artists$!: Observable<ArtistResponseDto[]>;
-  
   edit: boolean = false;
-  newArtist: ArtistRequestDto = {
+  selectedArtistId: string = "";
+  selectedArtistDto: ArtistRequestDto = {
     name: '',
     spotifyId: '',
     biography: ''
@@ -40,14 +40,14 @@ export class ArtistCrudComponent implements OnInit {
   }
 
   submitEdit() {
-    this.artistService.editArtist(this.newArtist)
+    this.artistService.editArtist(this.selectedArtistId, this.selectedArtistDto)
       .subscribe(() => this.artistService.fetchArtists());
     this.cancelEdit();
   }
 
   cancelEdit() {
     this.edit = false;
-    this.newArtist = {
+    this.selectedArtistDto = {
       name: '',
       spotifyId: '',
       biography: ''
@@ -56,8 +56,8 @@ export class ArtistCrudComponent implements OnInit {
 
   editArtist(artist: ArtistResponseDto) {
     this.edit = true;
-    this.newArtist = {
-      id: artist.id,
+    this.selectedArtistId = artist.id;
+    this.selectedArtistDto = {
       name: artist.name,
       spotifyId: artist.spotifyId,
       biography: artist.biography
@@ -65,7 +65,7 @@ export class ArtistCrudComponent implements OnInit {
   }
 
   submitForm() {
-    this.artistService.addArtist(this.newArtist).subscribe({
+    this.artistService.addArtist(this.selectedArtistDto).subscribe({
       next: () => {
         this.artistService.fetchArtists();
       },

@@ -36,8 +36,8 @@ export class ArtistService {
     return this.http.get<ArtistResponseDto[]>(`${this.apiUrl}/genre/${id}`);
   }
 
-  editArtist(artist: ArtistRequestDto) {
-    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${artist.id}`, artist);
+  editArtist(id: string, artist: ArtistRequestDto) {
+    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist);
   }
 
   deleteArtist(id: string) {
