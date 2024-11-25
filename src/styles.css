@@ -158,20 +158,68 @@
     local("Impacted Regular"),
     url("/assets/fonts/Impact/Impacted.woff") format("woff");
 }
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('/assets/fonts/Ubuntu/Ubuntu-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
 body {
   background-color: var(--dark-purple);
   font-family: "open sans", sans-serif;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: "Impact Regular";
+h1,h2,h3,h4{
+  font-family: "Ubuntu",sans-serif;
 }
-
 h2 {
   font-size: 32px;
 }

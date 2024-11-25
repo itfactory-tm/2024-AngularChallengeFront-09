@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { StageDto } from '../../dtos/stage-dto';
 import { environment } from '../../../../environments/environment';
+import slug from 'slug';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,22 @@ export class StageService {
       .post<StageDto>(this.apiUrl, ticket)
       .pipe(catchError(this.handleError));
   }
-
+  getStageBySlug(urlSlug: string): Observable<StageDto> {
+    return this.getStages().pipe(
+      map(stages => {
+        const stage = stages.find(stage => 
+          slug(stage.name) === urlSlug
+        );
+        
+        if (!stage) {
+          throw new Error('Stage not found');
+        }
+        
+        return stage;
+      })
+    );
+  }
+  
   private handleError(error: HttpErrorResponse): Observable<never> {
     const errorMessage =
       error.status === 400

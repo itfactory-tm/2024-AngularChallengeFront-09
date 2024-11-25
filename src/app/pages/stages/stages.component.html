@@ -1,6 +1,9 @@
 <div class="stages-container">
-    @for (stage of stageList$ | async; track $index) {
-      <app-stage [stage]="stage"></app-stage>
-    }
+  @for (stage of stageList$ | async; track $index) {
+    <app-stage 
+      [stage]="stage" 
+      [routerLink]="['/stages', generateSlug(stage.name)]"
+      class="stage-item">
+    </app-stage>
+  }
 </div>
-  
