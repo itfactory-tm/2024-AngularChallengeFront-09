@@ -12,7 +12,7 @@
                 <p>{{ artist.biography }}</p>
               </div>
               <button (click)="deleteArtist(artist.id)"><i class="fa-regular fa-trash-can"></i></button>
-              <button (click)="editArtist(artist)" ><i class="fa-solid fa-pen"></i></button>
+              <button [ngClass]="{'icon-button': (edit && newArtist.id === artist.id) }" (click)="editArtist(artist)"><i class="fa-solid fa-pen"></i></button>
             </li>
           }
         </ul>

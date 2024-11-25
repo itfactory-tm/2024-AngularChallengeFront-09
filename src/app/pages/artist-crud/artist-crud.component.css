@@ -61,7 +61,7 @@
 }
 
 .form-container button[disabled] {
-  background-color: rgba(171, 43, 193, 1);
+  /* background-color: rgba(139, 23, 142, 1); */
   cursor: not-allowed;
 }
 
@@ -130,8 +130,9 @@
   border-bottom: none;
 }
 
-.list-item button {
+.icon-button {
   font-size: large;
+  color: white;
 }
 
 .thumbnail {

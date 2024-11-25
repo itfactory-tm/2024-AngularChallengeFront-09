@@ -6,12 +6,12 @@ import { ErrorToastComponent } from '../../components/error-toast/error-toast.co
 import { Observable } from 'rxjs';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-artist-crud',
   standalone: true,
-  imports: [FormsModule, ErrorToastComponent, AsyncPipe],
+  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
   templateUrl: './artist-crud.component.html',
   styleUrl: './artist-crud.component.css'
 })
