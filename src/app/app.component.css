@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --primary: #3F0A73; /* Licht paars */
-    --secondary: #EF35F2; /* Donker paars */
-    --tertiary: #601BA6; /* Middel paars */
-    --text: #601BA6; /* Tekst */
-    --accent: #6BF2E5; /* Accent */
-  }
+  --primary: #3f0a73; /* Licht paars */
+  --secondary: #ef35f2; /* Donker paars */
+  --tertiary: #601ba6; /* Middel paars */
+  --text: #601ba6; /* Tekst */
+  --accent: #6bf2e5; /* Accent */
+}
 
+nav {
+  margin-bottom: 100px;
+}
