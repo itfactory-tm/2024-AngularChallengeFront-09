@@ -1,3 +1,4 @@
+/* FORM */
 .form-container {
   max-width: 500px;
   margin: 0 auto;
@@ -16,9 +17,9 @@
   margin-bottom: 8px;
 }
 
-.form-container input[type="name"],
-.form-container input[type="spotifyId"],
-.form-container input[type="biography"] {
+.form-container input[name="name"],
+.form-container input[name="spotifyId"],
+.form-container textarea[name="biography"] {
   width: 100%;
   padding: 10px;
   font-size: 0.9rem;
@@ -59,6 +60,11 @@
   background-color: rgba(239, 53, 242, 1);
 }
 
+.form-container button[disabled] {
+  /* background-color: rgba(139, 23, 142, 1); */
+  cursor: not-allowed;
+}
+
 .form-container a {
   color: rgba(107, 242, 229, 0.8);
   text-decoration: underline;
@@ -68,7 +74,6 @@
 .form-container a:hover {
   color: rgba(107, 242, 229, 1);
 }
-
 
 .form-container .form-title {
   font-size: 1.8rem;
@@ -91,3 +96,127 @@
   transform: translateX(-50%);
   border-radius: 2px;
 }
+/* FORM */
+
+
+
+
+.artists-container.list {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 800px;
+  border: 1px solid var(--medium-purple);
+  border-radius: 8px;
+  background-color: var(--dark-purple);
+  color: var(--text-color);
+}
+
+.artists-container.list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--medium-purple);
+  overflow: hidden;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.icon-button {
+  font-size: large;
+  color: white;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.details {
+  flex: 1;
+}
+
+.details h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: var(--light-purple);
+}
+
+.details p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  word-wrap: break-word;
+}
+
+.details p strong {
+  color: var(--light-purple);
+}
+
+@media (max-width: 600px) {
+  .list-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+
+  .details {
+    margin-top: 1rem;
+  }
+}
+
+
+
+
+/* Algemene stijlen voor de scroll container */
+.artists-container.list {
+  @apply w-1/2 max-h-[450px] overflow-y-scroll;
+  scrollbar-width: thin; /* Maakt de scrollbar smaller */
+  scrollbar-color: #6bf2e5 #3f0a73; /* Kleuren voor de scrollbar (thumb en track) */
+}
+
+/* Stijl de scrollbar thumb (het bewegende gedeelte) */
+.artists-container.list::-webkit-scrollbar {
+  width: 8px; /* Stel de breedte van de scrollbar in */
+}
+
+.artists-container.list::-webkit-scrollbar-thumb {
+  background-color: #6bf2e5; /* De kleur van de 'thumb' */
+  border-radius: 10px; /* Ronde hoeken voor de 'thumb' */
+}
+
+.artists-container.list::-webkit-scrollbar-thumb:hover {
+  background-color: #3f0a73; /* Kleur van de 'thumb' wanneer de muis erover gaat */
+}
+
+/* Stijl de scrollbar track (het achtergrond gedeelte) */
+.artists-container.list::-webkit-scrollbar-track {
+  background-color: #3f0a73; /* Kleur van de achtergrond van de scrollbar */
+  border-radius: 10px; /* Ronde hoeken voor de track */
+}
+
+
+
+.button-container {
+  display: flex;
+  gap: 1rem;  /* Optioneel: voegt ruimte toe tussen de knoppen */
+  justify-content: start;  /* Dit zorgt ervoor dat de knoppen aan de linkerzijde worden uitgelijnd */
+}
+
+
