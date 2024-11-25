@@ -208,15 +208,6 @@ export class LineUpComponent implements OnInit {
                 this.errorToast.showToast();
               },
             });
-
-            this.artistService.getArtists().subscribe({
-              next: artists => (this.artistSchedule = artists),
-              error: err => {
-                console.error(err);
-                this.errorMessage = `Error loading artists: ${err.message}`;
-                this.errorToast.showToast();
-              },
-            });
           });
 
           // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---

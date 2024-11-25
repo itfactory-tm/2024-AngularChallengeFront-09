@@ -55,7 +55,6 @@ export class AdminComponent implements OnInit {
   }
 
   notifyFail(): void {
-    console.log('FAILED');
     this.errorToast.showToast();
   }
 }

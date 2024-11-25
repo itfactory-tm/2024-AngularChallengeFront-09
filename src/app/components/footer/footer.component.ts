@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '@auth0/auth0-angular';
+import { AuthService, User } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-footer',
@@ -15,12 +15,14 @@ export class FooterComponent implements OnInit {
     @Inject(DOCUMENT) public document: Document,
     private auth: AuthService
   ) {}
+  user: User | undefined | null;
   isAuthenticated = false;
 
   ngOnInit(): void {
     this.auth.isAuthenticated$.subscribe(
       value => (this.isAuthenticated = value)
     );
+    this.auth.user$.subscribe(u => (this.user = u));
   }
 
   login() {

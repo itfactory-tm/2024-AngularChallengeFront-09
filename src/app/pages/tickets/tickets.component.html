@@ -1,7 +1,7 @@
 <h1>Tickets</h1>
 <div class="tickets">
     @for (ticket of TicketList$ | async; track $index) {
-        <div class="ticketCard">
+        <div class="ticketCard flex justify-center items-center flex-col">
             <h2>{{ ticket.name }}</h2>
             <p>€{{ ticket.price }}</p>
             <p>{{ ticket.description }}</p>

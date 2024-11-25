@@ -45,12 +45,19 @@ export class AppComponent {
 
     this.auth.appState$.subscribe(appState => {
       if (appState && appState.target) {
-        // Add user to backend or update it or nothing
-        this.userService.syncUser().subscribe({
-          next: response => console.log('User synced successfully:', response),
-          error: err => console.error('Error syncing user:', err),
-        });
-        this.router.navigate([appState.target]); // Redirect to the target URL
+        if (
+          this.auth.isAuthenticated$.subscribe(isAuthenticated => {
+            if (isAuthenticated) {
+              // Add user to backend or update it or nothing
+              this.userService.syncUser().subscribe({
+                next: response =>
+                  console.log('User synced successfully:', response),
+                error: err => console.error('Error syncing user:', err),
+              });
+            }
+          })
+        )
+          this.router.navigate([appState.target]); // Redirect to the target URL
       }
     });
   }

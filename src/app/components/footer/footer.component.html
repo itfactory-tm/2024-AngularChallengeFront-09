@@ -34,6 +34,11 @@
       </div>
       <div class="absolute bottom-4 left-0">
         @if (isAuthenticated) {
+          @if (user) {
+            <p class="text-sm">
+              Currently logged in: <span class="italic">{{ user.email }}</span>
+            </p>
+          }
           <a (click)="logout()" class="cursor-pointer">Log Out</a>
         } @else {
           <a (click)="login()" class="cursor-pointer">Log In</a>
