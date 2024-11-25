@@ -13,7 +13,7 @@ export class ArtistService {
   private apiUrl = `https://localhost:7091/api/Artists`;
 
   private artistsSubject = new BehaviorSubject<ArtistResponseDto[]>([]);
-  public artists$: Observable<ArtistResponseDto[]> = this.artistsSubject.asObservable();
+  artists$: Observable<ArtistResponseDto[]> = this.artistsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -45,12 +45,12 @@ export class ArtistService {
   }
 
   addArtist(artist: ArtistRequestDto): Observable<ArtistRequestDto> {
-    return this.http
-      .post<ArtistRequestDto>(this.apiUrl, artist)
+    return this.http.post<ArtistRequestDto>(this.apiUrl, artist)
       .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
+    console.log(error.error)
     const errorMessage =
       error.status === 400
         ? error.error

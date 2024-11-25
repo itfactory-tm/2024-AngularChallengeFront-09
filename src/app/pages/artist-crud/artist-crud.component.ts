@@ -22,7 +22,6 @@ export class ArtistCrudComponent implements OnInit {
   
   edit: boolean = false;
   newArtist: ArtistRequestDto = {
-    id: '',
     name: '',
     spotifyId: '',
     biography: ''
@@ -49,7 +48,6 @@ export class ArtistCrudComponent implements OnInit {
   cancelEdit() {
     this.edit = false;
     this.newArtist = {
-      id: '',
       name: '',
       spotifyId: '',
       biography: ''

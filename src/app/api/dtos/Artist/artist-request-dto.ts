@@ -1,5 +1,5 @@
 export interface ArtistRequestDto {
-    id: string;
+    id?: string;
     name: string;
     spotifyId: string;
     biography: string;

@@ -17,9 +17,9 @@
   margin-bottom: 8px;
 }
 
-.form-container input[type="name"],
-.form-container input[type="spotifyId"],
-.form-container input[type="biography"] {
+.form-container input[name="name"],
+.form-container input[name="spotifyId"],
+.form-container textarea[name="biography"] {
   width: 100%;
   padding: 10px;
   font-size: 0.9rem;
