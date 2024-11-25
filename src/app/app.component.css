@@ -10,3 +10,32 @@
 nav {
   margin-bottom: 100px;
 }
+
+.left-gradient {
+  z-index: -10;
+  mask-image: radial-gradient(
+    305vw 220vh at -50% 70vh,
+    rgba(0, 0, 0, 1) 30%,
+    transparent
+  );
+
+  background: radial-gradient(
+    115vw 450px at -50% 70vh,
+    rgba(239, 53, 242, 0.3),
+    transparent
+  );
+}
+
+.top-gradient {
+  z-index: -10;
+  mask-image: radial-gradient(
+    305vw 450px at 50% 0%,
+    rgba(0, 0, 0, 1) 30%,
+    transparent
+  );
+  background: radial-gradient(
+    115vw 450px at 110% 10%,
+    rgba(107, 242, 229, 0.3),
+    transparent
+  );
+}

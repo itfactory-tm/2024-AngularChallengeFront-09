@@ -1,13 +1,16 @@
+<div class="top-gradient absolute top-0 h-full w-screen overflow-hidden"></div>
+<div class="left-gradient absolute top-0 h-screen w-screen overflow-hidden"></div>
 
-<nav>
+<div class="min-h-screen flex flex-col">
+  <nav>
     <app-nav></app-nav>
-</nav>
-<main>
+  </nav>
+  <main>
     <router-outlet></router-outlet>
     <app-spinner></app-spinner>
+  </main>
 
-</main>
-
-<footer>
+  <footer class="mt-auto">
     <app-footer></app-footer>
-</footer>
+  </footer>
+</div>

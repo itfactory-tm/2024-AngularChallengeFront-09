@@ -215,6 +215,7 @@
 }
 body {
   background-color: var(--dark-purple);
+  color: white;
   font-family: "open sans", sans-serif;
 }
 h1,h2,h3,h4{
