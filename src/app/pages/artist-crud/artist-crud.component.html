@@ -2,7 +2,7 @@
     <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
     <h1 class="form-title">Add Artist</h1>
 
-    <form (ngSubmit)="submitForm()">
+    <form (ngSubmit)="submitForm()" #artistForm="ngForm">
         <div class="mb-5">
             <label for="name">Name</label>
             <input type="name" id="name" name="name" required [(ngModel)]="newArtist.name" />
@@ -13,8 +13,8 @@
         </div>
         <div class="mb-5">
             <label for="biography">Biography</label>
-            <input type="biography" id="biography" name="biography" required [(ngModel)]="newArtist.biography" />
+            <input type="biography" id="biography" name="biography" [(ngModel)]="newArtist.biography" />
         </div>
-        <button type="submit">Create artist</button>
+        <button type="submit" [disabled]="!artistForm.form.valid">Create artist</button>
     </form>
 </div>
