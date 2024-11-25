@@ -12,12 +12,13 @@
 
 
 .artist-image {
-    
+
     height: auto;
     object-fit: cover;
     display: block;
     border-radius: 8px;
     aspect-ratio: 1 1;
+    box-shadow: 4px 4px 3px 0 rgb(0 0 0 / 0.3)
 }
 
 .artist-name{
@@ -25,6 +26,7 @@
     background-color:rgba(239, 53, 242);
     clip-path: polygon(0 34%, 100% 0, 100% 100%, 0% 100%);
 
+    border-radius: 0 0 8px 8px;
     color: white;
     font-weight: bold;
     font-size: 21px;
