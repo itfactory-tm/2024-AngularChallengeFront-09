@@ -1,0 +1,24 @@
+<div class="stage-info-container">
+    @if (stage$ | async; as stage) {
+      <div class="stage-content">
+        <h1 class="stage-title">{{ stage.name }}</h1>
+        
+        <div class="stage-info">
+          <!-- Add your stage details here -->
+          <!-- For example: -->
+          <section class="stage-section">
+            <h2>Description</h2>
+            <p>{{ stage.capacity }}</p>
+          </section>
+  
+          <!-- Add more sections as needed -->
+        </div>
+      </div>
+    } @else {
+      <div class="not-found">
+        <h2>Stage Not Found</h2>
+        <p>The requested stage could not be found.</p>
+        <a routerLink="/stages" class="back-link">Return to Stages</a>
+      </div>
+    }
+  </div>

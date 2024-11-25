@@ -83,7 +83,7 @@
   }
   
   .genre-tag {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.9em;
@@ -92,7 +92,57 @@
   }
   
   .genre-tag:hover {
-    background-color: #e0e0e0;
+    background-color: #d0d0d0;
+  }
+
+  .performances {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .performance-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .performance-item:hover {
+    background-color: #eee; /* Your accent color */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .performance-item .day {
+    font-weight: bold;
+    font-size: 1em;
+    color: #3f0a73; /* Dark purple */
+    margin-right: 16px;
+    flex-basis: 20%;
+  }
+  
+  .performance-item .stage {
+    font-size: 1em;
+    color: #601ba6; /* Middle purple */
+    flex-basis: 35%;
+    text-align: left;
+  }
+  
+  .performance-item .time {
+    font-size: 0.9em;
+    color: #666;
+    flex-basis: 35%;
+    text-align: right;
+  }
+  
+  .performance-item .day,
+  .performance-item .stage,
+  .performance-item .time {
+    margin-bottom: 4px;
   }
   
   @media (max-width: 600px) {
@@ -109,5 +159,16 @@
   
     .artist-title {
       font-size: 1.6em;
+    }
+    performance-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .performance-item .day,
+    .performance-item .stage,
+    .performance-item .time {
+      flex-basis: 100%;
+      text-align: left;
     }
   }

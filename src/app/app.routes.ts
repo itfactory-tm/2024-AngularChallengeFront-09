@@ -7,12 +7,14 @@ import { StagesComponent } from './pages/stages/stages.component';
 import { TicketsComponent } from './pages/tickets/tickets.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { StageInfoComponent } from './pages/stage-info/stage-info.component';
 import { ArtistCrudComponent } from './pages/artist-crud/artist-crud.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'line-up', component: LineUpComponent },
   { path: 'stages', component: StagesComponent },
+  { path: 'stages/:slug', component: StageInfoComponent },
   { path: 'tickets', component: TicketsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
