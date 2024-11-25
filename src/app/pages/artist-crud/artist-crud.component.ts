@@ -15,7 +15,7 @@ import { ErrorToastComponent } from '../../components/error-toast/error-toast.co
 export class ArtistCrudComponent {
   constructor(private route: Router, private artistService: ArtistService) {}
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
-  errorMessage: string = "";
+  errorMessage = "";
 
   newArtist: ArtistRequestDto = {
     name: '',

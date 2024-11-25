@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserResponseDto } from '../../dtos/User/user-response-dto';
@@ -11,10 +15,16 @@ import { environment } from '../../../../environments/environment';
 })
 export class UserService {
   apiUrl = `${environment.baseUrl}/Users`;
+  private headers: HttpHeaders | undefined;
   constructor(
     public auth: AuthService,
     private http: HttpClient
-  ) {}
+  ) {
+    auth.getAccessTokenSilently().subscribe({
+      next: token =>
+        (this.headers = new HttpHeaders({ authorization: `Bearer ${token}` })),
+    });
+  }
 
   public getUsers(): Observable<UserResponseDto[]> {
     return this.http.get<UserResponseDto[]>(this.apiUrl);
@@ -22,7 +32,9 @@ export class UserService {
 
   updateUser(id: string, user: UserRequestDto): Observable<UserRequestDto> {
     return this.http
-      .put<UserRequestDto>(`${this.apiUrl}/${id}`, user)
+      .put<UserRequestDto>(`${this.apiUrl}/${id}`, user, {
+        headers: this.headers,
+      })
       .pipe(catchError(this.handleError));
   }
 
@@ -39,7 +51,9 @@ export class UserService {
           };
 
           return this.http
-            .post<UserRequestDto>(this.apiUrl, newUser)
+            .post<UserRequestDto>(this.apiUrl, newUser, {
+              headers: this.headers,
+            })
             .pipe(catchError(this.handleError));
         } else {
           return throwError(() => new Error('User data is not available.'));
