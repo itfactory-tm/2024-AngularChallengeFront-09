@@ -10,6 +10,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { StageInfoComponent } from './pages/stage-info/stage-info.component';
 import { ArtistCrudComponent } from './pages/artist-crud/artist-crud.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { StageCrudComponent } from './pages/stage-crud/stage-crud.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'tickets', component: TicketsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
+  { path: 'manage-stages', component: StageCrudComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: ErrorPageComponent }, // Fallback
