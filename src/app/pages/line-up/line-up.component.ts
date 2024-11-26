@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { combineLatest, forkJoin, groupBy, map, merge, mergeMap, Observable, of, toArray } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  combineLatest,
+  forkJoin,
+  groupBy,
+  map,
+  mergeMap,
+  of,
+  toArray,
+} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from '../../components/artist/artist.component';
@@ -13,31 +21,49 @@ import { PerformanceService } from '../../api/services/Performance/performance.s
 import { GenreResponseDto } from '../../api/dtos/Genre/genre-response-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { StageDto } from '../../api/dtos/stage-dto';
+import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
 
 @Component({
   selector: 'app-line-up',
   standalone: true,
-  imports: [ArtistComponent, AsyncPipe, FormatLineUpTitlePipe, RouterModule],
+  imports: [
+    ArtistComponent,
+    AsyncPipe,
+    FormatLineUpTitlePipe,
+    RouterModule,
+    ErrorToastComponent,
+  ],
   templateUrl: './line-up.component.html',
-  styleUrl: './line-up.component.css'
+  styleUrl: './line-up.component.css',
 })
-export class  LineUpComponent implements OnInit {
-  artistSchedule: Observable<ArtistResponseDto[]> = new Observable<ArtistResponseDto[]>();
-  activeFilter?: string = "all";
+export class LineUpComponent implements OnInit {
+  errorMessage = '';
+  @ViewChild('errorToast') errorToast!: ErrorToastComponent;
+  artistSchedule?: ArtistResponseDto[];
+  activeFilter?: string = 'all';
 
   subfilters: string[] = [];
-  activeSubFilterIndex: number = 0;
+  activeSubFilterIndex = 0;
 
-  mainGenres: string[] = ["rap", "pop", "hip hop"];
+  mainGenres: string[] = ['rap', 'pop', 'hip hop'];
 
-  constructor(private artistService : ArtistService, private dayService: DayService,
-              private genreService: GenreService,
-              private stageService: StageService,
-              private performanceService: PerformanceService) { }
+  constructor(
+    private artistService: ArtistService,
+    private dayService: DayService,
+    private genreService: GenreService,
+    private stageService: StageService,
+    private performanceService: PerformanceService
+  ) {}
 
   ngOnInit(): void {
-    let artists = this.artistService.getArtists();
-    this.artistSchedule = artists;
+    this.artistService.getArtists().subscribe({
+      next: artists => (this.artistSchedule = artists),
+      error: err => {
+        console.error(err);
+        this.errorMessage = `Error loading artists: ${err.message}`;
+        this.errorToast.showToast();
+      },
+    });
   }
 
   updateSubFilter(n: number) {
@@ -54,35 +80,52 @@ export class  LineUpComponent implements OnInit {
     }
 
     switch (this.activeFilter) {
-      case "all": {
-        let artists = this.artistService.getArtists();
-        this.artistSchedule = artists;
-        break;
-      }
-
-      case "byDay": {
-        this.dayService.getDays().subscribe(days => {
-          this.subfilters = days.map((day: DayResponseDto) => day.date);
-          
-          let day = days[this.activeSubFilterIndex]
-          let artists = this.artistService.getArtistsByDay(day.id);
-          this.artistSchedule = artists;
+      case 'all': {
+        this.artistService.getArtists().subscribe({
+          next: artists => (this.artistSchedule = artists),
+          error: err => {
+            console.error(err);
+            this.errorMessage = `Error loading artists: ${err.message}`;
+            this.errorToast.showToast();
+          },
         });
         break;
       }
 
-      case "byGenre": {
+      case 'byDay': {
+        this.dayService.getDays().subscribe(days => {
+          this.subfilters = days.map((day: DayResponseDto) => day.date);
+
+          const day = days[this.activeSubFilterIndex];
+
+          this.artistService.getArtistsByDay(day.id).subscribe({
+            next: artists => (this.artistSchedule = artists),
+            error: err => {
+              console.error(err);
+              this.errorMessage = `Error loading artists: ${err.message}`;
+              this.errorToast.showToast();
+            },
+          });
+        });
+        break;
+      }
+
+      case 'byGenre': {
         this.genreService.getGenres().subscribe(genres => {
           this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
-          let derivedFilters: Map<string, string[]> = new Map<string, string[]>();
+          const derivedFilters: Map<string, string[]> = new Map<
+            string,
+            string[]
+          >();
 
           this.mainGenres.forEach(mainGenre => {
             // Zorg ervoor dat bv 'trap' niet gemerged word met 'rap'
             const regex = new RegExp(`\\b(${mainGenre})\\b`, 'i');
-            
-            let derivedFiltersForGenre = this.subfilters.filter(subfilter =>
-              !this.mainGenres.includes(subfilter) && (regex.test(subfilter))
-            )
+
+            const derivedFiltersForGenre = this.subfilters.filter(
+              subfilter =>
+                !this.mainGenres.includes(subfilter) && regex.test(subfilter)
+            );
 
             // Enkel de hoofgenres die afgeleide genres hebben worden opgeslagen
             if (derivedFiltersForGenre.length > 0) {
@@ -91,29 +134,39 @@ export class  LineUpComponent implements OnInit {
           });
 
           // Pas de subfilter aan zonder de afgeleide genres
-          this.subfilters = this.subfilters.filter(item => !Array.from(derivedFilters.values()).flat().includes(item));
+          this.subfilters = this.subfilters.filter(
+            item => !Array.from(derivedFilters.values()).flat().includes(item)
+          );
 
           // Haal all genres van de subfilters op
-          let filteredGenres = genres.filter(genre => this.subfilters.includes(genre.name));
+          const filteredGenres = genres.filter(genre =>
+            this.subfilters.includes(genre.name)
+          );
 
           // Bepaal het actieve genre
-          let activeGenre = filteredGenres[this.activeSubFilterIndex];
-          
-          let derivedArtistsMap = new Map<string, ArtistResponseDto[]>();
+          const activeGenre = filteredGenres[this.activeSubFilterIndex];
+
+          const derivedArtistsMap = new Map<string, ArtistResponseDto[]>();
 
           // Maak een lijst van observables aan die worden uitgevoerd voor elke mainGenre
-          const derivedArtistsRequests = Array.from(derivedFilters.entries()).map(([mainGenre, derivedFilters]) => {
-            let derivedGenreResponseDtos = genres.filter(g => derivedFilters.includes(g.name));
-          
+          const derivedArtistsRequests = Array.from(
+            derivedFilters.entries()
+          ).map(([mainGenre, derivedFilters]) => {
+            const derivedGenreResponseDtos = genres.filter(g =>
+              derivedFilters.includes(g.name)
+            );
+
             // Combineer observables voor alle afgeleide genres van dit hoofdgenre
             return combineLatest(
-              derivedGenreResponseDtos.map(genre => this.artistService.getArtistsByGenre(genre.id))
+              derivedGenreResponseDtos.map(genre =>
+                this.artistService.getArtistsByGenre(genre.id)
+              )
             ).pipe(
               map(arrays => arrays.flat()), // Combineer alle artiesten in één lijst
               map(artists => ({ mainGenre, artists })) // Voeg de genre-informatie toe aan de output
             );
           });
-          
+
           // Gebruik `forkJoin` om te wachten tot alle observables zijn afgerond
           forkJoin(derivedArtistsRequests).subscribe(results => {
             results.forEach(({ mainGenre, artists }) => {
@@ -121,22 +174,40 @@ export class  LineUpComponent implements OnInit {
             });
 
             // Neem alle artiesten van het actieve genre
-            let activeGenreArtists = this.artistService.getArtistsByGenre(activeGenre.id);
+            let activeGenreArtists = this.artistService.getArtistsByGenre(
+              activeGenre.id
+            );
 
             if (this.mainGenres.includes(activeGenre.name)) {
               // Voeg alle afgeleide artiesten van het actieve genre samen in één observable
-              const derivedArtistsObservable = of(derivedArtistsMap.get(activeGenre.name)!);
-              
-              activeGenreArtists = combineLatest([activeGenreArtists, derivedArtistsObservable]).pipe(
+              const derivedArtistsObservable = of(
+                derivedArtistsMap.get(activeGenre.name)!
+              );
+
+              activeGenreArtists = combineLatest([
+                activeGenreArtists,
+                derivedArtistsObservable,
+              ]).pipe(
                 map(([artists1, artists2]) => {
-                  const combinedArtists = artists2 ? [...artists1, ...artists2] : [...artists1];
-                  const uniqueArtists = new Map(combinedArtists.map(artist => [artist.name, artist]));
+                  const combinedArtists = artists2
+                    ? [...artists1, ...artists2]
+                    : [...artists1];
+                  const uniqueArtists = new Map(
+                    combinedArtists.map(artist => [artist.name, artist])
+                  );
                   return Array.from(uniqueArtists.values());
                 })
               );
             }
 
-            this.artistSchedule = activeGenreArtists;
+            activeGenreArtists.subscribe({
+              next: artists => (this.artistSchedule = artists),
+              error: err => {
+                console.error(err);
+                this.errorMessage = `Error loading artists: ${err.message}`;
+                this.errorToast.showToast();
+              },
+            });
           });
 
           // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
@@ -150,26 +221,29 @@ export class  LineUpComponent implements OnInit {
         break;
       }
 
-      case "byStage": {
+      case 'byStage': {
         this.stageService.getStages().subscribe(stages => {
           this.subfilters = stages.map((stage: StageDto) => stage.name);
-          let filter = this.subfilters[this.activeSubFilterIndex];
+          const filter = this.subfilters[this.activeSubFilterIndex];
 
-          this.performanceService.getPerformances().pipe(
-          mergeMap((performances) => performances),
-          groupBy((performance) => performance.stage.name),
-          mergeMap((group$) =>
-            group$.pipe(
-              map((performance) => performance.artist),
-              toArray(),
-              map((artists) => ({ stageName: group$.key, artists }))
-            ))
-          )
-          .subscribe(({ stageName, artists }) => {
-            if (stageName === filter) {
-              this.artistSchedule =  of(artists);
-            }
-          });
+          this.performanceService
+            .getPerformances()
+            .pipe(
+              mergeMap(performances => performances),
+              groupBy(performance => performance.stage.name),
+              mergeMap(group$ =>
+                group$.pipe(
+                  map(performance => performance.artist),
+                  toArray(),
+                  map(artists => ({ stageName: group$.key, artists }))
+                )
+              )
+            )
+            .subscribe(({ stageName, artists }) => {
+              if (stageName === filter) {
+                this.artistSchedule = artists;
+              }
+            });
         });
 
         break;

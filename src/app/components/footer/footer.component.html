@@ -1,41 +1,52 @@
 <div class="wave"></div>
 <footer>
-    <div class="footer-container">
-      <!-- Festival Information -->
-      <div class="footer-section">
-        <h4>Festival Information</h4>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-        </ul>
-      </div>
+  <div class="footer-container">
+    <!-- Festival Information -->
+    <div class="footer-section">
+      <h4>Festival Information</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
 
-      <!-- Navigation Links -->
-      <div class="footer-section">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a routerLink="/line-up">Lineup</a></li>
-          <li><a routerLink="/stages">Stages</a></li>
-          <li><a routerLink="/tickets">Tickets</a></li>
-          <li><a routerLink="/admin">Admin</a></li>
-        </ul>
-      </div>
+    <!-- Navigation Links -->
+    <div class="footer-section">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a routerLink="/line-up">Lineup</a></li>
+        <li><a routerLink="/stages">Stages</a></li>
+        <li><a routerLink="/tickets">Tickets</a></li>
+        <li><a routerLink="/admin">Admin</a></li>
+      </ul>
+    </div>
 
-      <!-- Sponsors Section -->
-      <div class="footer-section sponsors">
-        <h4>Our Sponsors</h4>
-        <div class="sponsor-logos">
-          <img src="sponsor1.png" alt="Sponsor 1">
-          <img src="sponsor2.png" alt="Sponsor 2">
-          <img src="sponsor3.png" alt="Sponsor 3">
-          <!-- Add more sponsor logos as needed -->
-        </div>
+    <!-- Sponsors Section -->
+    <div class="footer-section sponsors relative">
+      <h4>Our Sponsors</h4>
+      <div class="sponsor-logos">
+        <img src="sponsor1.png" alt="Sponsor 1" />
+        <img src="sponsor2.png" alt="Sponsor 2" />
+        <img src="sponsor3.png" alt="Sponsor 3" />
+        <!-- Add more sponsor logos as needed -->
+      </div>
+      <div class="absolute bottom-4 left-0">
+        @if (isAuthenticated) {
+          @if (user) {
+            <p class="text-sm">
+              Currently logged in: <span class="italic">{{ user.email }}</span>
+            </p>
+          }
+          <a (click)="logout()" class="cursor-pointer">Log Out</a>
+        } @else {
+          <a (click)="login()" class="cursor-pointer">Log In</a>
+        }
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Laser Lama. All rights reserved.</p>
-    </div>
-  </footer>
-
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Laser Lama. All rights reserved.</p>
+  </div>
+</footer>

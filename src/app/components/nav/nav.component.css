@@ -7,7 +7,7 @@
     margin: 0;
     padding: 0;
     gap: 40px;
-    position: relative;
+    position: fixed;
     top: 0;
     width: 100%;
     background-color: transparent;

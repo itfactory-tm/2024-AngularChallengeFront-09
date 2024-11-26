@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
@@ -17,10 +17,10 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 })
 export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
-  errorMessage: string = "";
+  errorMessage = "";
   artists$!: Observable<ArtistResponseDto[]>;
-  edit: boolean = false;
-  selectedArtistId: string = "";
+  edit = false;
+  selectedArtistId = "";
   selectedArtistDto: ArtistRequestDto = {
     name: '',
     spotifyId: '',

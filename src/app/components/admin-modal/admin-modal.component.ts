@@ -4,7 +4,6 @@ import { UserService } from '../../api/services/Users/user.service';
 import { UserResponseDto } from '../../api/dtos/User/user-response-dto';
 import { AuthService } from '@auth0/auth0-angular';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-modal',
@@ -15,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class AdminModalComponent {
   constructor(
-    private router: Router,
     private auth: AuthService,
     private renderer: Renderer2,
     private userService: UserService
