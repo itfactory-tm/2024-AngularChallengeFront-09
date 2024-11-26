@@ -49,11 +49,11 @@ export class ArtistService {
   }
 
   editArtist(id: string, artist: ArtistRequestDto) {
-    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist);
+    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist, { headers: this.headers });
   }
 
   deleteArtist(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
 
   addArtist(artist: ArtistRequestDto): Observable<ArtistRequestDto> {
