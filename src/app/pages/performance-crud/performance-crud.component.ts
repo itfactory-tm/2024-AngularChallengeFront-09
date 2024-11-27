@@ -36,10 +36,14 @@ export class PerformanceCrudComponent implements OnInit {
   edit = false;
   createNewDate = false;
   selectedPerformanceId = '';
+  formattedStartTime = '00:00';
+  formattedEndTime = '00:00';
   selectedPerformanceDto: PerformanceRequestDto = {
     artistId: '',
     dayId: '',
     stageId: '',
+    startTime: new Date(),
+    endTime: new Date(),
   };
   selectedArtist?: ArtistResponseDto;
   days$!: Observable<DayResponseDto[]>;
@@ -63,10 +67,14 @@ export class PerformanceCrudComponent implements OnInit {
     this.selectedArtist = undefined;
     this.createNewDate = false;
     this.selectedPerformanceId = '';
+    this.formattedStartTime = '';
+    this.formattedEndTime = '';
     this.selectedPerformanceDto = {
       artistId: '',
       dayId: '',
       stageId: '',
+      startTime: new Date(),
+      endTime: new Date(),
     };
   }
 
@@ -81,6 +89,39 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   submitEdit() {
+    const [startHours, startMinutes] = this.formattedStartTime
+      .split(':')
+      .map(Number);
+    const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
+    const now = new Date();
+    this.selectedPerformanceDto.startTime = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDay(),
+        startHours,
+        startMinutes
+      )
+    );
+    console.log(
+      'UTC time',
+      this.selectedPerformanceDto.startTime.toISOString()
+    );
+    console.log(
+      'TZ offset',
+      this.selectedPerformanceDto.startTime.getTimezoneOffset()
+    );
+    this.selectedPerformanceDto.endTime = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDay(),
+        endHours,
+        endMinutes
+      )
+    );
+
+    console.log('SUBMITTING PERFORMANCE: ', this.selectedPerformanceDto);
     this.performanceService
       .editPerformance(this.selectedPerformanceId, this.selectedPerformanceDto)
       .subscribe(() => this.refreshPerformances());
@@ -89,11 +130,15 @@ export class PerformanceCrudComponent implements OnInit {
 
   cancelEdit() {
     this.edit = false;
-    this.selectedPerformanceDto = {
-      artistId: '',
-      dayId: '',
-      stageId: '',
-    };
+    this.resetForm();
+  }
+
+  toTimeString(date: Date): string {
+    if (!(date instanceof Date)) {
+      console.log(date);
+      throw new Error('Invalid date object');
+    }
+    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   }
 
   editPerformance(performance: PerformanceResponseDto) {
@@ -103,8 +148,17 @@ export class PerformanceCrudComponent implements OnInit {
       artistId: performance.artist.id,
       dayId: performance.day.id,
       stageId: performance.stage.id,
+      startTime: new Date(performance.startTime),
+      endTime: new Date(performance.endTime),
     };
 
+    this.formattedStartTime = this.toTimeString(
+      this.selectedPerformanceDto.startTime
+    );
+    this.formattedEndTime = this.toTimeString(
+      this.selectedPerformanceDto.endTime
+    );
+    console.log(this.formattedStartTime, this.formattedEndTime);
     this.artistService
       .getArtistById(this.selectedPerformanceDto.artistId)
       .subscribe({
@@ -114,6 +168,30 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   submitForm() {
+    const [startHours, startMinutes] = this.formattedStartTime
+      .split(':')
+      .map(Number);
+    const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
+
+    const now = new Date();
+    this.selectedPerformanceDto.startTime = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDay(),
+        startHours,
+        startMinutes
+      )
+    );
+    this.selectedPerformanceDto.endTime = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDay(),
+        endHours,
+        endMinutes
+      )
+    );
     this.performanceService
       .addPerformance(this.selectedPerformanceDto)
       .subscribe({

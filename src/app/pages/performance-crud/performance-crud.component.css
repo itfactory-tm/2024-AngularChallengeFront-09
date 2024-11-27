@@ -18,6 +18,7 @@
 
 .form-container input[type="text"],
 .form-container input[type="date"],
+.form-container input[type="time"],
 .form-container textarea[name="biography"] {
   padding: 10px;
   font-size: 0.9rem;

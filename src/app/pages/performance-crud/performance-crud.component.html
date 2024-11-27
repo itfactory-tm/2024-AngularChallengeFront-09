@@ -24,7 +24,7 @@
                 </p>
                 <p class="me-4">
                   <i class="fa-solid fa-clock"></i>
-                  {{ performance.startTime | date: 'shortTime' }} -
+                  {{ performance.startTime | date: 'HH:mm' }} -
                   {{ performance.endTime | date: 'shortTime' }}
                 </p>
               </div>
@@ -121,6 +121,28 @@
             <!--  class="w-full"-->
             <!--  required-->
             <!--  [(ngModel)]="selectedPerformanceDto.stageId" />-->
+          </div>
+          <div class="mb-5">
+            <div class="flex w-full justify-between items-center">
+              <label for="startTime" class="w-full">Start Time</label>
+              <label for="endTime" class="w-full">End Time</label>
+            </div>
+            <div class="flex w-full gap-x-2 justify-evenly items-center">
+              <input
+                type="time"
+                id="startTime"
+                name="startTime"
+                class="w-full"
+                required
+                [(ngModel)]="formattedStartTime" />
+              <input
+                type="time"
+                id="endTime"
+                name="endTime"
+                class="w-full"
+                required
+                [(ngModel)]="formattedEndTime" />
+            </div>
           </div>
           <div class="button-container">
             @if (edit) {
