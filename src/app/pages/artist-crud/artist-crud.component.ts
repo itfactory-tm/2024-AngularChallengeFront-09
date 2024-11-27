@@ -40,7 +40,7 @@ export class ArtistCrudComponent implements OnInit {
   }
 
   submitEdit() {
-    this.artistService.editArtist(this.selectedArtistId, this.selectedArtistDto)
+    this.artistService.updateArtist(this.selectedArtistId, this.selectedArtistDto)
       .subscribe(() => this.artistService.fetchArtists());
     this.cancelEdit();
   }
