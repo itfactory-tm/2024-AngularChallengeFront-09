@@ -1,0 +1,27 @@
+<div>
+  @if (isDropdownVisible) {
+    <div
+      class="fixed top-0 left-0 h-screen w-screen bg-transparent"
+      (click)="toggleDropdown()"></div>
+  }
+  <div>
+    <div class="cursor-pointer relative" (click)="toggleDropdown()">
+      <app-artist-dropdown-item [(selectedArtist)]="selectedArtist">
+      </app-artist-dropdown-item>
+      <div class="absolute top-2 right-3">
+        <i class="fa-solid fa-chevron-down text-xs text-secondary"></i>
+      </div>
+    </div>
+    @if (isDropdownVisible) {
+      <div
+        class="z-40 bg-primary/30 backdrop-blur-xl w-fit h-80 overflow-y-scroll absolute rounded-md p-4">
+        @for (artist of artists; track $index) {
+          <app-artist-dropdown-item
+            [(selectedArtist)]="artists[$index]"
+            (click)="selectArtist(artist)"
+            (selectedArtistChange)="selectArtist(artist)" />
+        }
+      </div>
+    }
+  </div>
+</div>
