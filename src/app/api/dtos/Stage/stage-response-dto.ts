@@ -1,4 +1,5 @@
 export interface StageResponseDto {
-    name: string;
-    capacity: number;
+  id: string;
+  name: string;
+  capacity: number;
 }
