@@ -5,7 +5,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { TicketDto } from '../../dtos/ticket-dto';
+import { TicketResponseDto } from '../../dtos/Ticket/ticket-response-dto';
+import { TicketRequestDto } from '../../dtos/Ticket/ticket-request-dto';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '@auth0/auth0-angular';
 
@@ -26,17 +27,17 @@ export class TicketService {
     });
   }
 
-  getTickets(): Observable<TicketDto[]> {
-    return this.http.get<TicketDto[]>(this.apiUrl);
+  getTickets(): Observable<TicketResponseDto[]> {
+    return this.http.get<TicketResponseDto[]>(this.apiUrl);
   }
 
-  getTicketById(id: TicketDto): Observable<TicketDto> {
-    return this.http.get<TicketDto>(`${this.apiUrl}/${id}`);
+  getTicketById(id: TicketResponseDto): Observable<TicketResponseDto> {
+    return this.http.get<TicketResponseDto>(`${this.apiUrl}/${id}`);
   }
 
-  addTicket(ticket: TicketDto): Observable<TicketDto> {
+  addTicket(ticket: TicketResponseDto): Observable<TicketResponseDto> {
     return this.http
-      .post<TicketDto>(this.apiUrl, ticket, { headers: this.headers })
+      .post<TicketResponseDto>(this.apiUrl, ticket, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
