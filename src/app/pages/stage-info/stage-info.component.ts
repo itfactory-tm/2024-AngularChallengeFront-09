@@ -5,6 +5,8 @@ import { Observable, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-stage-info',
   templateUrl: './stage-info.component.html',
@@ -13,6 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   imports: [AsyncPipe]
 })
 export class StageInfoComponent implements OnInit {
+  baseUrl = `${environment.baseUrl}/..`;
   stage$!: Observable<StageResponseDto | undefined>;
   loading = true;
 

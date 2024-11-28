@@ -221,6 +221,13 @@ body {
 h1,h2,h3,h4{
   font-family: "Ubuntu",sans-serif;
 }
+h1 {
+  font-size: 3rem;
+  margin-top: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
 h2 {
   font-size: 32px;
+  text-align: center;
 }

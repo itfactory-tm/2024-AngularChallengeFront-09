@@ -1,26 +1,49 @@
-<div class="stage-info-container">
-    @if (stage$ | async; as stage) {
-      {{stage.name}}
-      {{stage.capacity}}
-      {{stage.description}}
-      <div class="stage-info-container">
-        <iframe 
-          width="600" 
-          height="450" 
-          style="border:0;" 
-          loading="lazy" 
-          allowfullscreen 
-          [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
-        </iframe>
-        <small>
-          <a 
-            [href]="'https://maps.google.com/maps?q=' + stage.latitude + ',' + stage.longitude + '&hl=en&z=14'" 
-            style="color:#0000FF;text-align:left" 
-            target="_blank">
-            See map bigger
-          </a>
-        </small>
+<div class="container mx-auto">
+  @if (stage$ | async; as stage) {
+  <div class="full-screen flex flex-col">
+  
+    <div class="stage-header py-2">
+      <h1>{{ stage?.name }}</h1>
+    </div>
+
+    <div class="stage-details grid grid-cols-2 gap-4 mb-4">
+      <div class="stage-image-wrapper">
+        <img 
+          class="stage-image object-cover w-full h-48" 
+          [src]="baseUrl + stage.imageUrl" 
+          alt="{{stage.name}}" 
+        />
       </div>
-      
-}
+
+      <div class="stage-info">
+        <div class="stage-capacity mb-2">
+          <span class="info-label font-semibold">Capacity:</span>
+          <span class="info-value">{{ stage?.capacity }}</span>
+        </div>
+        
+        <div class="stage-description">
+          <span class="info-label font-semibold">Description:</span>
+          <p class="info-value text-sm">{{ stage?.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1 relative"> <!-- Iframe container -->
+      <iframe  
+        class="absolute inset-0 w-full h-full"
+        loading="lazy"  
+        allowfullscreen  
+        [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
+      </iframe>
+    </div>
+  
+  </div>
+
+  <div class="full-screen">
+    <h2>Timetable for {{stage.name}}</h2>
+  </div>
+  }
+  @else {
+    <p class="stage-not-found">Stage not found</p>
+  }
 </div>
