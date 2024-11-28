@@ -23,7 +23,9 @@ export class StageCrudComponent {
   selectedStageDto: StageRequestDto = {
     name: '',
     description: '',
-    capacity: 0
+    capacity: 0,
+    longitude:0,
+    latitude:0
   }
 
   constructor(private stageService: StageService) {}
@@ -49,7 +51,9 @@ export class StageCrudComponent {
     this.selectedStageDto = {
       name: '',
       description: '',
-      capacity: 0
+      capacity: 0,
+      longitude:0,
+      latitude:0
     }
   }
 
@@ -59,7 +63,9 @@ export class StageCrudComponent {
     this.selectedStageDto = {
       name: stage.name,
       description: stage.description,
-      capacity: stage.capacity
+      capacity: stage.capacity,
+      longitude:stage.longitude,
+      latitude:stage.latitude
     }
   }
 
