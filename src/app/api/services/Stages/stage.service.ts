@@ -4,11 +4,13 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { StageDto } from '../../dtos/stage-dto';
 import { environment } from '../../../../environments/environment';
 import slug from 'slug';
 import { AuthService } from '@auth0/auth0-angular';
+import { StageResponseDto } from '../../dtos/Stage/stage-response-dto';
+import { StageRequestDto } from '../../dtos/Stage/stage-request-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,9 @@ import { AuthService } from '@auth0/auth0-angular';
 export class StageService {
   private apiUrl = `${environment.baseUrl}/Stages`;
   private headers: HttpHeaders | undefined;
+  private stagesSubject = new BehaviorSubject<StageResponseDto[]>([]);
+  stages$: Observable<StageResponseDto[]> = this.stagesSubject.asObservable();
+
 
   constructor(
     private http: HttpClient,
@@ -27,6 +32,21 @@ export class StageService {
     });
   }
 
+  // Methode om artiesten op te halen
+  fetchStages(): void {
+    this.http.get<StageResponseDto[]>(this.apiUrl).subscribe((stages) => {
+      this.stagesSubject.next(stages);
+    });
+  }
+
+  deleteStage(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
+  updateStage(id: string, stage: StageRequestDto) {
+    return this.http.put<StageRequestDto>(`${this.apiUrl}/${id}`, stage, { headers: this.headers });
+  }
+
   getStages(): Observable<StageDto[]> {
     return this.http.get<StageDto[]>(this.apiUrl);
   }
@@ -35,7 +55,7 @@ export class StageService {
     return this.http.get<StageDto>(`this.apiUrl/${id}`);
   }
 
-  addStage(ticket: StageDto): Observable<StageDto> {
+  addStage(ticket: StageRequestDto): Observable<StageDto> {
     return this.http
       .post<StageDto>(this.apiUrl, ticket, { headers: this.headers })
       .pipe(catchError(this.handleError));

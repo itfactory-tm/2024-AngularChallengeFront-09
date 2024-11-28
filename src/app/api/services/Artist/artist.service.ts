@@ -52,7 +52,7 @@ export class ArtistService {
     return this.http.get<ArtistResponseDto[]>(`${this.apiUrl}/genre/${id}`);
   }
 
-  editArtist(id: string, artist: ArtistRequestDto) {
+  updateArtist(id: string, artist: ArtistRequestDto) {
     return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist, { headers: this.headers });
   }
 
