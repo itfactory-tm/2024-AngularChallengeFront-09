@@ -8,7 +8,6 @@ import {
   of,
   toArray,
 } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from '../../components/artist/artist.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
@@ -28,7 +27,6 @@ import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
   standalone: true,
   imports: [
     ArtistComponent,
-    AsyncPipe,
     FormatLineUpTitlePipe,
     RouterModule,
     ErrorToastComponent,
