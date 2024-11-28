@@ -5,7 +5,7 @@
 <div class="container mx-auto mt-10">
   <div class="flex justify-between gap-4 flex-wrap">
     <!-- Artiestenlijst -->
-    <div class="artists-container list w-1/2 overflow-y-scroll">
+    <div class="artists-container w-1/2 overflow-y-scroll">
       <ul>
         @for (artist of artists$ | async; track $index) {
           <li class="list-item">
@@ -37,6 +37,6 @@
       (ErrorEvent)="onErrorEvent($event)"
       [selectedArtistId]="selectedArtistId"
       [selectedArtistDto]="selectedArtistDto"
-      [edit]="edit" />
+      [(edit)]="edit" />
   </div>
 </div>

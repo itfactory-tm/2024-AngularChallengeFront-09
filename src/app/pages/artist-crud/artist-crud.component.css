@@ -1,4 +1,4 @@
-.artists-container.list {
+.artists-container {
   margin: 0 auto;
   padding: 1rem;
   max-width: 800px;
@@ -8,7 +8,7 @@
   color: var(--text-color);
 }
 
-.artists-container.list ul {
+.artists-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -82,28 +82,28 @@
 
 
 /* Algemene stijlen voor de scroll container */
-.artists-container.list {
+.artists-container {
   @apply w-1/2 max-h-[450px] overflow-y-scroll;
   scrollbar-width: thin; /* Maakt de scrollbar smaller */
   scrollbar-color: #6bf2e5 #3f0a73; /* Kleuren voor de scrollbar (thumb en track) */
 }
 
 /* Stijl de scrollbar thumb (het bewegende gedeelte) */
-.artists-container.list::-webkit-scrollbar {
+.artists-container::-webkit-scrollbar {
   width: 8px; /* Stel de breedte van de scrollbar in */
 }
 
-.artists-container.list::-webkit-scrollbar-thumb {
+.artists-container::-webkit-scrollbar-thumb {
   background-color: #6bf2e5; /* De kleur van de 'thumb' */
   border-radius: 10px; /* Ronde hoeken voor de 'thumb' */
 }
 
-.artists-container.list::-webkit-scrollbar-thumb:hover {
+.artists-container::-webkit-scrollbar-thumb:hover {
   background-color: #3f0a73; /* Kleur van de 'thumb' wanneer de muis erover gaat */
 }
 
 /* Stijl de scrollbar track (het achtergrond gedeelte) */
-.artists-container.list::-webkit-scrollbar-track {
+.artists-container::-webkit-scrollbar-track {
   background-color: #3f0a73; /* Kleur van de achtergrond van de scrollbar */
   border-radius: 10px; /* Ronde hoeken voor de track */
 }
