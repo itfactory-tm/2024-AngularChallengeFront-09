@@ -1,24 +1,26 @@
 <div class="stage-info-container">
     @if (stage$ | async; as stage) {
-      <div class="stage-content">
-        <h1 class="stage-title">{{ stage.name }}</h1>
-        
-        <div class="stage-info">
-          <!-- Add your stage details here -->
-          <!-- For example: -->
-          <section class="stage-section">
-            <h2>Description</h2>
-            <p>{{ stage.capacity }}</p>
-          </section>
-  
-          <!-- Add more sections as needed -->
-        </div>
+      {{stage.name}}
+      {{stage.capacity}}
+      {{stage.description}}
+      <div class="stage-info-container">
+        <iframe 
+          width="600" 
+          height="450" 
+          style="border:0;" 
+          loading="lazy" 
+          allowfullscreen 
+          [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
+        </iframe>
+        <small>
+          <a 
+            [href]="'https://maps.google.com/maps?q=' + stage.latitude + ',' + stage.longitude + '&hl=en&z=14'" 
+            style="color:#0000FF;text-align:left" 
+            target="_blank">
+            See map bigger
+          </a>
+        </small>
       </div>
-    } @else {
-      <div class="not-found">
-        <h2>Stage Not Found</h2>
-        <p>The requested stage could not be found.</p>
-        <a routerLink="/stages" class="back-link">Return to Stages</a>
-      </div>
-    }
-  </div>
+      
+}
+</div>

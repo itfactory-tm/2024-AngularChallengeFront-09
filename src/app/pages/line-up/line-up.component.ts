@@ -20,8 +20,8 @@ import { DayResponseDto } from '../../api/dtos/Day/day-response-dto';
 import { PerformanceService } from '../../api/services/Performance/performance.service';
 import { GenreResponseDto } from '../../api/dtos/Genre/genre-response-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
-import { StageDto } from '../../api/dtos/stage-dto';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
+import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 
 @Component({
   selector: 'app-line-up',
@@ -223,7 +223,7 @@ export class LineUpComponent implements OnInit {
 
       case 'byStage': {
         this.stageService.getStages().subscribe(stages => {
-          this.subfilters = stages.map((stage: StageDto) => stage.name);
+          this.subfilters = stages.map((stage: StageResponseDto) => stage.name);
           const filter = this.subfilters[this.activeSubFilterIndex];
 
           this.performanceService

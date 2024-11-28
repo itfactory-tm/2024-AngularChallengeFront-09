@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StageDto } from '../../api/dtos/stage-dto';
+import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 
 
 @Component({
@@ -12,5 +12,5 @@ import { StageDto } from '../../api/dtos/stage-dto';
 
 export class StageComponent {
  @Input()
- stage!:StageDto;
+ stage!:StageResponseDto;
 }
