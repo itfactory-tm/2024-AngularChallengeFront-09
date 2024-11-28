@@ -78,42 +78,25 @@
   }
 }
 
-
-
-
-/* Algemene stijlen voor de scroll container */
 .artists-container {
-  @apply w-1/2 max-h-[450px] overflow-y-scroll;
-  scrollbar-width: thin; /* Maakt de scrollbar smaller */
-  scrollbar-color: #6bf2e5 #3f0a73; /* Kleuren voor de scrollbar (thumb en track) */
+  scrollbar-width: thin;
+  scrollbar-color: #6bf2e5 #3f0a73;
 }
 
-/* Stijl de scrollbar thumb (het bewegende gedeelte) */
 .artists-container::-webkit-scrollbar {
-  width: 8px; /* Stel de breedte van de scrollbar in */
+  width: 8px;
 }
 
 .artists-container::-webkit-scrollbar-thumb {
-  background-color: #6bf2e5; /* De kleur van de 'thumb' */
-  border-radius: 10px; /* Ronde hoeken voor de 'thumb' */
+  background-color: #6bf2e5;
+  border-radius: 10px;
 }
 
 .artists-container::-webkit-scrollbar-thumb:hover {
-  background-color: #3f0a73; /* Kleur van de 'thumb' wanneer de muis erover gaat */
+  background-color: #3f0a73;
 }
 
-/* Stijl de scrollbar track (het achtergrond gedeelte) */
 .artists-container::-webkit-scrollbar-track {
-  background-color: #3f0a73; /* Kleur van de achtergrond van de scrollbar */
-  border-radius: 10px; /* Ronde hoeken voor de track */
+  background-color: #3f0a73;
+  border-radius: 10px;
 }
-
-
-
-.button-container {
-  display: flex;
-  gap: 1rem;  /* Optioneel: voegt ruimte toe tussen de knoppen */
-  justify-content: start;  /* Dit zorgt ervoor dat de knoppen aan de linkerzijde worden uitgelijnd */
-}
-
-
