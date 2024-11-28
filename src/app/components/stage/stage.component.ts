@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 })
 
 export class StageComponent {
- @Input()
- stage!:StageResponseDto;
+	baseUrl = `${environment.baseUrl}/..`;
+	
+	@Input()
+	stage!:StageResponseDto;
 }

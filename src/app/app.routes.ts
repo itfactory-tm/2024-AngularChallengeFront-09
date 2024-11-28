@@ -23,8 +23,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
   { path: 'manage-stages', component: StageCrudComponent, canActivate: [AuthGuard]},
-  //{ path: 'manage-performances', component: PerformanceCrudComponent, canActivate: [AuthGuard]},
-  { path: 'manage-performances', component: PerformanceCrudComponent},
+  { path: 'manage-performances', component: PerformanceCrudComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: ErrorPageComponent }, // Fallback

@@ -5,4 +5,5 @@ export interface StageResponseDto {
     capacity: number;
     longitude: number;
     latitude: number;
+	imageUrl: string;
 }
