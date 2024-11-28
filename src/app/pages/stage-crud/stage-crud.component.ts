@@ -6,27 +6,34 @@ import { StageRequestDto } from '../../api/dtos/Stage/stage-request-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { StageFormComponent } from '../../components/stage-form/stage-form.component';
 
 @Component({
   selector: 'app-stage-crud',
   standalone: true,
-  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
+  imports: [
+    FormsModule,
+    ErrorToastComponent,
+    AsyncPipe,
+    CommonModule,
+    StageFormComponent,
+  ],
   templateUrl: './stage-crud.component.html',
-  styleUrl: './stage-crud.component.css'
+  styleUrl: './stage-crud.component.css',
 })
 export class StageCrudComponent {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
-  errorMessage = "";
+  errorMessage = '';
   stages$!: Observable<StageResponseDto[]>;
   edit = false;
-  selectedStageId = "";
+  selectedStageId = '';
   selectedStageDto: StageRequestDto = {
     name: '',
     description: '',
     capacity: 0,
-    longitude:0,
-    latitude:0
-  }
+    longitude: 0,
+    latitude: 0,
+  };
 
   constructor(private stageService: StageService) {}
 
@@ -36,26 +43,11 @@ export class StageCrudComponent {
   }
 
   deleteStage(id: string) {
-    this.stageService.deleteStage(id)
+    this.stageService
+      .deleteStage(id)
       .subscribe(() => this.stageService.fetchStages());
   }
 
-  submitEdit() {
-    this.stageService.updateStage(this.selectedStageId, this.selectedStageDto)
-      .subscribe(() => this.stageService.fetchStages());
-    this.cancelEdit();
-  }
-
-  cancelEdit() {
-    this.edit = false;
-    this.selectedStageDto = {
-      name: '',
-      description: '',
-      capacity: 0,
-      longitude:0,
-      latitude:0
-    }
-  }
 
   editStage(stage: StageResponseDto) {
     this.edit = true;
@@ -64,20 +56,13 @@ export class StageCrudComponent {
       name: stage.name,
       description: stage.description,
       capacity: stage.capacity,
-      longitude:stage.longitude,
-      latitude:stage.latitude
-    }
+      longitude: stage.longitude,
+      latitude: stage.latitude,
+    };
   }
 
-  submitForm() {
-    this.stageService.addStage(this.selectedStageDto).subscribe({
-      next: () => {
-        this.stageService.fetchStages();
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-        this.errorToast.showToast();
-      }
-    });
+  onErrorEvent(message: string) {
+    this.errorMessage = message;
+    this.errorToast.showToast();
   }
 }

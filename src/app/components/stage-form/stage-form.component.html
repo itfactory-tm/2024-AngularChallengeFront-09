@@ -1,0 +1,52 @@
+<!-- Formulier -->
+<div class="form-container w-full max-h-[480px]">
+  <div>
+    <h1 class="form-title">{{ this.edit ? 'Edit stage' : 'Add stage' }}</h1>
+
+    <form (ngSubmit)="submitForm()" #stageForm="ngForm">
+      <div class="mb-5">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="selectedStageDto.name" />
+      </div>
+      <div class="mb-5">
+        <label for="capacity">Capacity</label>
+        <input
+          type="number"
+          pattern="[0-9]*"
+          id="capacity"
+          name="capacity"
+          required
+          [(ngModel)]="selectedStageDto.capacity" />
+      </div>
+      <div class="mb-5">
+        <label for="description">Description</label>
+        <textarea
+          class="resize-none"
+          type="textarea"
+          id="description"
+          name="description"
+          [(ngModel)]="selectedStageDto.description"></textarea>
+      </div>
+      <div class="flex gap-1 justify-start">
+        @if (edit) {
+          <button
+            type="button"
+            (click)="submitEdit()"
+            [disabled]="!stageForm.form.valid">
+            Edit
+          </button>
+          <button type="button" (click)="cancelEdit()">Cancel</button>
+        } @else {
+          <button type="submit" [disabled]="!stageForm.form.valid">
+            Create
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>

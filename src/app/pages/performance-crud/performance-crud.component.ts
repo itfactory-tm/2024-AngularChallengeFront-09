@@ -3,7 +3,7 @@ import { PerformanceRequestDto } from '../../api/dtos/Performance/performance-re
 import { PerformanceService } from '../../api/services/Performance/performance.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { PerformanceResponseDto } from '../../api/dtos/Performance/performance-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
@@ -15,7 +15,9 @@ import { ArtistDropdownComponent } from '../../components/artist-dropdown/artist
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { RouterLink } from '@angular/router';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
-import { StageDto } from '../../api/dtos/stage-dto';
+import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
+import { StageFormComponent } from '../../components/stage-form/stage-form.component';
+import { DayRequestDto } from '../../api/dtos/Day/day-request-dto';
 
 @Component({
   selector: 'app-performance-crud',
@@ -29,6 +31,7 @@ import { StageDto } from '../../api/dtos/stage-dto';
     DatePipe,
     RouterLink,
     ArtistFormComponent,
+    StageFormComponent,
   ],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',
@@ -39,6 +42,8 @@ export class PerformanceCrudComponent implements OnInit {
   performances$!: Observable<PerformanceResponseDto[]>;
   edit = false;
   createNewDate = false;
+  newDate = '';
+  newDayId = '';
   createNewArtist = false;
   createNewStage = true;
   selectedPerformanceId = '';
@@ -53,7 +58,7 @@ export class PerformanceCrudComponent implements OnInit {
   };
   selectedArtist?: ArtistResponseDto;
   days$!: Observable<DayResponseDto[]>;
-  stages$!: Observable<StageDto[]>;
+  stages$!: Observable<StageResponseDto[]>;
 
   constructor(
     private performanceService: PerformanceService,
@@ -73,6 +78,8 @@ export class PerformanceCrudComponent implements OnInit {
     this.selectedArtist = undefined;
     this.createNewDate = false;
     this.selectedPerformanceId = '';
+    this.newDayId = '';
+    this.newDate = '';
     this.formattedStartTime = '';
     this.formattedEndTime = '';
     this.selectedPerformanceDto = {
@@ -100,38 +107,73 @@ export class PerformanceCrudComponent implements OnInit {
       .map(Number);
     const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
     const now = new Date();
+
+    // Set startTime and endTime for the performance
     this.selectedPerformanceDto.startTime = new Date(
       Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDay(),
+        now.getUTCDate(), // Fix here: use getUTCDate() for day, not getUTCDay()
         startHours,
         startMinutes
       )
-    );
-    console.log(
-      'UTC time',
-      this.selectedPerformanceDto.startTime.toISOString()
-    );
-    console.log(
-      'TZ offset',
-      this.selectedPerformanceDto.startTime.getTimezoneOffset()
     );
     this.selectedPerformanceDto.endTime = new Date(
       Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDay(),
+        now.getUTCDate(),
         endHours,
         endMinutes
       )
     );
 
-    console.log('SUBMITTING PERFORMANCE: ', this.selectedPerformanceDto);
-    this.performanceService
-      .editPerformance(this.selectedPerformanceId, this.selectedPerformanceDto)
-      .subscribe(() => this.refreshPerformances());
-    this.cancelEdit();
+    let dayObservable;
+
+    if (this.createNewDate && this.newDate) {
+      // Create a new day DTO
+      const newDateDto: DayRequestDto = {
+        date: new Date(this.newDate).toISOString().split('T')[0], // Get only the date part
+        isActive: true,
+      };
+
+      // Observable to handle adding the new day
+      dayObservable = this.dayService.addDay(newDateDto).pipe(
+        switchMap(day => {
+          this.newDayId = day.id;
+
+          // Assign the new day ID to the performance DTO
+          this.selectedPerformanceDto.dayId = this.newDayId;
+
+          // Return the edit performance observable
+          return this.performanceService.editPerformance(
+            this.selectedPerformanceId,
+            this.selectedPerformanceDto
+          );
+        })
+      );
+    } else {
+      // If no new day is created, directly edit the performance
+      dayObservable = this.performanceService.editPerformance(
+        this.selectedPerformanceId,
+        this.selectedPerformanceDto
+      );
+    }
+
+    // Subscribe to the final observable
+    dayObservable.subscribe({
+      next: () => {
+        console.log('PERFORMANCE UPDATED');
+        this.refreshPerformances();
+      },
+      error: err => {
+        this.errorMessage = err.message;
+        this.errorToast.showToast();
+      },
+      complete: () => {
+        this.cancelEdit();
+      },
+    });
   }
 
   cancelEdit() {
@@ -174,17 +216,19 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   submitPerformanceForm() {
+    console.log('submitting form');
     const [startHours, startMinutes] = this.formattedStartTime
       .split(':')
       .map(Number);
     const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
-
     const now = new Date();
+
+    // Set startTime and endTime for the performance
     this.selectedPerformanceDto.startTime = new Date(
       Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDay(),
+        now.getUTCDate(), // Fix here: use getUTCDate() for day, not getUTCDay()
         startHours,
         startMinutes
       )
@@ -193,24 +237,55 @@ export class PerformanceCrudComponent implements OnInit {
       Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
-        now.getUTCDay(),
+        now.getUTCDate(),
         endHours,
         endMinutes
       )
     );
-    console.log('addmign performance!');
-    this.performanceService
-      .addPerformance(this.selectedPerformanceDto)
-      .subscribe({
-        next: () => {
-          this.refreshPerformances();
-        },
-        error: err => {
-          this.errorMessage = err.message;
-          this.errorToast.showToast();
-        },
-      });
-    this.resetForm();
+
+    let dayObservable;
+
+    if (this.createNewDate && this.newDate) {
+      // Create a new day DTO
+      const newDateDto: DayRequestDto = {
+        date: new Date(this.newDate).toISOString().split('T')[0], // Get only the date part
+        isActive: true,
+      };
+
+      // Observable to handle adding the new day
+      dayObservable = this.dayService.addDay(newDateDto).pipe(
+        switchMap(day => {
+          this.newDayId = day.id;
+
+          // Assign the new day ID to the performance DTO
+          this.selectedPerformanceDto.dayId = this.newDayId;
+
+          return this.performanceService.addPerformance(
+            this.selectedPerformanceDto
+          );
+        })
+      );
+    } else {
+      // If no new day is created, directly edit the performance
+      dayObservable = this.performanceService.addPerformance(
+        this.selectedPerformanceDto
+      );
+    }
+
+    // Subscribe to the final observable
+    dayObservable.subscribe({
+      next: () => {
+        console.log('PERFORMANCE UPDATED');
+        this.refreshPerformances();
+      },
+      error: err => {
+        this.errorMessage = err.message;
+        this.errorToast.showToast();
+      },
+      complete: () => {
+        this.cancelEdit();
+      },
+    });
   }
 
   onArtistSelected(artist: any) {
@@ -226,8 +301,6 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   onArtistCreated(artist: any) {
-    console.log('RECEIVED CREATED ARTIST', artist);
-    console.log(artist.id);
     this.selectedPerformanceDto.artistId = artist.id;
     this.artistService
       .getArtistById(this.selectedPerformanceDto.artistId)
@@ -235,5 +308,14 @@ export class PerformanceCrudComponent implements OnInit {
         next: artist => (this.selectedArtist = artist),
         error: err => console.error('ERROR GETTING ARTIST BY ID', err),
       });
+  }
+  onStageCreated(stage: any) {
+    this.selectedPerformanceDto.stageId = stage.id;
+    this.stages$ = this.stageService.getStages();
+  }
+
+  closeModal() {
+    this.createNewStage = false;
+    this.createNewArtist = false;
   }
 }
