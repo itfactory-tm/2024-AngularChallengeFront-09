@@ -57,34 +57,49 @@
           {{ this.edit ? 'Edit performance' : 'Add performance' }}
         </h1>
 
-        <form (ngSubmit)="submitForm()" #performanceForm="ngForm">
+        <form (ngSubmit)="submitPerformanceForm()" #performanceForm="ngForm">
           <div class="mb-5">
             <div class="flex justify-between items-center">
-              <label>Select Artist</label>
-              <label>New artist</label>
+              <label class="w-full"
+                >Select Artist
+                <span
+                  class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
+                  (click)="createNewArtist = !createNewArtist"
+                  >Or create a new artist?</span
+                >
+              </label>
             </div>
-            <div class="flex w-full justify-center gap-x-3 items-center">
+            <div class="flex w-full justify-center gap-x-3 items-stretch">
               <app-artist-dropdown
                 class="w-full"
                 [(selectedArtist)]="selectedArtist"
                 (selectedArtistChange)="onArtistSelected($event)" />
-              <input
-                type="checkbox"
-                [checked]="createNewArtist"
-                (change)="createNewArtist = !createNewArtist"
-                class="w-1/5" />
             </div>
           </div>
           @if (createNewDate) {
             <div class="mb-5">
-              <label for="newDate">Add new day</label>
+              <label for="newDate"
+                >Add new day
+                <span
+                  class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
+                  (click)="createNewDate = false"
+                  >Or choose from existing days?</span
+                >
+              </label>
               <div class="flex justify-center items-center gap-4">
                 <input type="date" class="w-full" id="newDate" />
               </div>
             </div>
           } @else {
             <div class="mb-5">
-              <label for="dayId">Day</label>
+              <label for="dayId"
+                >Day
+                <span
+                  class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
+                  (click)="createNewDate = true"
+                  >Or create a new day?</span
+                ></label
+              >
               <div class="flex justify-center items-center gap-4">
                 <select
                   id="days"
@@ -106,7 +121,14 @@
             </div>
           }
           <div class="mb-5">
-            <label for="stageId">Stage</label>
+            <label for="stageId">
+              Stage
+              <span
+                class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
+                (click)="createNewStage = !createNewStage"
+                >Or add a new stage?</span
+              >
+            </label>
             <select
               id="stages"
               class="rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -179,10 +201,23 @@
     </div>
   </div>
 </div>
-@if (createNewArtist) {
-  <app-artist-form
-    class="w-full max-w-[500px]"
-    (ArtistCreatedEvent)="onArtistCreated($event)"
-    (ErrorEvent)="onErrorEvent($event)"
-    [edit]="false" />
+@if (createNewArtist || createNewStage) {
+  <div
+    class="w-screen h-screen fixed top-0 left-0 bg-black/20 backdrop-blur-lg flex justify-center items-center">
+    <div
+      (click)="createNewArtist = false"
+      class="fixed top-0 right-0 pt-32 px-32 w-auto h-50 z-50 cursor-pointer">
+      <i class="fa-solid fa-x text-4xl"></i>
+    </div>
+    @if (createNewArtist) {
+      <app-artist-form
+        class="w-full max-w-[500px]"
+        (ArtistCreatedEvent)="onArtistCreated($event)"
+        (ErrorEvent)="onErrorEvent($event)"
+        [edit]="false" />
+    }
+    @if (createNewStage) {
+      <div>TODO: STAGE CRUD</div>
+    }
+  </div>
 }

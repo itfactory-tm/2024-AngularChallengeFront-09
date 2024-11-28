@@ -60,9 +60,9 @@ export class ArtistService {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
 
-  addArtist(artist: ArtistRequestDto): Observable<ArtistRequestDto> {
+  addArtist(artist: ArtistRequestDto): Observable<ArtistResponseDto> {
     return this.http
-      .post<ArtistRequestDto>(this.apiUrl, artist, { headers: this.headers })
+      .post<ArtistResponseDto>(this.apiUrl, artist, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

@@ -10,13 +10,12 @@ import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { DayResponseDto } from '../../api/dtos/Day/day-response-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { DayService } from '../../api/services/Day/day.service';
-import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { ArtistDropdownComponent } from '../../components/artist-dropdown/artist-dropdown.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { RouterLink } from '@angular/router';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
-import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
+import { StageDto } from '../../api/dtos/stage-dto';
 
 @Component({
   selector: 'app-performance-crud',
@@ -40,7 +39,8 @@ export class PerformanceCrudComponent implements OnInit {
   performances$!: Observable<PerformanceResponseDto[]>;
   edit = false;
   createNewDate = false;
-  createNewArtist = true;
+  createNewArtist = false;
+  createNewStage = true;
   selectedPerformanceId = '';
   formattedStartTime = '00:00';
   formattedEndTime = '00:00';
@@ -53,7 +53,7 @@ export class PerformanceCrudComponent implements OnInit {
   };
   selectedArtist?: ArtistResponseDto;
   days$!: Observable<DayResponseDto[]>;
-  stages$!: Observable<StageResponseDto[]>;
+  stages$!: Observable<StageDto[]>;
 
   constructor(
     private performanceService: PerformanceService,
@@ -173,7 +173,7 @@ export class PerformanceCrudComponent implements OnInit {
       });
   }
 
-  submitForm() {
+  submitPerformanceForm() {
     const [startHours, startMinutes] = this.formattedStartTime
       .split(':')
       .map(Number);
@@ -198,6 +198,7 @@ export class PerformanceCrudComponent implements OnInit {
         endMinutes
       )
     );
+    console.log('addmign performance!');
     this.performanceService
       .addPerformance(this.selectedPerformanceDto)
       .subscribe({
@@ -224,8 +225,15 @@ export class PerformanceCrudComponent implements OnInit {
     this.errorToast.showToast();
   }
 
-  onArtistCreated(artist: ArtistRequestDto) {
+  onArtistCreated(artist: any) {
     console.log('RECEIVED CREATED ARTIST', artist);
-    //console.log(artist.Id);
+    console.log(artist.id);
+    this.selectedPerformanceDto.artistId = artist.id;
+    this.artistService
+      .getArtistById(this.selectedPerformanceDto.artistId)
+      .subscribe({
+        next: artist => (this.selectedArtist = artist),
+        error: err => console.error('ERROR GETTING ARTIST BY ID', err),
+      });
   }
 }

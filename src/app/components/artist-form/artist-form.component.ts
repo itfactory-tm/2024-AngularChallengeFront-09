@@ -14,7 +14,7 @@ import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 export class ArtistFormComponent {
   constructor(private artistService: ArtistService) {}
   @Output() ErrorEvent = new EventEmitter<string>();
-  @Output() ArtistCreatedEvent = new EventEmitter<ArtistRequestDto>();
+  @Output() ArtistCreatedEvent = new EventEmitter<ArtistResponseDto>();
   @Input()
   edit = false;
   @Input()
@@ -28,7 +28,7 @@ export class ArtistFormComponent {
 
   submitEdit() {
     this.artistService
-      .editArtist(this.selectedArtistId, this.selectedArtistDto)
+      .updateArtist(this.selectedArtistId, this.selectedArtistDto)
       .subscribe(() => this.artistService.fetchArtists());
     this.cancelEdit();
   }
