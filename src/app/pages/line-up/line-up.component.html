@@ -19,9 +19,9 @@
 
   <!-- <h2 class="day-title">Line up</h2> -->
 
-  <div class="artists-container">
-    @for (artist of artistSchedule; track $index) {
-      <app-artist [artist]="artist"></app-artist>
-    }
-  </div>
+  <div class="artists-container grid grid-cols-4 gap-4">
+	@for (artist of artistSchedule; track $index) {
+	  <app-artist [artist]="artist"></app-artist>
+	}
+  </div>  
 </div>

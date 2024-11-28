@@ -1,4 +1,4 @@
-export interface TicketDto {
+export interface TicketResponseDto {
     id: string
     name: string;
     price: number;
