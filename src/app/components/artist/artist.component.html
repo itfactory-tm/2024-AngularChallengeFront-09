@@ -1,7 +1,7 @@
 <div class="artist-card" (click)="showArtistInfo()">
   @if (artist.spotifyImage) {
     <img
-      [src]="artist.spotifyImage?.url"
+      [src]="artist.spotifyImage.url"
       [alt]="artist.name"
       class="artist-image" />
   } @else {

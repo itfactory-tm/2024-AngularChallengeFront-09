@@ -1,0 +1,144 @@
+<app-error-toast
+  [message]="errorMessage"
+  [timeout]="3000"
+  #errorToast></app-error-toast>
+<div class="container mx-auto mt-10">
+  <div class="flex justify-between gap-4 flex-wrap">
+    <!-- Artiestenlijst -->
+    <div
+      class="artists-container list max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
+      <ul>
+        @for (performance of performances$ | async; track $index) {
+          <li class="list-item">
+            <img
+              [src]="performance.artist.spotifyImage?.url"
+              class="thumbnail"
+              [alt]="performance.artist.name" />
+            <div class="details">
+              <h3>{{ performance.artist.name }}</h3>
+              <p>{{ performance.stage.name }}</p>
+              <div class="flex gap-4 flex-wrap">
+                <p class="me-4">
+                  <i class="fa-solid fa-calendar-days"></i>
+                  {{ performance.day.date | date: 'mediumDate' }}
+                </p>
+                <p class="me-4">
+                  <i class="fa-solid fa-clock"></i>
+                  {{ performance.startTime | date: 'shortTime' }} -
+                  {{ performance.endTime | date: 'shortTime' }}
+                </p>
+              </div>
+            </div>
+            <div class="flex justify-center items-center gap-6">
+              <button
+                class="text-lg"
+                (click)="deletePerformance(performance.id)">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+              <button
+                class="text-lg"
+                [ngClass]="{
+                  'icon-button':
+                    edit && selectedPerformanceId === performance.id,
+                }"
+                (click)="editPerformance(performance)">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Formulier -->
+    <div class="form-container w-full lg:w-1/3">
+      <div>
+        <h1 class="form-title">
+          {{ this.edit ? 'Edit performance' : 'Add performance' }}
+        </h1>
+
+        <form (ngSubmit)="submitForm()" #performanceForm="ngForm">
+          <div class="mb-5">
+            <label>Artist</label>
+            <app-artist-dropdown
+              [(selectedArtist)]="selectedArtist"
+              (selectedArtistChange)="onArtistSelected($event)" />
+          </div>
+          @if (createNewDate) {
+            <div class="mb-5">
+              <label for="newDate">Add new day</label>
+              <div class="flex justify-center items-center gap-4">
+                <input type="date" class="w-full" id="newDate" />
+              </div>
+            </div>
+          } @else {
+            <div class="mb-5">
+              <label for="dayId">Day</label>
+              <div class="flex justify-center items-center gap-4">
+                <select
+                  id="days"
+                  class="rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  name="dayId"
+                  style="
+                    background-color: rgba(239, 53, 242, 0.1);
+                    border: 1px solid rgba(239, 53, 242, 0.4);
+                    color: rgba(239, 53, 242, 0.9);
+                  "
+                  [(ngModel)]="selectedPerformanceDto.dayId">
+                  <option selected>Select a day</option>
+                  @for (day of days$ | async; track $index) {
+                    <option value="{{ day.id }}">
+                      {{ day.date | date: 'dd/MM/yyyy' }}
+                    </option>
+                  }
+                </select>
+              </div>
+            </div>
+          }
+          <div class="mb-5">
+            <label for="stageId">Stage</label>
+            <select
+              id="stages"
+              class="rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+              name="stageId"
+              style="
+                background-color: rgba(239, 53, 242, 0.1);
+                border: 1px solid rgba(239, 53, 242, 0.4);
+                color: rgba(239, 53, 242, 0.9);
+              "
+              [(ngModel)]="selectedPerformanceDto.stageId">
+              <option selected>Select a stage</option>
+              @for (stage of stages$ | async; track $index) {
+                <option value="{{ stage.id }}">
+                  {{ stage.name }}
+                </option>
+              }
+            </select>
+            <!--<input-->
+            <!--  type="text"-->
+            <!--  id="stageId"-->
+            <!--  name="stageId"-->
+            <!--  class="w-full"-->
+            <!--  required-->
+            <!--  [(ngModel)]="selectedPerformanceDto.stageId" />-->
+          </div>
+          <div class="button-container">
+            @if (edit) {
+              <button
+                type="button"
+                (click)="submitEdit()"
+                [disabled]="!performanceForm.form.valid">
+                Edit
+              </button>
+              <button type="button" (click)="cancelEdit()">Cancel</button>
+            } @else {
+              <button type="submit" [disabled]="!performanceForm.form.valid">
+                Create
+              </button>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

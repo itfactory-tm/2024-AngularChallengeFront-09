@@ -1,6 +1,5 @@
 /* Ensure that the navbar is centered and sticky */
 .nav-list {
-    display: flex;
     justify-content: center;
     align-items: center;
     list-style-type: none;
@@ -25,8 +24,8 @@
 }
 
 /* Blurring effect */
-.nav-list.nav-blur {
-    backdrop-filter: blur(1px);
+.nav-blur {
+    backdrop-filter: blur(8px);
     background-color: rgba(63, 10, 115, 0.7);
 }
 
@@ -40,7 +39,7 @@
     flex-shrink: 0;
 }
 
-img {
+.logo img {
     width: 100px;
 }
 

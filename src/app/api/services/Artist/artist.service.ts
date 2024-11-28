@@ -40,6 +40,10 @@ export class ArtistService {
     return this.http.get<ArtistResponseDto[]>(this.apiUrl);
   }
 
+  getArtistById(id: string): Observable<ArtistResponseDto> {
+    return this.http.get<ArtistResponseDto>(`${this.apiUrl}/${id}`);
+  }
+
   getArtistsByDay(id: string): Observable<ArtistResponseDto[]> {
     return this.http.get<ArtistResponseDto[]>(`${this.apiUrl}/day/${id}`);
   }
