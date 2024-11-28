@@ -59,10 +59,21 @@
 
         <form (ngSubmit)="submitForm()" #performanceForm="ngForm">
           <div class="mb-5">
-            <label>Artist</label>
-            <app-artist-dropdown
-              [(selectedArtist)]="selectedArtist"
-              (selectedArtistChange)="onArtistSelected($event)" />
+            <div class="flex justify-between items-center">
+              <label>Select Artist</label>
+              <label>New artist</label>
+            </div>
+            <div class="flex w-full justify-center gap-x-3 items-center">
+              <app-artist-dropdown
+                class="w-full"
+                [(selectedArtist)]="selectedArtist"
+                (selectedArtistChange)="onArtistSelected($event)" />
+              <input
+                type="checkbox"
+                [checked]="createNewArtist"
+                (change)="createNewArtist = !createNewArtist"
+                class="w-1/5" />
+            </div>
           </div>
           @if (createNewDate) {
             <div class="mb-5">
@@ -85,7 +96,6 @@
                     color: rgba(239, 53, 242, 0.9);
                   "
                   [(ngModel)]="selectedPerformanceDto.dayId">
-                  <option selected>Select a day</option>
                   @for (day of days$ | async; track $index) {
                     <option value="{{ day.id }}">
                       {{ day.date | date: 'dd/MM/yyyy' }}
@@ -107,7 +117,6 @@
                 color: rgba(239, 53, 242, 0.9);
               "
               [(ngModel)]="selectedPerformanceDto.stageId">
-              <option selected>Select a stage</option>
               @for (stage of stages$ | async; track $index) {
                 <option value="{{ stage.id }}">
                   {{ stage.name }}
@@ -148,13 +157,19 @@
             @if (edit) {
               <button
                 type="button"
+                class="w-full"
                 (click)="submitEdit()"
                 [disabled]="!performanceForm.form.valid">
                 Edit
               </button>
-              <button type="button" (click)="cancelEdit()">Cancel</button>
+              <button type="button" class="w-full" (click)="cancelEdit()">
+                Cancel
+              </button>
             } @else {
-              <button type="submit" [disabled]="!performanceForm.form.valid">
+              <button
+                type="submit"
+                class="w-full"
+                [disabled]="!performanceForm.form.valid">
                 Create
               </button>
             }
@@ -164,3 +179,10 @@
     </div>
   </div>
 </div>
+@if (createNewArtist) {
+  <app-artist-form
+    class="w-full max-w-[500px]"
+    (ArtistCreatedEvent)="onArtistCreated($event)"
+    (ErrorEvent)="onErrorEvent($event)"
+    [edit]="false" />
+}

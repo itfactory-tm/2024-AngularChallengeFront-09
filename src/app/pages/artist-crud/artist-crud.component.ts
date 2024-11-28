@@ -7,25 +7,32 @@ import { Observable } from 'rxjs';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
 
 @Component({
   selector: 'app-artist-crud',
   standalone: true,
-  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
+  imports: [
+    FormsModule,
+    ErrorToastComponent,
+    AsyncPipe,
+    CommonModule,
+    ArtistFormComponent,
+  ],
   templateUrl: './artist-crud.component.html',
-  styleUrl: './artist-crud.component.css'
+  styleUrl: './artist-crud.component.css',
 })
 export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
-  errorMessage = "";
+  errorMessage = '';
   artists$!: Observable<ArtistResponseDto[]>;
   edit = false;
-  selectedArtistId = "";
+  selectedArtistId = '';
   selectedArtistDto: ArtistRequestDto = {
     name: '',
     spotifyId: '',
-    biography: ''
-  }
+    biography: '',
+  };
 
   constructor(private artistService: ArtistService) {}
 
@@ -34,45 +41,24 @@ export class ArtistCrudComponent implements OnInit {
     this.artists$ = this.artistService.artists$;
   }
 
-  deleteArtist(id: string) {
-    this.artistService.deleteArtist(id)
-      .subscribe(() => this.artistService.fetchArtists());
-  }
-
-  submitEdit() {
-    this.artistService.editArtist(this.selectedArtistId, this.selectedArtistDto)
-      .subscribe(() => this.artistService.fetchArtists());
-    this.cancelEdit();
-  }
-
-  cancelEdit() {
-    this.edit = false;
-    this.selectedArtistDto = {
-      name: '',
-      spotifyId: '',
-      biography: ''
-    }
-  }
-
   editArtist(artist: ArtistResponseDto) {
     this.edit = true;
     this.selectedArtistId = artist.id;
     this.selectedArtistDto = {
       name: artist.name,
       spotifyId: artist.spotifyId,
-      biography: artist.biography
-    }
+      biography: artist.biography,
+    };
   }
 
-  submitForm() {
-    this.artistService.addArtist(this.selectedArtistDto).subscribe({
-      next: () => {
-        this.artistService.fetchArtists();
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-        this.errorToast.showToast();
-      }
-    });
+  deleteArtist(id: string) {
+    this.artistService
+      .deleteArtist(id)
+      .subscribe(() => this.artistService.fetchArtists());
+  }
+
+  onErrorEvent(message: string) {
+    this.errorMessage = message;
+    this.errorToast.showToast();
   }
 }

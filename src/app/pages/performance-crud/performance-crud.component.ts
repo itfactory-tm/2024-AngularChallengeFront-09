@@ -14,6 +14,9 @@ import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { ArtistDropdownComponent } from '../../components/artist-dropdown/artist-dropdown.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
+import { RouterLink } from '@angular/router';
+import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
+import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 
 @Component({
   selector: 'app-performance-crud',
@@ -25,6 +28,8 @@ import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
     CommonModule,
     ArtistDropdownComponent,
     DatePipe,
+    RouterLink,
+    ArtistFormComponent,
   ],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',
@@ -35,6 +40,7 @@ export class PerformanceCrudComponent implements OnInit {
   performances$!: Observable<PerformanceResponseDto[]>;
   edit = false;
   createNewDate = false;
+  createNewArtist = true;
   selectedPerformanceId = '';
   formattedStartTime = '00:00';
   formattedEndTime = '00:00';
@@ -211,5 +217,15 @@ export class PerformanceCrudComponent implements OnInit {
     this.artistService
       .getArtistById(this.selectedPerformanceDto.artistId)
       .subscribe(artist => (this.selectedArtist = artist));
+  }
+
+  onErrorEvent(message: string) {
+    this.errorMessage = message;
+    this.errorToast.showToast();
+  }
+
+  onArtistCreated(artist: ArtistRequestDto) {
+    console.log('RECEIVED CREATED ARTIST', artist);
+    //console.log(artist.Id);
   }
 }
