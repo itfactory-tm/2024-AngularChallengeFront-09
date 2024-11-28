@@ -18,6 +18,7 @@
 
 .form-container input[type="text"],
 .form-container input[type="date"],
+.form-container input[type="time"],
 .form-container textarea[name="biography"] {
   padding: 10px;
   font-size: 0.9rem;
@@ -41,7 +42,7 @@
 
 .form-container button {
   display: block;
-  width: 100%;
+  /*width: 100%;*/
   padding: 12px;
   font-size: 1rem;
   font-weight: bold;
@@ -78,7 +79,7 @@
   font-weight: bold;
   color: rgba(107, 242, 229, 0.8);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-transform: uppercase;
   position: relative;
 }

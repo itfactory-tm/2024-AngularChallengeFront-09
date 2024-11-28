@@ -7,6 +7,6 @@ export interface PerformanceResponseDto {
   artist: ArtistResponseDto;
   stage: StageResponseDto;
   day: DayResponseDto;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
 }

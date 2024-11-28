@@ -1,0 +1,56 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
+import { ArtistService } from '../../api/services/Artist/artist.service';
+import { FormsModule } from '@angular/forms';
+import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
+
+@Component({
+  selector: 'app-artist-form',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './artist-form.component.html',
+  styleUrl: './artist-form.component.css',
+})
+export class ArtistFormComponent {
+  constructor(private artistService: ArtistService) {}
+  @Output() ErrorEvent = new EventEmitter<string>();
+  @Output() ArtistCreatedEvent = new EventEmitter<ArtistResponseDto>();
+  @Input()
+  edit = false;
+  @Input()
+  selectedArtistId = '';
+  @Input()
+  selectedArtistDto: ArtistRequestDto = {
+    name: '',
+    spotifyId: '',
+    biography: '',
+  };
+
+  submitEdit() {
+    this.artistService
+      .updateArtist(this.selectedArtistId, this.selectedArtistDto)
+      .subscribe(() => this.artistService.fetchArtists());
+    this.cancelEdit();
+  }
+
+  cancelEdit() {
+    this.edit = false;
+    this.selectedArtistDto = {
+      name: '',
+      spotifyId: '',
+      biography: '',
+    };
+  }
+
+  submitForm() {
+    this.artistService.addArtist(this.selectedArtistDto).subscribe({
+      next: value => {
+        this.ArtistCreatedEvent.emit(value);
+        this.artistService.fetchArtists();
+      },
+      error: err => {
+        this.ErrorEvent.emit(err.message);
+      },
+    });
+  }
+}
