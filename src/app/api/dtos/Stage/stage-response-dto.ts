@@ -3,4 +3,6 @@ export interface StageResponseDto {
     name: string;
     description: string;
     capacity: number;
+    longitude: number;
+    latitude: number;
 }
