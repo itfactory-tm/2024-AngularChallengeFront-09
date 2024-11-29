@@ -348,7 +348,7 @@ h2 {
 /* SCROLL BAR */
 
 /* ARTISTS CONTAINER */
-.artists-container {
+.artists-list-container {
   margin: 0 auto;
   padding: 1rem;
   max-width: 800px;
@@ -358,13 +358,13 @@ h2 {
   color: var(--text-color);
 }
 
-.artists-container ul {
+.artists-list-container ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.list-item {
+.artists-list-container .list-item {
   display: flex;
   align-items: flex-start;
   gap: 1.5rem;
@@ -373,16 +373,16 @@ h2 {
   overflow: hidden;
 }
 
-.list-item:last-child {
+.artists-list-container .list-item:last-child {
   border-bottom: none;
 }
 
-.icon-button {
+.artists-list-container .icon-button {
   font-size: large;
   color: white;
 }
 
-.thumbnail {
+.artists-list-container .thumbnail {
   width: 80px;
   height: 80px;
   object-fit: cover;
@@ -390,25 +390,24 @@ h2 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.details {
+.artists-list-container .details {
   flex: 1;
 }
 
-.details h3 {
+.artists-list-container .details h3 {
   margin: 0 0 0.3rem;
   font-size: 1.2rem;
   color: var(--light-purple);
 }
 
-.details p {
+.artists-list-container .details p {
   margin: 0.3rem 0;
   font-size: 0.9rem;
   color: var(--accent-color);
   word-wrap: break-word;
 }
 
-.details p strong {
+.artists-list-container .details p strong {
   color: var(--light-purple);
 }
-
 /* ARTISTS CONTAINER */
