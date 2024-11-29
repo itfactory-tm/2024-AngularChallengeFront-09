@@ -255,7 +255,7 @@ h2 {
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.form-container input:focus {
+.form-container input, textarea:focus {
   border-color: rgba(239, 53, 242, 1);
   background-color: rgba(239, 53, 242, 0.2);
   outline: none;
@@ -321,3 +321,94 @@ h2 {
   border-radius: 2px;
 }
 /* FORM */
+
+/* SCROLL BAR */
+.list-scroll-bar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--dark-purple);
+}
+
+.list-scroll-bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list-scroll-bar::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+}
+
+.list-scroll-bar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--dark-purple);
+}
+
+.list-scroll-bar::-webkit-scrollbar-track {
+  background-color: var(--dark-purple);
+  border-radius: 10px;
+}
+/* SCROLL BAR */
+
+/* ARTISTS CONTAINER */
+.artists-container {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 800px;
+  border: 1px solid var(--medium-purple);
+  border-radius: 8px;
+  background-color: var(--dark-purple);
+  color: var(--text-color);
+}
+
+.artists-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--medium-purple);
+  overflow: hidden;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.icon-button {
+  font-size: large;
+  color: white;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.details {
+  flex: 1;
+}
+
+.details h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  color: var(--light-purple);
+}
+
+.details p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  word-wrap: break-word;
+}
+
+.details p strong {
+  color: var(--light-purple);
+}
+
+/* ARTISTS CONTAINER */

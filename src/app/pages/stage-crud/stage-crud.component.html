@@ -7,7 +7,7 @@
     <!-- Artiestenlijst -->
     <div class="list w-1/2 mx-auto">
       <div
-        class="stages-container mx-auto p-4 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 max-w-[800px] border border-tertiary rounded-lg max-h-[450px] overflow-y-auto">
+        class="stages-container list-scroll-bar mx-auto p-4 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 max-w-[800px] border border-tertiary rounded-lg max-h-[450px] overflow-y-auto">
         <!-- Loop over stages -->
         @for (stage of stages$ | async; track $index) {
           <div
@@ -40,10 +40,10 @@
       </div>
     </div>
     <app-stage-form
-      class="w-full max-w-[500px]"
       (ErrorEvent)="onErrorEvent($event)"
       [selectedStageId]="selectedStageId"
       [selectedStageDto]="selectedStageDto"
-      [(edit)]="edit" />
+      [(edit)]="edit"
+      class="w-full max-w-[500px] lg:w-1/3 mx-auto" />
   </div>
 </div>
