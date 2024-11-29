@@ -17,6 +17,8 @@ export class StageFormComponent {
   @Output() StageCreatedEvent = new EventEmitter<StageResponseDto>();
   @Input()
   edit = false;
+  @Output()
+  editChange = new EventEmitter<boolean>();
   @Input()
   selectedStageId = '';
   @Input()
@@ -49,6 +51,7 @@ export class StageFormComponent {
 
   cancelEdit() {
     this.edit = false;
+    this.editChange.emit(this.edit);
     this.selectedStageDto = {
       name: '',
       description: '',

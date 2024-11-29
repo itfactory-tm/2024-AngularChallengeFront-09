@@ -1,5 +1,5 @@
 <!-- Formulier -->
-<div class="form-container w-full max-h-[480px]">
+<div class="form-container">
   <div>
     <h1 class="form-title">{{ this.edit ? 'Edit artist' : 'Add artist' }}</h1>
 
@@ -31,7 +31,7 @@
           name="biography"
           [(ngModel)]="selectedArtistDto.biography"></textarea>
       </div>
-      <div class="button-container">
+      <div class="flex gap-4 justify-start">
         @if (edit) {
           <button
             type="button"

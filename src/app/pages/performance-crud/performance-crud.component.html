@@ -6,7 +6,7 @@
   <div class="flex justify-between gap-4 flex-wrap">
     <!-- Artiestenlijst -->
     <div
-      class="artists-container list max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
+      class="artists-list-container list-scroll-bar max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
       <ul>
         @for (performance of performances$ | async; track $index) {
           <li class="list-item">
@@ -180,7 +180,7 @@
                 [(ngModel)]="formattedEndTime" />
             </div>
           </div>
-          <div class="button-container">
+          <div class="flex gap-4 justify-start">
             @if (edit) {
               <button
                 type="button"

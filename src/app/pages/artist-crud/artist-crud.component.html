@@ -5,7 +5,7 @@
 <div class="container mx-auto mt-10">
   <div class="flex justify-between gap-4 flex-wrap">
     <!-- Artiestenlijst -->
-    <div class="artists-container list w-1/2 overflow-y-scroll">
+    <div class="artists-list-container list-scroll-bar max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
       <ul>
         @for (artist of artists$ | async; track $index) {
           <li class="list-item">
@@ -32,11 +32,13 @@
         }
       </ul>
     </div>
+
     <app-artist-form
-      class="w-full max-w-[500px]"
       (ErrorEvent)="onErrorEvent($event)"
       [selectedArtistId]="selectedArtistId"
       [selectedArtistDto]="selectedArtistDto"
-      [edit]="edit" />
+      [(edit)]="edit"
+      class="w-full max-w-[500px] lg:w-1/3 mx-auto" />
+
   </div>
 </div>
