@@ -1,5 +1,5 @@
 <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
-
+<h1>Line up</h1>
 <div class="container mx-auto">
   <nav class="nav-bar">
     <button (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
@@ -19,7 +19,7 @@
 
   <!-- <h2 class="day-title">Line up</h2> -->
 
-  <div class="artists-container">
+  <div class="artists-grid">
     @for (artist of artistSchedule; track $index) {
       <app-artist [artist]="artist"></app-artist>
     }

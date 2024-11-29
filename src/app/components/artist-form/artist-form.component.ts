@@ -17,6 +17,8 @@ export class ArtistFormComponent {
   @Output() ArtistCreatedEvent = new EventEmitter<ArtistResponseDto>();
   @Input()
   edit = false;
+  @Output()
+  editChange = new EventEmitter<boolean>();
   @Input()
   selectedArtistId = '';
   @Input()
@@ -34,6 +36,7 @@ export class ArtistFormComponent {
 
   cancelEdit() {
     this.edit = false;
+    this.editChange.emit(this.edit);
     this.selectedArtistDto = {
       name: '',
       discogsId: '',

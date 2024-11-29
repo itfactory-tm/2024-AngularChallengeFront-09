@@ -45,7 +45,7 @@ export class PerformanceCrudComponent implements OnInit {
   newDate = '';
   newDayId = '';
   createNewArtist = false;
-  createNewStage = true;
+  createNewStage = false;
   selectedPerformanceId = '';
   formattedStartTime = '00:00';
   formattedEndTime = '00:00';

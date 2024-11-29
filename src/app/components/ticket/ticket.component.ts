@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TicketDto } from '../../api/dtos/ticket-dto';
+import { Component, Input } from '@angular/core';
+import { TicketResponseDto } from '../../api/dtos/Ticket/ticket-response-dto';
 
 @Component({
   selector: 'app-ticket',
@@ -8,6 +8,7 @@ import { TicketDto } from '../../api/dtos/ticket-dto';
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.css'
 })
-export class TicketComponent {
-ticket!: TicketDto
+export class TicketComponent{	
+	@Input()
+	ticket!:TicketResponseDto;
 }

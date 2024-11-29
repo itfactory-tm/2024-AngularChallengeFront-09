@@ -1,1 +1,9 @@
-<p>ticket works!</p>
+<div class="ticket-card">
+    <h3 class="ticket-title font-bold">{{ ticket.name }}</h3>
+    <p class="ticket-price font-bold my-2">
+      Price: <span>€{{ ticket.price }}</span>
+    </p>
+	<p class="ticket-description">
+		{{ ticket.description }}
+	</p>
+</div>
