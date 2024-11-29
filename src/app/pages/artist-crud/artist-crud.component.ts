@@ -8,6 +8,7 @@ import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
+import { convertBiographyToHtml } from '../../lib/utils';
 
 @Component({
   selector: 'app-artist-crud',
@@ -25,20 +26,32 @@ import { ArtistFormComponent } from '../../components/artist-form/artist-form.co
 export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
   errorMessage = '';
-  artists$!: Observable<ArtistResponseDto[]>;
+  artists!: ArtistResponseDto[];
+  artistBios: string[] = [];
   edit = false;
   selectedArtistId = '';
   selectedArtistDto: ArtistRequestDto = {
     name: '',
-    spotifyId: '',
-    biography: '',
+    discogsId: '',
   };
 
   constructor(private artistService: ArtistService) {}
 
   ngOnInit() {
     this.artistService.fetchArtists();
-    this.artists$ = this.artistService.artists$;
+    this.artistService.getArtists().subscribe({
+      next: artists => {
+        artists.forEach(artist => {
+          this.artistBios.push(convertBiographyToHtml(artist.biography));
+        });
+        this.artists = artists;
+        console.log(artists);
+      },
+      error: err => {
+        this.errorMessage = err.message;
+        this.errorToast.showToast();
+      },
+    });
   }
 
   editArtist(artist: ArtistResponseDto) {
@@ -46,8 +59,7 @@ export class ArtistCrudComponent implements OnInit {
     this.selectedArtistId = artist.id;
     this.selectedArtistDto = {
       name: artist.name,
-      spotifyId: artist.spotifyId,
-      biography: artist.biography,
+      discogsId: artist.discogsId,
     };
   }
 

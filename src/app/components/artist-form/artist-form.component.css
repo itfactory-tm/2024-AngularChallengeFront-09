@@ -16,8 +16,7 @@
 }
 
 .form-container input[name="name"],
-.form-container input[name="spotifyId"],
-.form-container textarea[name="biography"] {
+.form-container input[name="discogsId"] {
   width: 100%;
   padding: 10px;
   font-size: 0.9rem;

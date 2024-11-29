@@ -7,15 +7,15 @@
     <!-- Artiestenlijst -->
     <div class="artists-container list w-1/2 overflow-y-scroll">
       <ul>
-        @for (artist of artists$ | async; track $index) {
+        @for (artist of artists; track $index; let index = $index) {
           <li class="list-item">
             <img
-              [src]="artist.spotifyImage?.url"
+              [src]="artist.discogsImage?.url"
               [alt]="artist.name"
               class="thumbnail" />
             <div class="details">
               <h3>{{ artist.name }}</h3>
-              <p>{{ artist.biography }}</p>
+              <p [innerHtml]="artistBios[index]"></p>
             </div>
             <button class="text-lg" (click)="deleteArtist(artist.id)">
               <i class="fa-regular fa-trash-can"></i>

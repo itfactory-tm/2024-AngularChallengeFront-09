@@ -6,9 +6,9 @@
     color: rgba(239, 53, 242, 0.9);
   ">
   @if (selectedArtist) {
-    @if (selectedArtist.spotifyImage) {
+    @if (selectedArtist.discogsImage) {
       <img
-        [src]="selectedArtist.spotifyImage.url"
+        [src]="selectedArtist.discogsImage.url"
         [alt]="selectedArtist.name"
         class="w-20 h-20 rounded-lg" />
     } @else {

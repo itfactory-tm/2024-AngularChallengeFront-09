@@ -11,7 +11,7 @@
         @for (performance of performances$ | async; track $index) {
           <li class="list-item">
             <img
-              [src]="performance.artist.spotifyImage?.url"
+              [src]="performance.artist.discogsImage?.url"
               class="thumbnail"
               [alt]="performance.artist.name" />
             <div class="details">
