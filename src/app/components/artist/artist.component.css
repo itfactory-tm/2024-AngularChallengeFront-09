@@ -1,18 +1,16 @@
 .artist-card {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 350px;
+    max-height: 350px;
     text-align: center;
     position: relative;
     display: flex;
     cursor: grab;
-
 }
 
 
 .artist-image {
-
     height: auto;
     object-fit: cover;
     display: block;
