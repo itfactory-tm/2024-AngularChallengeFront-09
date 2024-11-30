@@ -1,11 +1,10 @@
 <div class="stage-card cursor-pointer">
-    <img
-      [src]="baseUrl + stage.imageUrl"
-      alt="Stage Image"
-      class="max-w-[250px] rounded-lg"
-    />
-    <h3 class="stage-title">{{ stage.name }}</h3>
-    <p class="stage-capacity">
-      Capacity: <span>{{ stage.capacity }}</span>
-    </p>
-  </div>
+  <img
+    [src]="baseUrl + stage.imageUrl"
+    alt="Stage Image"
+    class="w-[350px] h-[350px] object-cover rounded-lg" />
+  <h3 class="stage-title">{{ stage.name }}</h3>
+  <p class="stage-capacity">
+    Capacity: <span>{{ stage.capacity }}</span>
+  </p>
+</div>

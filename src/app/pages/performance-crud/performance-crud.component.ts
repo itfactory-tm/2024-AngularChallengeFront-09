@@ -163,7 +163,6 @@ export class PerformanceCrudComponent implements OnInit {
     // Subscribe to the final observable
     dayObservable.subscribe({
       next: () => {
-        console.log('PERFORMANCE UPDATED');
         this.refreshPerformances();
       },
       error: err => {
@@ -216,7 +215,6 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   submitPerformanceForm() {
-    console.log('submitting form');
     const [startHours, startMinutes] = this.formattedStartTime
       .split(':')
       .map(Number);
