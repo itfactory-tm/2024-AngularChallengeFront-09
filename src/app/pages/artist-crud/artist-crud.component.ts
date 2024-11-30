@@ -3,7 +3,6 @@ import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
-import { Observable } from 'rxjs';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -72,5 +71,15 @@ export class ArtistCrudComponent implements OnInit {
   onErrorEvent(message: string) {
     this.errorMessage = message;
     this.errorToast.showToast();
+  }
+
+  onArtistCreatedEvent() {
+    this.artistService.getArtists().subscribe({
+      next: artists => (this.artists = artists),
+      error: err => {
+        this.errorMessage = err.message;
+        this.errorToast.showToast();
+      },
+    });
   }
 }
