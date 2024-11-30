@@ -1,9 +1,10 @@
 <!-- Formulier -->
 <div class="form-container">
   <div>
-    <h1 class="form-title">{{ this.edit ? 'Edit artist' : 'Add artist' }}</h1>
+    <h1 class="form-title">{{ edit ? 'Edit artist' : 'Add artist' }}</h1>
 
     <form (ngSubmit)="submitForm()" #artistForm="ngForm">
+      <!-- Naam -->
       <div class="mb-5">
         <label for="name">Name</label>
         <input
@@ -13,8 +14,10 @@
           required
           [(ngModel)]="selectedArtistDto.name" />
       </div>
+
+      <!-- Discogs ID -->
       <div class="mb-5">
-        <label for="discogsId">Discogs id</label>
+        <label for="discogsId">Discogs ID</label>
         <input
           type="text"
           id="discogsId"
@@ -22,20 +25,39 @@
           required
           [(ngModel)]="selectedArtistDto.discogsId" />
       </div>
+
+      <!-- Genres -->
+      <div class="mb-5">
+        <label for="genres">Genres</label>
+
+        <select
+          id="genres"
+          name="genres"
+          multiple
+          class="styled-select list-scroll-bar"
+          [(ngModel)]="selectedGenres">
+          @for (genre of genres$ | async; track $index;)
+          {
+            <option [value]="genre.name">{{ genre.name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Knoppen -->
       <div class="flex gap-4 justify-start">
         @if (edit) {
           <button
-            type="button"
-            (click)="submitEdit()"
-            [disabled]="!artistForm.form.valid">
-            Edit
+              type="button"
+              (click)="submitEdit()"
+              [disabled]="!artistForm.form.valid">
+              Edit
           </button>
           <button type="button" (click)="cancelEdit()">Cancel</button>
-        } @else {
+          } @else {
           <button type="submit" [disabled]="!artistForm.form.valid">
-            Create
+              Create
           </button>
-        }
+          }
       </div>
     </form>
   </div>
