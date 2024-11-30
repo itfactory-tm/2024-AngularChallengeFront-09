@@ -41,6 +41,12 @@
 
   <div class="full-screen">
     <h2>Timetable for {{stage.name}}</h2>
+    @for(performance of performances$ | async; track performance){
+      <p>{{performance.artist.name}}</p>
+      <p>{{performance.startTime}}</p>
+      <p>{{performance.endTime}}</p>
+      <p>{{performance.day.date}}</p>
+    }
   </div>
   }
   @else {

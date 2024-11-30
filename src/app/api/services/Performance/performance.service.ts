@@ -39,6 +39,12 @@ export class PerformanceService {
       `${this.apiUrl}/artist/${id}`
     );
   }
+  getPerformancesByStage(id: string): Observable<PerformanceResponseDto[]> {
+    return this.http.get<PerformanceResponseDto[]>(
+      `${this.apiUrl}/stage/${id}`
+    );
+  }
+
 
   deletePerformance(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
