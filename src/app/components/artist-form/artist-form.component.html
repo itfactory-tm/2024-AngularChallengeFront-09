@@ -30,17 +30,20 @@
       <div class="mb-5">
         <label for="genres">Genres</label>
 
-        <select
-          id="genres"
-          name="genres"
-          multiple
-          class="styled-select list-scroll-bar"
-          [(ngModel)]="selectedGenres">
-          @for (genre of genres$ | async; track $index;)
-          {
-            <option [value]="genre.name">{{ genre.name }}</option>
+        <div class="list-scroll-bar select-checkbox overflow-y-scroll max-h-[100px]">
+          @for (genre of genres$ | async; track $index) {
+            <label>
+              <input
+                #checkbox
+                type="checkbox"
+                [value]="genre.name"
+                [checked]="isGenreSelected(genre.name)"
+                (change)="onCheckboxChange($event)"
+                />
+              {{ genre.name }}
+            </label>
           }
-        </select>
+        </div>
       </div>
 
       <!-- Knoppen -->

@@ -31,6 +31,7 @@ export class ArtistCrudComponent implements OnInit {
   selectedArtistId = '';
   selectedArtistDto: ArtistRequestDto = {
     name: '',
+    genres: [],
     discogsId: '',
   };
 
@@ -54,6 +55,7 @@ export class ArtistCrudComponent implements OnInit {
     this.selectedArtistId = artist.id;
     this.selectedArtistDto = {
       name: artist.name,
+      genres: artist.genres,
       discogsId: artist.discogsId,
     };
   }
