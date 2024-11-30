@@ -1,17 +1,17 @@
 <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
 <h1>Line up</h1>
 <div class="container mx-auto">
-  <nav class="nav-bar">
-    <button (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
-    <button (click)="updateFilterContent('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
-    <button (click)="updateFilterContent('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
-    <button (click)="updateFilterContent('byStage')" [class.active]="activeFilter === 'byStage'">Artists by stage</button>
+  <nav class="nav-bar flex justify-center items-stretch flex-wrap px-3 py-14 gap-4 mx-auto">
+    <button class="w-full max-w-80 sm:w-auto" (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
+    <button class="w-full max-w-80 sm:w-auto" (click)="updateFilterContent('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
+    <button class="w-full max-w-80 sm:w-auto" (click)="updateFilterContent('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by genre</button>
+    <button class="w-full max-w-80 sm:w-auto" (click)="updateFilterContent('byStage')" [class.active]="activeFilter === 'byStage'">Artists by stage</button>
   </nav>
 
   <!-- subfilter -->
-  <nav class="sub-nav-bar">
+  <nav class="flex flex-wrap gap-0.5 px-1 py-1 sm:py-8 justify-center items-stretch h-full">
     @for (filterOption of subfilters; track $index) {
-      <button (click)="updateSubFilter($index)" [class.active]="activeSubFilterIndex === $index">{{ filterOption | formatLineUpTitle }}</button>
+    <button (click)="updateSubFilter($index)" [class.active]="activeSubFilterIndex === $index">{{ filterOption | formatLineUpTitle }}</button>
     }
   </nav>
   <!-- subfilter -->
