@@ -102,6 +102,7 @@ export class LineUpComponent implements OnInit {
         this.genreService.getGenres().subscribe(genres => {
           this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
           const genre = genres[this.activeSubFilterIndex];
+
           const activeGenreArtists = this.artistService.getArtistsByGenre(
             genre.id
           );
