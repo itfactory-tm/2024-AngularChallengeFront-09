@@ -19,11 +19,11 @@ export function convertBiographyToHtml(biography: string): string {
 
   // Links with just the Id
   // [a1812708] to <a href="https://www.discogs.com/artist/[a1812708]" target="_blank">[a1812708]</a>
-  biography = biography.replace(/\[a([0-9]{7})\]/g, (match, id) => {
+  biography = biography.replace(/\[a([0-9]{5,7})\]/g, (match, id) => {
     return `<a href="https://www.discogs.com/artist/${id}" target="_blank">${match}</a>`;
   });
 
-  biography = biography.replace(/\[l([0-9]{6})\]/g, (match, id) => {
+  biography = biography.replace(/\[l([0-9]{5,7})\]/g, (match, id) => {
     return `<a href="https://www.discogs.com/label/${id}" target="_blank">${match}</a>`;
   });
   return biography;
