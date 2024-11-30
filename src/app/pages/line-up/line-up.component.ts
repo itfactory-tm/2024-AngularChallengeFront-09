@@ -1,13 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  combineLatest,
-  forkJoin,
-  groupBy,
-  map,
-  mergeMap,
-  of,
-  toArray,
-} from 'rxjs';
+import { groupBy, map, mergeMap, toArray } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from '../../components/artist/artist.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
@@ -42,8 +34,6 @@ export class LineUpComponent implements OnInit {
 
   subfilters: string[] = [];
   activeSubFilterIndex = 0;
-
-  mainGenres: string[] = ['rap', 'pop', 'hip hop'];
 
   constructor(
     private artistService: ArtistService,
@@ -111,109 +101,17 @@ export class LineUpComponent implements OnInit {
       case 'byGenre': {
         this.genreService.getGenres().subscribe(genres => {
           this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
-          const derivedFilters: Map<string, string[]> = new Map<
-            string,
-            string[]
-          >();
-
-          this.mainGenres.forEach(mainGenre => {
-            // Zorg ervoor dat bv 'trap' niet gemerged word met 'rap'
-            const regex = new RegExp(`\\b(${mainGenre})\\b`, 'i');
-
-            const derivedFiltersForGenre = this.subfilters.filter(
-              subfilter =>
-                !this.mainGenres.includes(subfilter) && regex.test(subfilter)
-            );
-
-            // Enkel de hoofgenres die afgeleide genres hebben worden opgeslagen
-            if (derivedFiltersForGenre.length > 0) {
-              derivedFilters.set(mainGenre, derivedFiltersForGenre);
-            }
-          });
-
-          // Pas de subfilter aan zonder de afgeleide genres
-          this.subfilters = this.subfilters.filter(
-            item => !Array.from(derivedFilters.values()).flat().includes(item)
+          const genre = genres[this.activeSubFilterIndex];
+          const activeGenreArtists = this.artistService.getArtistsByGenre(
+            genre.id
           );
-
-          // Haal all genres van de subfilters op
-          const filteredGenres = genres.filter(genre =>
-            this.subfilters.includes(genre.name)
-          );
-
-          // Bepaal het actieve genre
-          const activeGenre = filteredGenres[this.activeSubFilterIndex];
-
-          const derivedArtistsMap = new Map<string, ArtistResponseDto[]>();
-
-          // Maak een lijst van observables aan die worden uitgevoerd voor elke mainGenre
-          const derivedArtistsRequests = Array.from(
-            derivedFilters.entries()
-          ).map(([mainGenre, derivedFilters]) => {
-            const derivedGenreResponseDtos = genres.filter(g =>
-              derivedFilters.includes(g.name)
-            );
-
-            // Combineer observables voor alle afgeleide genres van dit hoofdgenre
-            return combineLatest(
-              derivedGenreResponseDtos.map(genre =>
-                this.artistService.getArtistsByGenre(genre.id)
-              )
-            ).pipe(
-              map(arrays => arrays.flat()), // Combineer alle artiesten in één lijst
-              map(artists => ({ mainGenre, artists })) // Voeg de genre-informatie toe aan de output
-            );
+          activeGenreArtists.subscribe({
+            next: artist => (this.artistSchedule = artist),
+            error: err => {
+              this.errorMessage = err.message;
+              this.errorToast.showToast();
+            },
           });
-
-          // Gebruik `forkJoin` om te wachten tot alle observables zijn afgerond
-          forkJoin(derivedArtistsRequests).subscribe(results => {
-            results.forEach(({ mainGenre, artists }) => {
-              derivedArtistsMap.set(mainGenre, artists);
-            });
-
-            // Neem alle artiesten van het actieve genre
-            let activeGenreArtists = this.artistService.getArtistsByGenre(
-              activeGenre.id
-            );
-
-            if (this.mainGenres.includes(activeGenre.name)) {
-              // Voeg alle afgeleide artiesten van het actieve genre samen in één observable
-              const derivedArtistsObservable = of(
-                derivedArtistsMap.get(activeGenre.name)!
-              );
-
-              activeGenreArtists = combineLatest([
-                activeGenreArtists,
-                derivedArtistsObservable,
-              ]).pipe(
-                map(([artists1, artists2]) => {
-                  const combinedArtists = artists2
-                    ? [...artists1, ...artists2]
-                    : [...artists1];
-                  const uniqueArtists = new Map(
-                    combinedArtists.map(artist => [artist.name, artist])
-                  );
-                  return Array.from(uniqueArtists.values());
-                })
-              );
-            }
-
-            activeGenreArtists.subscribe({
-              next: artists => (this.artistSchedule = artists),
-              error: err => {
-                console.error(err);
-                this.errorMessage = `Error loading artists: ${err.message}`;
-                this.errorToast.showToast();
-              },
-            });
-          });
-
-          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
-          // this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
-          // let genre = genres[this.activeSubFilterIndex]
-          // let activeGenreArtists = this.artistService.getArtistsByGenre(genre.id);
-          // this.artistSchedule = activeGenreArtists;
-          // --- OUDE STUK CODE HOE HET NORMAAL WEKRT ---
         });
 
         break;
