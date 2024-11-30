@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
-import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 
 @Component({
   selector: 'app-artist-form',
@@ -14,7 +13,6 @@ import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 export class ArtistFormComponent {
   constructor(private artistService: ArtistService) {}
   @Output() ErrorEvent = new EventEmitter<string>();
-  @Output() ArtistCreatedEvent = new EventEmitter<ArtistResponseDto>();
   @Input()
   edit = false;
   @Output()
@@ -45,8 +43,7 @@ export class ArtistFormComponent {
 
   submitForm() {
     this.artistService.addArtist(this.selectedArtistDto).subscribe({
-      next: value => {
-        this.ArtistCreatedEvent.emit(value);
+      next: () => {
         this.artistService.fetchArtists();
       },
       error: err => {

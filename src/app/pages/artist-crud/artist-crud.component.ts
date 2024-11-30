@@ -8,6 +8,7 @@ import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
 import { convertBiographyToHtml } from '../../lib/utils';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-artist-crud',
@@ -25,8 +26,7 @@ import { convertBiographyToHtml } from '../../lib/utils';
 export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
   errorMessage = '';
-  artists!: ArtistResponseDto[];
-  artistBios: string[] = [];
+  artists$!: Observable<ArtistResponseDto[]>;
   edit = false;
   selectedArtistId = '';
   selectedArtistDto: ArtistRequestDto = {
@@ -38,19 +38,15 @@ export class ArtistCrudComponent implements OnInit {
 
   ngOnInit() {
     this.artistService.fetchArtists();
-    this.artistService.getArtists().subscribe({
-      next: artists => {
-        artists.forEach(artist => {
-          this.artistBios.push(convertBiographyToHtml(artist.biography));
-        });
-        this.artists = artists;
-        console.log(artists);
-      },
-      error: err => {
-        this.errorMessage = err.message;
-        this.errorToast.showToast();
-      },
-    });
+
+    this.artists$ = this.artistService.artists$.pipe(
+      map(artists => 
+        artists.map(artist => ({
+          ...artist,
+          biography: convertBiographyToHtml(artist.biography)
+        }))
+      )
+    );
   }
 
   editArtist(artist: ArtistResponseDto) {
@@ -71,15 +67,5 @@ export class ArtistCrudComponent implements OnInit {
   onErrorEvent(message: string) {
     this.errorMessage = message;
     this.errorToast.showToast();
-  }
-
-  onArtistCreatedEvent() {
-    this.artistService.getArtists().subscribe({
-      next: artists => (this.artists = artists),
-      error: err => {
-        this.errorMessage = err.message;
-        this.errorToast.showToast();
-      },
-    });
   }
 }
