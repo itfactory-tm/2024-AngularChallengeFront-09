@@ -14,22 +14,13 @@
           [(ngModel)]="selectedArtistDto.name" />
       </div>
       <div class="mb-5">
-        <label for="spotifyId">Spotify id</label>
+        <label for="discogsId">Discogs id</label>
         <input
           type="text"
-          id="spotifyId"
-          name="spotifyId"
+          id="discogsId"
+          name="discogsId"
           required
-          [(ngModel)]="selectedArtistDto.spotifyId" />
-      </div>
-      <div class="mb-5">
-        <label for="biography">Biography</label>
-        <textarea
-          class="resize-none"
-          type="textarea"
-          id="biography"
-          name="biography"
-          [(ngModel)]="selectedArtistDto.biography"></textarea>
+          [(ngModel)]="selectedArtistDto.discogsId" />
       </div>
       <div class="flex gap-4 justify-start">
         @if (edit) {

@@ -11,7 +11,8 @@
 
 
 .artist-image {
-    height: auto;
+    height: 350px;
+    width: 350px;
     object-fit: cover;
     display: block;
     border-radius: 8px;

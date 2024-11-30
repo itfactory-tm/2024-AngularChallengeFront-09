@@ -24,8 +24,7 @@ export class ArtistFormComponent {
   @Input()
   selectedArtistDto: ArtistRequestDto = {
     name: '',
-    spotifyId: '',
-    biography: '',
+    discogsId: '',
   };
 
   submitEdit() {
@@ -40,8 +39,7 @@ export class ArtistFormComponent {
     this.editChange.emit(this.edit);
     this.selectedArtistDto = {
       name: '',
-      spotifyId: '',
-      biography: '',
+      discogsId: '',
     };
   }
 

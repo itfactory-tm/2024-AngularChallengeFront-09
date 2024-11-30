@@ -1,37 +1,53 @@
 <div class="modal-overlay" (click)="onOverlayClick($event)">
-    <div class="modal-content">
-      <button class="close-button" (click)="close()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+  <div class="modal-content">
+    <button class="close-button" (click)="close()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12" />
       </svg>
-      </button>
-      
-      <div class="artist-header">
-        <img [src]="artist.spotifyImage?.url" [alt]="artist.name" class="artist-modal-image" />
-        <h2 class="artist-title">{{ artist.name }}</h2>
+    </button>
+
+    <div class="artist-header">
+      <img
+        [src]="artist.discogsImage?.url"
+        [alt]="artist.name"
+        class="artist-modal-image" />
+      <h2 class="artist-title">{{ artist.name }}</h2>
+    </div>
+
+    <div class="artist-details">
+      <div class="biography" *ngIf="artist.biography">
+        <h3>Biography</h3>
+        <p [innerHTML]="htmlBiography"></p>
       </div>
-      
-      <div class="artist-details">
-        <div class="biography" *ngIf="artist.biography">
-          <h3>Biography</h3>
-          <p>{{ artist.biography }}</p>
-        </div>
-        <div class="performances">
-          @for(performance of performances$ | async; track $index){
-            <div class="performance-item">
-            <span class="day">{{ performance.day.date | date:'dd/MM' }}</span>
-            <span class="stage">{{ performance.stage.name }}</span>   
-            <span class="time">{{ performance.startTime | date:'HH:mm' }} - {{ performance.endTime | date:'HH:mm' }}</span>
+      <div class="performances">
+        @for (performance of performances$ | async; track $index) {
+          <div class="performance-item">
+            <span class="day">{{ performance.day.date | date: 'dd/MM' }}</span>
+            <span class="stage">{{ performance.stage.name }}</span>
+            <span class="time"
+              >{{ performance.startTime | date: 'HH:mm' }} -
+              {{ performance.endTime | date: 'HH:mm' }}</span
+            >
           </div>
-          }
-        </div>
-        <div class="genres" *ngIf="artist.genres?.length">
-          <h3>Genres</h3>
-          <div class="genre-tags">
-            <span class="genre-tag" *ngFor="let genre of artist.genres">
-              {{ genre.name }}
-            </span>
-          </div>
+        }
+      </div>
+      <div class="genres" *ngIf="artist.genres?.length">
+        <h3>Genres</h3>
+        <div class="genre-tags">
+          <span class="genre-tag" *ngFor="let genre of artist.genres">
+            {{ genre.name }}
+          </span>
         </div>
       </div>
     </div>
   </div>
+</div>
