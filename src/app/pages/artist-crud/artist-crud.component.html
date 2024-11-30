@@ -35,7 +35,7 @@
 
     <app-artist-form
       (ErrorEvent)="onErrorEvent($event)"
-      (ArtistCreatedEvent)="onArtistCreatedEvent($event)"
+      (ArtistCreatedEvent)="onArtistCreatedEvent()"
       [selectedArtistId]="selectedArtistId"
       [selectedArtistDto]="selectedArtistDto"
       [(edit)]="edit"
