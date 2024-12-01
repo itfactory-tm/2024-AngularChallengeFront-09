@@ -10,6 +10,7 @@
       <p>Email is verified: {{ user.email_verified }}</p>
       <p>unique id: {{ user.sub }}</p>
       <p>gender: {{ user.gender }}</p>
+      <p>access_token: {{ token }}</p>
     </div>
   }
 
@@ -78,16 +79,20 @@
       [destination]="'/manage-artists'"
       [icon_classes]="'fa-solid fa-user'"></app-admin-button>
     <app-admin-button
+      [text]="'Manage Stages'"
+      [destination]="'/manage-stages'"
+      [icon_classes]="'fa-solid fa-user'"></app-admin-button>
+    <app-admin-button
       [text]="'Manage Days'"
       [destination]="'/line-up'"
       [icon_classes]="'fa-solid fa-calendar-day'"></app-admin-button>
     <app-admin-button
       [text]="'Manage Genres'"
-      [destination]="'/line-up'"
+      [destination]="'/manage-genres'"
       [icon_classes]="'fa-solid fa-record-vinyl'"></app-admin-button>
     <app-admin-button
       [text]="'Manage Performances'"
-      [destination]="'/line-up'"
+      [destination]="'/manage-performances'"
       [icon_classes]="'fa-solid fa-guitar'"></app-admin-button>
   </div>
 </div>

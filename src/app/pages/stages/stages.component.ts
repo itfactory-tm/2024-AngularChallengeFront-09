@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StageService } from '../../api/services/Stages/stage.service';
-import { StageDto } from '../../api/dtos/stage-dto';
 import { StageComponent } from "../../components/stage/stage.component";
 import { Observable } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import slug from 'slug';
+import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 
 @Component({
   selector: 'app-stages',
@@ -15,7 +15,7 @@ import slug from 'slug';
   standalone: true
 })
 export class StagesComponent implements OnInit {
-  stageList$!: Observable<StageDto[]>;
+  stageList$!: Observable<StageResponseDto[]>;
 
   constructor(private stageService: StageService) {
     slug.defaults.mode = 'pretty';

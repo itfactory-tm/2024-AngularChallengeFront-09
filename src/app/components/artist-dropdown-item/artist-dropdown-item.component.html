@@ -1,0 +1,24 @@
+<div
+  class="flex justify-stretch content-center p-2 px-4 gap-4 my-4 rounded-md hover:bg-pink-600 cursor-pointer text-secondary"
+  style="
+    background-color: rgba(239, 53, 242, 0.1);
+    border: 1px solid rgba(239, 53, 242, 0.4);
+    color: rgba(239, 53, 242, 0.9);
+  ">
+  @if (selectedArtist) {
+    @if (selectedArtist.discogsImage) {
+      <img
+        [src]="selectedArtist.discogsImage.url"
+        [alt]="selectedArtist.name"
+        class="w-20 h-20 rounded-lg" />
+    } @else {
+      <img
+        [src]="'/assets/placeholder.jpg'"
+        [alt]="selectedArtist.name"
+        class="w-20 h-20 rounded-lg" />
+    }
+  }
+  <div class="flex justify-center items-center">
+    <p>{{ selectedArtist ? selectedArtist.name : 'Select artist' }}</p>
+  </div>
+</div>

@@ -1,5 +1,7 @@
+import { GenreRequestDto } from "../Genre/genre-request-dto";
+
 export interface ArtistRequestDto {
     name: string;
-    spotifyId: string;
-    biography: string;
+    genres: GenreRequestDto[];
+    discogsId: string;
 }

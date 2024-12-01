@@ -5,7 +5,7 @@ export interface ArtistResponseDto {
     id: string;
     name: string;
     biography: string;
-    genres?: GenreResponseDto[];
-    spotifyImage?: Image;
-    spotifyId: string;
+    genres: GenreResponseDto[];
+    discogsImage?: Image;
+    discogsId: string;
 }

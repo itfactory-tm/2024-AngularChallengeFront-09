@@ -1,9 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --primary: #3F0A73; /* Licht paars */
-    --secondary: #EF35F2; /* Donker paars */
-    --tertiary: #601BA6; /* Middel paars */
-    --text: #601BA6; /* Tekst */
-    --accent: #6BF2E5; /* Accent */
-  }
+  --primary: #3f0a73; /* Licht paars */
+  --secondary: #ef35f2; /* Donker paars */
+  --tertiary: #601ba6; /* Middel paars */
+  --text: #601ba6; /* Tekst */
+  --accent: #6bf2e5; /* Accent */
+}
 
+nav {
+  margin-bottom: 100px;
+}
+
+.left-gradient {
+  z-index: -10;
+  mask-image: radial-gradient(
+    305vw 220vh at -50% 70vh,
+    rgba(0, 0, 0, 1) 30%,
+    transparent
+  );
+
+  background: radial-gradient(
+    115vw 30vh at -50% 40vh,
+    rgba(239, 53, 242, 0.3),
+    transparent
+  );
+}
+
+.bottom-gradient {
+  z-index: -10;
+  mask-image: radial-gradient(
+    305vw 220vh at 90% 110vh,
+    rgba(0, 0, 0, 1) 30%,
+    transparent
+  );
+
+  background: radial-gradient(
+    115vw 80vh at 120% 80vh,
+    rgba(252, 21, 5, 0.2),
+    transparent
+  );
+}
+.top-gradient {
+  z-index: -10;
+  mask-image: radial-gradient(
+    305vw 450px at 50% 0%,
+    rgba(0, 0, 0, 1) 30%,
+    transparent
+  );
+  background: radial-gradient(
+    115vw 450px at 110% 10%,
+    rgba(107, 242, 229, 0.3),
+    transparent
+  );
+}

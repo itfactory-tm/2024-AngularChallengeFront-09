@@ -1,32 +1,25 @@
 /* Ensure that the navbar is centered and sticky */
 .nav-list {
-    display: flex;
     justify-content: center;
     align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
     gap: 40px;
-    position: relative;
     top: 0;
+    z-index: 2000;
     width: 100%;
     background-color: transparent;
-    z-index: 20;
     transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
     left: 0;
     height: 100px;
 }
 
-/* Add smooth transition to fixed navbar */
-.nav-list.fixed {
-    position: fixed;
-    background-color: rgba(63, 10, 115, 0.7);  /* Ensure background is set for fixed navbar */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  /* Optional: Add shadow for better visibility */
-}
+
 
 /* Blurring effect */
-.nav-list.nav-blur {
-    backdrop-filter: blur(1px);
+.nav-blur {
+    backdrop-filter: blur(8px);
     background-color: rgba(63, 10, 115, 0.7);
 }
 
@@ -40,7 +33,7 @@
     flex-shrink: 0;
 }
 
-img {
+.logo img {
     width: 100px;
 }
 

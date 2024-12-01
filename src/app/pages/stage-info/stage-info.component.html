@@ -1,24 +1,49 @@
-<div class="stage-info-container">
-    @if (stage$ | async; as stage) {
-      <div class="stage-content">
-        <h1 class="stage-title">{{ stage.name }}</h1>
-        
-        <div class="stage-info">
-          <!-- Add your stage details here -->
-          <!-- For example: -->
-          <section class="stage-section">
-            <h2>Description</h2>
-            <p>{{ stage.capacity }}</p>
-          </section>
+<div class="container mx-auto">
+  @if (stage$ | async; as stage) {
+  <div class="full-screen flex flex-col">
   
-          <!-- Add more sections as needed -->
+    <div class="stage-header py-2">
+      <h1>{{ stage?.name }}</h1>
+    </div>
+
+    <div class="stage-details grid grid-cols-2 gap-4 mb-4">
+      <div class="stage-image-wrapper">
+        <img 
+          class="stage-image object-cover w-full h-48" 
+          [src]="baseUrl + stage.imageUrl" 
+          alt="{{stage.name}}" 
+        />
+      </div>
+
+      <div class="stage-info">
+        <div class="stage-capacity mb-2">
+          <span class="info-label font-semibold">Capacity:</span>
+          <span class="info-value">{{ stage?.capacity }}</span>
+        </div>
+        
+        <div class="stage-description">
+          <span class="info-label font-semibold">Description:</span>
+          <p class="info-value text-sm">{{ stage?.description }}</p>
         </div>
       </div>
-    } @else {
-      <div class="not-found">
-        <h2>Stage Not Found</h2>
-        <p>The requested stage could not be found.</p>
-        <a routerLink="/stages" class="back-link">Return to Stages</a>
-      </div>
-    }
+    </div>
+
+    <div class="flex-1 relative"> <!-- Iframe container -->
+      <iframe  
+        class="absolute inset-0 w-full h-full"
+        loading="lazy"  
+        allowfullscreen  
+        [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
+      </iframe>
+    </div>
+  
   </div>
+
+  <div class="full-screen">
+    <h2>Timetable for {{stage.name}}</h2>
+  </div>
+  }
+  @else {
+    <p class="stage-not-found">Stage not found</p>
+  }
+</div>

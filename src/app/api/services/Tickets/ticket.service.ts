@@ -1,29 +1,43 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { TicketDto } from '../../dtos/ticket-dto';
+import { TicketResponseDto } from '../../dtos/Ticket/ticket-response-dto';
+import { TicketRequestDto } from '../../dtos/Ticket/ticket-request-dto';
 import { environment } from '../../../../environments/environment';
-
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketService {
   private apiUrl = `${environment.baseUrl}/Tickets`;
+  private headers: HttpHeaders | undefined;
 
-  constructor(private http: HttpClient) {}
-
-  getTickets(): Observable<TicketDto[]> {
-    return this.http.get<TicketDto[]>(this.apiUrl);
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService
+  ) {
+    this.auth.getAccessTokenSilently().subscribe({
+      next: token =>
+        (this.headers = new HttpHeaders({ authorization: `Bearer ${token}` })),
+    });
   }
 
-  getTicketById(id: TicketDto): Observable<TicketDto> {
-    return this.http.get<TicketDto>(`${this.apiUrl}/${id}`);
+  getTickets(): Observable<TicketResponseDto[]> {
+    return this.http.get<TicketResponseDto[]>(this.apiUrl);
   }
 
-  addTicket(ticket: TicketDto): Observable<TicketDto> {
+  getTicketById(id: TicketResponseDto): Observable<TicketResponseDto> {
+    return this.http.get<TicketResponseDto>(`${this.apiUrl}/${id}`);
+  }
+
+  addTicket(ticket: TicketResponseDto): Observable<TicketResponseDto> {
     return this.http
-      .post<TicketDto>(this.apiUrl, ticket)
+      .post<TicketResponseDto>(this.apiUrl, ticket, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

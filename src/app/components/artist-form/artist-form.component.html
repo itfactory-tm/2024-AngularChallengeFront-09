@@ -1,0 +1,67 @@
+<!-- Formulier -->
+<div class="form-container">
+  <div>
+    <h1 class="form-title">{{ edit ? 'Edit artist' : 'Add artist' }}</h1>
+
+    <form (ngSubmit)="submitForm()" #artistForm="ngForm">
+      <!-- Naam -->
+      <div class="mb-5">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="selectedArtistDto.name" />
+      </div>
+
+      <!-- Discogs ID -->
+      <div class="mb-5">
+        <label for="discogsId">Discogs ID</label>
+        <input
+          type="text"
+          id="discogsId"
+          name="discogsId"
+          required
+          [(ngModel)]="selectedArtistDto.discogsId" />
+      </div>
+
+      <!-- Genres -->
+      <div class="mb-5">
+        <label for="genres">Genres</label>
+
+        <div class="list-scroll-bar select-checkbox overflow-y-scroll max-h-[100px]">
+          @for (genre of genres$ | async; track $index) {
+            <label>
+              <input
+                #checkbox
+                type="checkbox"
+                [value]="genre.name"
+                [checked]="isGenreSelected(genre.name)"
+                (change)="onCheckboxChange($event)"
+                />
+              {{ genre.name }}
+            </label>
+          }
+        </div>
+      </div>
+
+      <!-- Knoppen -->
+      <div class="flex gap-4 justify-start">
+        @if (edit) {
+          <button
+              type="button"
+              (click)="submitEdit()"
+              [disabled]="!artistForm.form.valid">
+              Edit
+          </button>
+          <button type="button" (click)="cancelEdit()">Cancel</button>
+          } @else {
+          <button type="submit" [disabled]="!artistForm.form.valid">
+              Create
+          </button>
+          }
+      </div>
+    </form>
+  </div>
+</div>

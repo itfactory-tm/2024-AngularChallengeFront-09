@@ -1,23 +1,23 @@
 .artist-card {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 350px;
+    max-height: 350px;
     text-align: center;
     position: relative;
     display: flex;
     cursor: grab;
-
 }
 
 
 .artist-image {
-    
-    height: auto;
+    height: 350px;
+    width: 350px;
     object-fit: cover;
     display: block;
     border-radius: 8px;
     aspect-ratio: 1 1;
+    box-shadow: 4px 4px 3px 0 rgb(0 0 0 / 0.3)
 }
 
 .artist-name{
@@ -25,6 +25,7 @@
     background-color:rgba(239, 53, 242);
     clip-path: polygon(0 34%, 100% 0, 100% 100%, 0% 100%);
 
+    border-radius: 0 0 8px 8px;
     color: white;
     font-weight: bold;
     font-size: 21px;

@@ -1,57 +1,53 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
-import { Observable } from 'rxjs';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
+import { convertBiographyToHtml } from '../../lib/utils';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-artist-crud',
   standalone: true,
-  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
+  imports: [
+    FormsModule,
+    ErrorToastComponent,
+    AsyncPipe,
+    CommonModule,
+    ArtistFormComponent,
+  ],
   templateUrl: './artist-crud.component.html',
-  styleUrl: './artist-crud.component.css'
+  styleUrl: './artist-crud.component.css',
 })
 export class ArtistCrudComponent implements OnInit {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
-  errorMessage: string = "";
+  errorMessage = '';
   artists$!: Observable<ArtistResponseDto[]>;
-  edit: boolean = false;
-  selectedArtistId: string = "";
+  edit = false;
+  selectedArtistId = '';
   selectedArtistDto: ArtistRequestDto = {
     name: '',
-    spotifyId: '',
-    biography: ''
-  }
+    genres: [],
+    discogsId: '',
+  };
 
   constructor(private artistService: ArtistService) {}
 
   ngOnInit() {
     this.artistService.fetchArtists();
-    this.artists$ = this.artistService.artists$;
-  }
 
-  deleteArtist(id: string) {
-    this.artistService.deleteArtist(id)
-      .subscribe(() => this.artistService.fetchArtists());
-  }
-
-  submitEdit() {
-    this.artistService.editArtist(this.selectedArtistId, this.selectedArtistDto)
-      .subscribe(() => this.artistService.fetchArtists());
-    this.cancelEdit();
-  }
-
-  cancelEdit() {
-    this.edit = false;
-    this.selectedArtistDto = {
-      name: '',
-      spotifyId: '',
-      biography: ''
-    }
+    this.artists$ = this.artistService.artists$.pipe(
+      map(artists => 
+        artists.map(artist => ({
+          ...artist,
+          biography: convertBiographyToHtml(artist.biography)
+        }))
+      )
+    );
   }
 
   editArtist(artist: ArtistResponseDto) {
@@ -59,20 +55,19 @@ export class ArtistCrudComponent implements OnInit {
     this.selectedArtistId = artist.id;
     this.selectedArtistDto = {
       name: artist.name,
-      spotifyId: artist.spotifyId,
-      biography: artist.biography
-    }
+      genres: artist.genres,
+      discogsId: artist.discogsId,
+    };
   }
 
-  submitForm() {
-    this.artistService.addArtist(this.selectedArtistDto).subscribe({
-      next: () => {
-        this.artistService.fetchArtists();
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
-        this.errorToast.showToast();
-      }
-    });
+  deleteArtist(id: string) {
+    this.artistService
+      .deleteArtist(id)
+      .subscribe(() => this.artistService.fetchArtists());
+  }
+
+  onErrorEvent(message: string) {
+    this.errorMessage = message;
+    this.errorToast.showToast();
   }
 }

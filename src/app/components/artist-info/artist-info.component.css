@@ -12,7 +12,7 @@
     z-index: 1000;
     padding: 20px;
   }
-  
+
   .modal-content {
     background-color: #eee;
     border-radius: 12px;
@@ -23,7 +23,7 @@
     overflow-y: auto;
     position: relative;
   }
-  
+
   .close-button {
     position: absolute;
     top: 16px;
@@ -32,56 +32,56 @@
     border-radius: 50%;
     padding: 5px;
   }
-  
+
   .close-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-  
+
   .artist-header {
     display: flex;
     align-items: center;
     gap: 24px;
     margin-bottom: 32px;
   }
-  
+
   .artist-modal-image {
     width: 150px;
     height: 150px;
     border-radius: 12px;
     object-fit: cover;
   }
-  
+
   .artist-title {
     font-size: 2em;
     font-weight: 600;
     color: #333;
     margin: 0;
   }
-  
+
   .artist-details {
     display: flex;
     flex-direction: column;
     gap: 24px;
   }
-  
+
   .biography h3, .genres h3 {
     font-size: 1.2em;
     color: #444;
     margin-bottom: 12px;
   }
-  
+
   .biography p {
     line-height: 1.6;
     color: #666;
     margin: 0;
   }
-  
+
   .genre-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
-  
+
   .genre-tag {
     background-color: #e0e0e0;
     padding: 6px 16px;
@@ -90,7 +90,7 @@
     color: #555;
     transition: background-color 0.2s;
   }
-  
+
   .genre-tag:hover {
     background-color: #d0d0d0;
   }
@@ -100,7 +100,7 @@
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .performance-item {
     display: flex;
     flex-wrap: wrap;
@@ -111,12 +111,12 @@
     border-radius: 8px;
     transition: background-color 0.2s, box-shadow 0.2s;
   }
-  
+
   .performance-item:hover {
     background-color: #eee; /* Your accent color */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .performance-item .day {
     font-weight: bold;
     font-size: 1em;
@@ -124,39 +124,33 @@
     margin-right: 16px;
     flex-basis: 20%;
   }
-  
+
   .performance-item .stage {
     font-size: 1em;
     color: #601ba6; /* Middle purple */
     flex-basis: 35%;
     text-align: left;
   }
-  
+
   .performance-item .time {
     font-size: 0.9em;
     color: #666;
     flex-basis: 35%;
     text-align: right;
   }
-  
-  .performance-item .day,
-  .performance-item .stage,
-  .performance-item .time {
-    margin-bottom: 4px;
-  }
-  
+
   @media (max-width: 600px) {
     .artist-header {
       flex-direction: column;
       text-align: center;
       gap: 16px;
     }
-  
+
     .artist-modal-image {
       width: 120px;
       height: 120px;
     }
-  
+
     .artist-title {
       font-size: 1.6em;
     }
@@ -164,7 +158,7 @@
       flex-direction: column;
       align-items: flex-start;
     }
-  
+
     .performance-item .day,
     .performance-item .stage,
     .performance-item .time {

@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../../api/services/Tickets/ticket.service';
 import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { TicketComponent } from '../../components/ticket/ticket.component';
 import { RouterModule } from '@angular/router';
-import { TicketDto } from '../../api/dtos/ticket-dto';
+import { AsyncPipe } from '@angular/common';
+import { TicketResponseDto } from '../../api/dtos/Ticket/ticket-response-dto';
 
 @Component({
   selector: 'app-tickets',
   standalone: true,
-  imports: [AsyncPipe, RouterModule],
+  imports: [TicketComponent, RouterModule, AsyncPipe],
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.css'
 })
 export class TicketsComponent implements OnInit{
-  TicketList!: TicketDto[];
-  TicketList$!: Observable<TicketDto[]>;
-  ticket!: TicketDto;
+	ticketList$!: Observable<TicketResponseDto[]>;
 
-  constructor(private ticketService: TicketService){ }
-
-  ngOnInit(): void {
-    this.TicketList$ = this.ticketService.getTickets();
-  }
+	constructor(private ticketService: TicketService) {}
+  
+	ngOnInit(): void {
+	  this.ticketList$ = this.ticketService.getTickets();
+	}
 }
