@@ -3,12 +3,11 @@ import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 import { Component } from '@angular/core';
-import { LoginButtonComponent } from './components/login/login-button';
-import { LogoutButtonComponent } from './components/login/logout-button';
 import { SpinnerComponent } from './components/loading-spinner/spinner/spinner.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from './api/services/Users/user.service';
 import { LoaderService } from './components/loading-spinner/loader.service';
+import { AdminNavComponent } from "./components/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-root',
@@ -17,10 +16,9 @@ import { LoaderService } from './components/loading-spinner/loader.service';
     RouterOutlet,
     NavComponent,
     FooterComponent,
-    LoginButtonComponent,
-    LogoutButtonComponent,
     SpinnerComponent,
-  ],
+    AdminNavComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

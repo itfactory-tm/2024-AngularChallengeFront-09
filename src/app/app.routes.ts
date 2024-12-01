@@ -12,7 +12,7 @@ import { ArtistCrudComponent } from './pages/artist-crud/artist-crud.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { StageCrudComponent } from './pages/stage-crud/stage-crud.component';
 import { PerformanceCrudComponent } from './pages/performance-crud/performance-crud.component';
-import { GenreCrudComponent } from './components/genre-crud/genre-crud.component';
+import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
 
 
 export const routes: Routes = [

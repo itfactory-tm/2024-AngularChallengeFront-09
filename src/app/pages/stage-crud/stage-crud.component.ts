@@ -7,6 +7,7 @@ import { StageService } from '../../api/services/Stages/stage.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StageFormComponent } from '../../components/stage-form/stage-form.component';
+import { AdminNavComponent } from "../../components/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-stage-crud',
@@ -17,7 +18,8 @@ import { StageFormComponent } from '../../components/stage-form/stage-form.compo
     AsyncPipe,
     CommonModule,
     StageFormComponent,
-  ],
+    AdminNavComponent
+],
   templateUrl: './stage-crud.component.html',
   styleUrl: './stage-crud.component.css',
 })

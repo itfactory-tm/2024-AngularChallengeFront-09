@@ -6,11 +6,12 @@ import { GenreService } from '../../api/services/Genres/genre.service';
 import { Observable } from 'rxjs';
 import { GenreResponseDto } from '../../api/dtos/Genre/genre-response-dto';
 import { GenreRequestDto } from '../../api/dtos/Genre/genre-request-dto';
+import { AdminNavComponent } from "../../components/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-genre-crud',
   standalone: true,
-  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
+  imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule, AdminNavComponent],
   templateUrl: './genre-crud.component.html',
   styleUrl: './genre-crud.component.css'
 })

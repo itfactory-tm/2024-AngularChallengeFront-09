@@ -13,11 +13,12 @@ import { DayService } from '../../api/services/Day/day.service';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { ArtistDropdownComponent } from '../../components/artist-dropdown/artist-dropdown.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
 import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
 import { StageFormComponent } from '../../components/stage-form/stage-form.component';
 import { DayRequestDto } from '../../api/dtos/Day/day-request-dto';
+import { AdminNavComponent } from "../../components/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-performance-crud',
@@ -29,10 +30,11 @@ import { DayRequestDto } from '../../api/dtos/Day/day-request-dto';
     CommonModule,
     ArtistDropdownComponent,
     DatePipe,
-    RouterLink,
+    RouterModule,
     ArtistFormComponent,
     StageFormComponent,
-  ],
+    AdminNavComponent
+],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',
 })

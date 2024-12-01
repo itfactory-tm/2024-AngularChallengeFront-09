@@ -1,11 +1,18 @@
 <button
-  class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-md font-bold text-gray-900 rounded-lg group bg-gradient-to-br from-secondary to-accent group-hover:from-primary group-hover:to-accent hover:-translate-y-2 transition-all hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-accent dark:focus:ring-blue-800"
-  routerLink="{{ destination }}">
+  class="relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden 
+  text-md font-bold rounded-lg hover:-translate-y-2 
+  transition-all focus:ring-4 focus:outline-none focus:ring-accent dark:focus:ring-blue-800
+  border border-tertiary bg-primary"
+  [routerLink]="destination">
   <span
-    class="relative px-8 py-8 transition-all ease-in duration-75 bg-white dark:bg-gray-900 font-bold rounded-md group-hover:bg-opacity-0">
-    <div class="flex flex-col gap-6">
-      <span class="w-44">{{ text }}</span>
-      <li class="{{ icon_classes }} text-5xl"></li>
+    class="relative px-8 py-8 transition-all ease-in duration-75 font-bold rounded-md group-hover:bg-opacity-0">
+    <div class="flex flex-col items-center gap-4">
+      <!-- Text Section -->
+      <span class="w-44 text-center hover:text-secondary dark:text-secondary text-md">
+        {{ text }}
+      </span>
+      <!-- Icon Section -->
+      <span class="{{ icon_classes }} text-5xl hover:text-accent dark:text-accent"></span>
     </div>
   </span>
 </button>

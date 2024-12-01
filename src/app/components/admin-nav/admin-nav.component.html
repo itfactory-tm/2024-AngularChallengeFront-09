@@ -1,0 +1,32 @@
+<div class="fixed top-0 right-0 mr-10 mt-32 pt-3" style="z-index: 9999999;">
+    <nav class="flex flex-col items-center p-4 pb-3 border border-tertiary bg-primary rounded-lg">
+	  <h3 class="text-secondary text-xl font-bold border-b-2 border-secondary">Manage</h3>
+	  <div class="flex flex-col items-center mt-3 nav-list">
+		<a routerLink="/manage-artists" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Artists</a>
+		<a routerLink="/manage-performances" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Performances</a>
+		<a routerLink="/manage-stages" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Stages</a>
+		<a routerLink="/manage-genres" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Genres</a>
+		<a routerLink="/manage-days" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Days</a>
+		<a routerLink="/manage-tickets" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Tickets</a>
+		<a href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" class="text-accent no-underline border-b border-transparent hover:border-current mb-2">Users</a>
+	  </div>
+    </nav>
+</div>

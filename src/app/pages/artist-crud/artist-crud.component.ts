@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
 import { convertBiographyToHtml } from '../../lib/utils';
+import { AdminNavComponent } from '../../components/admin-nav/admin-nav.component';
 
 @Component({
   selector: 'app-artist-crud',
@@ -15,9 +16,9 @@ import { convertBiographyToHtml } from '../../lib/utils';
   imports: [
     FormsModule,
     ErrorToastComponent,
-    AsyncPipe,
     CommonModule,
     ArtistFormComponent,
+	AdminNavComponent,
   ],
   templateUrl: './artist-crud.component.html',
   styleUrl: './artist-crud.component.css',
