@@ -1,75 +1,54 @@
 <div class="hero">
     <h1>Laser Lama</h1>
     <h2>1/2/3 augustus 2025</h2>
-    <button class="scroll-button" (click)="scrollToNextSection()">
-        <i class="fas fa-chevron-down"></i>
+    
+    <!-- Button Section for Tickets and Stages -->
+    <div class="flex gap-20 mt-10">
+      <a routerLink="/tickets"
+        class="relative no-underline group w-32 sm:w-40 bg-cover bg-center rounded-lg overflow-hidden shadow-lg p-4 text-white font-bold text-lg bg-secondary hover:scale-105 hover:-translate-y-2 transition-transform">
+        <span class="text-center">Buy Tickets</span>
+      </a>
+      
+      <a routerLink="/stages"
+        class="relative no-underline group w-32 sm:w-40 bg-cover bg-center rounded-lg overflow-hidden shadow-lg p-4 text-white font-bold text-lg bg-secondary hover:scale-105 hover:-translate-y-2 transition-transform">
+        <span class="text-center">See Stages</span>
+      </a>
+    </div>
+  
+    <!-- Scroll Down Button -->
+    <button class="scroll-button mt-6 p-2" (click)="scrollToNextSection()">
+      <i class="fas fa-chevron-down text-white"></i>
     </button>
 </div>
-
-<section class="info">
-    <div class="Welcome card">
-        <div class="title">
-            <h2>Welcome to Laser Lama!</h2>
+  
+<section class="info flex flex-wrap justify-center gap-4 p-6 h-screen">
+    <!-- Welcome Card -->
+    <div class="relative inline-flex w-dvw h-fit items-center justify-center p-0.5 overflow-hidden rounded-lg group bg-primary ">
+      <span class="relative px-8 py-6 w-dvw">
+        <div class="title text-center mt-4">
+          <h2 class="text-3xl font-bold text-secondary">Welcome to Laser Lama 2025!</h2>
         </div>
-        <div class="text">
-            🎉✨ Welcome to Laser Lama 2025! ✨🎉 
-            <br>
-            Get ready for an unforgettable experience as we bring the ultimate blend of music, light, and pure energy to life! From the electrifying beats on our stages to the mesmerizing laser shows that will light up the sky, Laser Lama is more than just a festival – it’s a celebration of creativity, connection, and community.
-
-            Join us from 1 to 3 August 2025 and step into a world where music transcends boundaries, and every moment is a memory in the making. Whether you’re here for the beats, the vibes, or the incredible lineup of artists, Laser Lama promises a weekend filled with epic performances, great food, and unforgettable moments under the stars.
-            <br>
-            🦙 Let’s make this summer legendary. See you on the dance floor! 🦙
+        <div class="text text-accent mt-4 space-y-4">
+          <p>Get ready for an unforgettable experience as Laser Lama 2025 brings the ultimate fusion of music, light, and pure energy to life! Imagine electrifying beats reverberating through the air, mesmerizing laser shows painting the night sky, and a crowd united by the rhythm and the thrill of the moment. Laser Lama isn’t just a festival—it’s a journey into a realm where creativity, connection, and community come alive in ways you’ve never imagined.</p>
+          <p>From 1 to 3 August 2025, our festival grounds will transform into a playground of sights and sounds, welcoming music lovers from all walks of life. Step into a world where boundaries dissolve, and the magic of music becomes a universal language. Whether you’re here for the heart-pounding energy of our main stages, the intimate vibes of experimental sets, or simply to soak in the atmosphere, Laser Lama offers something for everyone.</p>
+          <p>Beyond the beats and melodies, immerse yourself in the full festival experience: savor world-class food and drink, explore interactive art installations, and lose yourself in breathtaking visuals and light displays that will captivate your imagination. From sunrise to starry nights, every moment is designed to create memories that will last a lifetime.</p>
+          <p>So, gather your friends, pack your best festival gear, and join us for three days of epic performances, incredible vibes, and unforgettable adventures under the summer sky. Together, let’s make this summer legendary—see you on the dance floor!</p>
         </div>
+      </span>
     </div>
-    <div class="Overzicht card">
-        <div class="title">
-            <h2>About Laser Lama</h2>
+  
+    <!-- About Card -->
+    <div class="relative w-dvw h-fit inline-flex items-center justify-center p-0.5 overflow-hidden rounded-lg group bg-primary ">
+      <span class="relative px-8 py-6 w-dvw">
+        <div class="title text-center mt-4">
+          <h2 class="text-3xl font-bold text-secondary">About Laser Lama</h2>
         </div>
-        <div class="text">
-            Welcome to the heart of Laser Lama 2025 - where the magic of music, lights, and atmosphere come together in an epic festival experience. <br>This year, we present three spectacular stages, each with its own unique vibe and energy:
-            <br>
-            🎶 Main Stage
-            The biggest of them all, where the hardest beats and the most breathtaking laser shows will make you dance under the stars. Get ready for a lineup of top artists who will set the crowd on fire!
-            <br>
-            🎧 Side Stage
-            For lovers of alternative sounds and unique performance experiences. This is the place for those looking for something different, with a mix of genres and emerging artists ready to surprise you.
-            <br>
-            🌟 Small Stage
-            More intimate and cozy, the Small Stage offers a warm, inviting atmosphere with performances from up-and-coming artists and experimental sounds. Perfect for those seeking a more refined experience without the hustle of the larger stages.
-            <br>
-            In addition to these incredible stages, festival-goers can look forward to an amazing lineup of artists who will bring unforgettable music and energy throughout the weekend. Whether you're into house, techno, or other electronic genres, there's something for everyone!
-            <br>
-            Laser Lama is more than just a festival - it's a celebration of music, culture, and community. So come and discover the magic of our three stages and get swept up in the vibe of Laser Lama 2025!
+        <div class="text text-accent mt-4 space-y-4">
+          <p>Welcome to the heart of Laser Lama 2025 – a spectacular fusion of music, lights, and atmosphere that promises an unforgettable festival experience like no other. Prepare to be swept away as we bring together the world’s most vibrant sounds, dazzling visuals, and a community of passionate music lovers for three days of pure magic.</p>
+          <p>This year, we’re thrilled to present an electrifying blend of performances across multiple stages, each offering its own unique vibe and energy. Whether you’re drawn to the pulse-pounding beats of the main acts or prefer to discover hidden gems in a more intimate setting, Laser Lama 2025 has something to ignite every music lover’s soul.</p>
+          <p>But the magic doesn’t stop there. Festival-goers can expect to be captivated by breathtaking visuals, mesmerizing light shows that illuminate the night sky, and a lineup of artists as diverse and dynamic as the crowd itself. With immersive experiences and surprises around every corner, the energy will stay alive all weekend long.</p>
+          <p>More than just a festival, Laser Lama 2025 is a vibrant community—a celebration of creativity, connection, and culture. It’s a shared journey where music becomes a bridge, uniting us all under one brilliant sky. So, join us, embrace the magic, and let yourself be part of something extraordinary. The dance floor is calling!</p>
         </div>
+      </span>
     </div>
-</section>
-
-<section class="buttons">
-    <div class="cards-container">
-    
-        <a routerLink="/tickets" class="Ticket card">
-            <div class="card-image"></div>
-            <div class="card-overlay">
-                <span>Tickets</span>
-            </div>
-        </a>
-        <a routerLink="/stages" class="Stages card">
-            <div class="card-image"></div>
-            <div class="card-overlay">
-                <span>STAGES</span>
-            </div>
-        </a>
-        <a routerLink="/line-up" class="Artists card">
-            <div class="card-image"></div>
-            <div class="card-overlay">
-                <span>ARTISTS</span>
-            </div>            
-        </a>
-    </div>
-</section>
-
-
-<app-login-button></app-login-button>
-<app-logout-button></app-logout-button>
-
-
+</section> 
