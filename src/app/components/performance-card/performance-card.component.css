@@ -1,0 +1,7 @@
+.performance-card {
+    transition: transform 0.2s;
+  }
+  
+  .performance-card:hover {
+    transform: scale(1.02);
+  }
