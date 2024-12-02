@@ -393,7 +393,7 @@ a {
 
 .artists-list-container .icon-button {
   font-size: large;
-  color: white;
+  color: var(--light-purple);
 }
 
 .artists-list-container .thumbnail {

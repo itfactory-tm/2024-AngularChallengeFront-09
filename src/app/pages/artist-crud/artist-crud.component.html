@@ -14,7 +14,7 @@
               [alt]="artist.name"
               class="thumbnail my-auto" />
             <div class="details">
-              <h3>{{ artist.name }} <span class="text-sm">{{ artist.genres.length > 0 ? getGenreList(artist.genres) : '' }}</span> </h3>
+              <h3>{{ artist.name }} <span class="text-sm text-accent">{{ artist.genres.length > 0 ? getGenreList(artist.genres) : '' }}</span> </h3>
 
               <div class="biography-container" [class.expanded]="artist.showFullBio">
                 <p [innerHtml]="artist.biography"></p>
