@@ -1,0 +1,84 @@
+<app-toast #Toast [message]="toastMessage" [timeout]="3000" #toast></app-toast>
+
+<div class="flex justify-center items-center min-h-screen">
+    <div class="container mx-auto p-6 rounded-lg">
+      <div class="grid grid-cols-1 gap-20">
+        <!-- FAQ Sectie -->
+        <div>
+          <h2 class="text-4xl font-bold text-center text-accent mb-4">FAQ</h2>
+          <div class=" grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-center" id="faqAccordion">
+                @for (faq of faqs; track $index) 
+                {
+                    <div class="rounded-xl">
+                        <h2>
+                            <button
+                                class="w-full text-center text-2xl px-4 py-2 text-secondary bg-primary bg-opacity-40 hover:bg-tertiary font-semibold rounded-t-xl"
+                                [ngClass]="{
+                                'bg-tertiary bg-opacity-100': faq.id === openFaqId,
+                                'hover:bg-tertiary': faq.id !== openFaqId
+                                }"
+                                type="button"
+                                (click)="toggleFaq(faq.id)"
+                            >
+                                {{ faq.question }}
+                            </button>
+                        </h2>
+                        <div
+                            [id]="'collapse' + faq.id"
+                            class="px-4 py-2 bg-primary bg-opacity-25 text-center text-accent border-t border-secondary rounded-b-xl"
+                            [class.hidden]="faq.id !== openFaqId"
+                        >
+                            {{ faq.answer }}
+                        </div>
+                    </div>
+                }
+          </div>
+        </div>
+  
+        <!-- Contactformulier Sectie -->
+        <div>
+          <h2 class="text-4xl font-bold text-center text-accent mb-4">Contact Us</h2>
+          <form (ngSubmit)="onSubmit()" class="space-y-4 p-6 rounded-md border-secondary">
+            <div>
+              <label for="name" class="block font-medium text-secondary">Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full rounded-md p-2 text-secondary bg-secondary bg-opacity-25 border border-secondary"
+                [(ngModel)]="contactForm.name"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="block font-medium text-secondary">E-mail:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full rounded-md text-secondary p-2 bg-secondary bg-opacity-25 border border-secondary"
+                [(ngModel)]="contactForm.email"
+                required
+              />
+            </div>
+            <div>
+              <label for="message" class="block font-medium text-secondary">Question:</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full rounded-md p-2 border border-secondary"
+                [(ngModel)]="contactForm.message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="w-full bg-secondary bg-opacity-75 text-white py-2 rounded-md hover:bg-opacity-100">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
