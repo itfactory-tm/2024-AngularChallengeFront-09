@@ -39,15 +39,36 @@
   
   </div>
 
-  <div class="full-screen">
-    <h2>Timetable for {{stage.name}}</h2>
-    @for(performance of performances$ | async; track performance){
-      <p>{{performance.artist.name}}</p>
-      <p>{{performance.startTime}}</p>
-      <p>{{performance.endTime}}</p>
-      <p>{{performance.day.date}}</p>
-    }
+  <div class="performance-timetable mt-6">
+    <h2 class="text-2xl font-bold text-[#601BA6] mb-4 text-center">
+      Timetable for {{ stage.name }}
+    </h2>
+  
+    <div class="timetable-container bg-[#601BA6] rounded-lg p-4 shadow-lg">
+      <div *ngFor="let data of performances$ | async" class="day-container mb-6">
+        <h3 class="day-header text-xl font-semibold text-[#6BF2E5] border-b border-[#EF35F2] pb-2 mb-4">
+          {{ data.day.date | date: 'fullDate' }}
+        </h3>
+  
+        <div class="performances-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div *ngFor="let performance of data.performances">
+            <div class="performance-card bg-[#3F0A73] p-4 rounded-lg shadow-md hover:scale-105 transform transition-transform duration-200">
+              <h4 class="text-lg font-bold text-[#6BF2E5] mb-2">
+                {{ performance.artist.name }}
+              </h4>
+              <p class="text-sm text-white mb-2">
+                {{ performance.startTime | date: 'shortTime' }} - {{ performance.endTime | date: 'shortTime' }}
+              </p>
+              <span class="text-sm text-[#EF35F2]">
+                {{ performance.day.date | date: 'shortDate' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  
   }
   @else {
     <p class="stage-not-found">Stage not found</p>

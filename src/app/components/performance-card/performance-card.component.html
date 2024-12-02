@@ -1,0 +1,12 @@
+<div class="performance-card bg-white shadow-md rounded-lg p-4 mb-2">
+    <div class="flex justify-between items-center">
+      <div>
+        <h3 class="text-lg font-bold text-gray-800">{{ performance.artist.name }}</h3>
+        <p class="text-sm text-gray-600">
+          {{ performance.startTime | date:'shortTime' }} - 
+          {{ performance.endTime | date:'shortTime' }}
+        </p>
+      </div>
+      <span class="text-sm text-gray-500">{{ performance.day.date | date:'shortDate' }}</span>
+    </div>
+  </div>
