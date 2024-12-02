@@ -8,8 +8,19 @@
 }
 
 nav {
-  margin-bottom: 100px;
-}
+	margin-bottom: 100px;
+  }
+  
+  @media (max-width: 768px) {
+	nav {
+	  margin-bottom: 150px;
+	}
+  }
+  
+  nav.admin-nav {
+	margin-bottom: 150px;
+  }
+  
 
 .left-gradient {
   z-index: -10;

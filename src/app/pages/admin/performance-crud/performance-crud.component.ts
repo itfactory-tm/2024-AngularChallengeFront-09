@@ -1,23 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
-import { PerformanceRequestDto } from '../../api/dtos/Performance/performance-request-dto';
-import { PerformanceService } from '../../api/services/Performance/performance.service';
+import { PerformanceRequestDto } from '../../../api/dtos/Performance/performance-request-dto';
+import { PerformanceService } from '../../../api/services/Performance/performance.service';
 import { FormsModule } from '@angular/forms';
-import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
+import { ErrorToastComponent } from '../../../components/error-toast/error-toast.component';
 import { Observable, switchMap } from 'rxjs';
-import { PerformanceResponseDto } from '../../api/dtos/Performance/performance-response-dto';
+import { PerformanceResponseDto } from '../../../api/dtos/Performance/performance-response-dto';
 import { OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
-import { DayResponseDto } from '../../api/dtos/Day/day-response-dto';
-import { ArtistService } from '../../api/services/Artist/artist.service';
-import { DayService } from '../../api/services/Day/day.service';
-import { StageService } from '../../api/services/Stages/stage.service';
-import { ArtistDropdownComponent } from '../../components/artist-dropdown/artist-dropdown.component';
-import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
-import { RouterLink } from '@angular/router';
-import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
-import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
-import { StageFormComponent } from '../../components/stage-form/stage-form.component';
-import { DayRequestDto } from '../../api/dtos/Day/day-request-dto';
+import { DayResponseDto } from '../../../api/dtos/Day/day-response-dto';
+import { ArtistService } from '../../../api/services/Artist/artist.service';
+import { DayService } from '../../../api/services/Day/day.service';
+import { StageService } from '../../../api/services/Stages/stage.service';
+import { ArtistDropdownComponent } from '../../../components/artist-dropdown/artist-dropdown.component';
+import { ArtistResponseDto } from '../../../api/dtos/Artist/artist-response-dto';
+import { RouterModule } from '@angular/router';
+import { ArtistFormComponent } from '../../../components/artist-form/artist-form.component';
+import { StageResponseDto } from '../../../api/dtos/Stage/stage-response-dto';
+import { StageFormComponent } from '../../../components/stage-form/stage-form.component';
+import { DayRequestDto } from '../../../api/dtos/Day/day-request-dto';
 
 @Component({
   selector: 'app-performance-crud',
@@ -29,10 +29,10 @@ import { DayRequestDto } from '../../api/dtos/Day/day-request-dto';
     CommonModule,
     ArtistDropdownComponent,
     DatePipe,
-    RouterLink,
+    RouterModule,
     ArtistFormComponent,
     StageFormComponent,
-  ],
+],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',
 })

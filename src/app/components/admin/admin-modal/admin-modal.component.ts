@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
-import { UserRequestDto } from '../../api/dtos/User/user-request-dto';
-import { UserService } from '../../api/services/Users/user.service';
-import { UserResponseDto } from '../../api/dtos/User/user-response-dto';
+import { UserRequestDto } from '../../../api/dtos/User/user-request-dto';
+import { UserService } from '../../../api/services/Users/user.service';
+import { UserResponseDto } from '../../../api/dtos/User/user-response-dto';
 import { AuthService } from '@auth0/auth0-angular';
 import { FormsModule } from '@angular/forms';
 

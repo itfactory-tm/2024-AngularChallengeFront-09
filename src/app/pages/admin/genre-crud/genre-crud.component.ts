@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
+import { ErrorToastComponent } from '../../../components/error-toast/error-toast.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { GenreService } from '../../api/services/Genres/genre.service';
+import { GenreService } from '../../../api/services/Genres/genre.service';
 import { Observable } from 'rxjs';
-import { GenreResponseDto } from '../../api/dtos/Genre/genre-response-dto';
-import { GenreRequestDto } from '../../api/dtos/Genre/genre-request-dto';
+import { GenreResponseDto } from '../../../api/dtos/Genre/genre-response-dto';
+import { GenreRequestDto } from '../../../api/dtos/Genre/genre-request-dto';
 
 @Component({
   selector: 'app-genre-crud',
