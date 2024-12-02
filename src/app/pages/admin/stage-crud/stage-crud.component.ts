@@ -1,13 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
+import { ErrorToastComponent } from '../../../components/error-toast/error-toast.component';
 import { Observable } from 'rxjs';
-import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
-import { StageRequestDto } from '../../api/dtos/Stage/stage-request-dto';
-import { StageService } from '../../api/services/Stages/stage.service';
+import { StageResponseDto } from '../../../api/dtos/Stage/stage-response-dto';
+import { StageRequestDto } from '../../../api/dtos/Stage/stage-request-dto';
+import { StageService } from '../../../api/services/Stages/stage.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StageFormComponent } from '../../components/stage-form/stage-form.component';
-import { AdminNavComponent } from "../../components/admin-nav/admin-nav.component";
+import { StageFormComponent } from '../../../components/stage-form/stage-form.component';
+import { AdminNavComponent } from "../../../components/admin/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-stage-crud',

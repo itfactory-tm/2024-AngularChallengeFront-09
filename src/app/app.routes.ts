@@ -1,18 +1,17 @@
 import { Routes } from '@angular/router';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LineUpComponent } from './pages/line-up/line-up.component';
 import { StagesComponent } from './pages/stages/stages.component';
 import { TicketsComponent } from './pages/tickets/tickets.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { ContactComponent } from './pages/admin/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { StageInfoComponent } from './pages/stage-info/stage-info.component';
-import { ArtistCrudComponent } from './pages/artist-crud/artist-crud.component';
+import { ArtistCrudComponent } from './pages/admin/artist-crud/artist-crud.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { StageCrudComponent } from './pages/stage-crud/stage-crud.component';
-import { PerformanceCrudComponent } from './pages/performance-crud/performance-crud.component';
-import { GenreCrudComponent } from './pages/genre-crud/genre-crud.component';
+import { StageCrudComponent } from './pages/admin/stage-crud/stage-crud.component';
+import { PerformanceCrudComponent } from './pages/admin/performance-crud/performance-crud.component';
+import { GenreCrudComponent } from './pages/admin/genre-crud/genre-crud.component';
 
 
 export const routes: Routes = [
@@ -22,11 +21,10 @@ export const routes: Routes = [
   { path: 'stages/:slug', component: StageInfoComponent },
   { path: 'tickets', component: TicketsComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
-  { path: 'manage-stages', component: StageCrudComponent, canActivate: [AuthGuard]},
-  { path: 'manage-genres', component: GenreCrudComponent, canActivate: [AuthGuard]},
-  { path: 'manage-performances', component: PerformanceCrudComponent, canActivate: [AuthGuard]},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'admin/manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
+  { path: 'admin/manage-stages', component: StageCrudComponent, canActivate: [AuthGuard]},
+  { path: 'admin/manage-genres', component: GenreCrudComponent, canActivate: [AuthGuard]},
+  { path: 'admin/manage-performances', component: PerformanceCrudComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: '**', component: ErrorPageComponent }, // Fallback
+  { path: '**', component: ErrorPageComponent },
 ];

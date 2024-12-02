@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
-import { ArtistService } from '../../api/services/Artist/artist.service';
+import { ArtistRequestDto } from '../../../api/dtos/Artist/artist-request-dto';
+import { ArtistService } from '../../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
-import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
-import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
+import { ErrorToastComponent } from '../../../components/error-toast/error-toast.component';
+import { ArtistResponseDto } from '../../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
-import { convertBiographyToHtml } from '../../lib/utils';
-import { AdminNavComponent } from '../../components/admin-nav/admin-nav.component';
+import { ArtistFormComponent } from '../../../components/artist-form/artist-form.component';
+import { convertBiographyToHtml } from '../../../lib/utils';
+import { AdminNavComponent } from '../../../components/admin/admin-nav/admin-nav.component';
 
 @Component({
   selector: 'app-artist-crud',

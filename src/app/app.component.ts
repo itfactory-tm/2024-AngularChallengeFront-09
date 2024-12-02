@@ -7,7 +7,7 @@ import { SpinnerComponent } from './components/loading-spinner/spinner/spinner.c
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from './api/services/Users/user.service';
 import { LoaderService } from './components/loading-spinner/loader.service';
-import { AdminNavComponent } from "./components/admin-nav/admin-nav.component";
+import { AdminNavComponent } from "./components/admin/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { AdminButtonComponent } from '../../components/admin-button/admin-button.component';
+import { AdminButtonComponent } from '../../components/admin/admin-button/admin-button.component';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from '../../api/services/Users/user.service';
-import { AdminModalComponent } from '../../components/admin-modal/admin-modal.component';
+import { AdminModalComponent } from '../../components/admin/admin-modal/admin-modal.component';
 import { UserResponseDto } from '../../api/dtos/User/user-response-dto';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
 
