@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { ArtistRequestDto } from '../../api/dtos/Artist/artist-request-dto';
-import { ArtistService } from '../../api/services/Artist/artist.service';
+import { ArtistRequestDto } from '../../../api/dtos/Artist/artist-request-dto';
+import { ArtistService } from '../../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
-import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
-import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
+import { ErrorToastComponent } from '../../../components/error-toast/error-toast.component';
+import { ArtistResponseDto } from '../../../api/dtos/Artist/artist-response-dto';
 import { OnInit } from '@angular/core';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { ArtistFormComponent } from '../../components/artist-form/artist-form.component';
-import { convertBiographyToHtml } from '../../lib/utils';
+import { CommonModule } from '@angular/common';
+import { ArtistFormComponent } from '../../../components/artist-form/artist-form.component';
+import { convertBiographyToHtml } from '../../../lib/utils';
 import { map, Observable } from 'rxjs';
+import { GenreResponseDto } from '../../../api/dtos/Genre/genre-response-dto';
 
 @Component({
   selector: 'app-artist-crud',
@@ -16,7 +17,6 @@ import { map, Observable } from 'rxjs';
   imports: [
     FormsModule,
     ErrorToastComponent,
-    AsyncPipe,
     CommonModule,
     ArtistFormComponent,
   ],
@@ -34,7 +34,7 @@ export class ArtistCrudComponent implements OnInit {
     genres: [],
     discogsId: '',
   };
-
+ 
   constructor(private artistService: ArtistService) {}
 
   ngOnInit() {
@@ -44,10 +44,19 @@ export class ArtistCrudComponent implements OnInit {
       map(artists => 
         artists.map(artist => ({
           ...artist,
-          biography: convertBiographyToHtml(artist.biography)
+          biography: convertBiographyToHtml(artist.biography),
+          showFullBio: false
         }))
       )
     );
+  }
+
+  getGenreList(genres: GenreResponseDto[]): string {
+    return '(' + genres.map((genre) => genre.name).join(', ') + ')';
+  }
+
+  toggleBiography(artist: ArtistResponseDto) {
+    artist.showFullBio = !artist.showFullBio;
   }
 
   editArtist(artist: ArtistResponseDto) {

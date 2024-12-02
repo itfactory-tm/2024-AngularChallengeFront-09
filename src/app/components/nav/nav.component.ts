@@ -20,9 +20,19 @@ export class NavComponent {
   showDropdown() {
     this.renderer.addClass(document.body, 'overflow-hidden'); // Lock scrolling when modal is open
     this.dropdownIsVisible = true;
+
+	const hideBarElement = document.querySelector('.hide-bar');
+    if (hideBarElement) {
+      this.renderer.addClass(hideBarElement, 'sm:hidden');
+    }
   }
   closeDropdown() {
     this.renderer.removeClass(document.body, 'overflow-hidden'); // Unlock scrolling when modal is open
     this.dropdownIsVisible = false;
+
+	const hideBarElement = document.querySelector('.hide-bar');
+    if (hideBarElement) {
+      this.renderer.removeClass(hideBarElement, 'sm:hidden');
+    }
   }
 }

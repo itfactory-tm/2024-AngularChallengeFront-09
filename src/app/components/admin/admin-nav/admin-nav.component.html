@@ -1,0 +1,77 @@
+<div
+  class="fixed flex justify-between items-center px-6 py-2 z-20 top-[120px] h-[50px] w-screen bg-primary/40 backdrop-blur-xl md:hidden hide-bar">
+  <button
+    class="flex items-center space-x-2 text-xl cursor-pointer"
+    (click)="showDropdown()">
+    <i class="fa-solid fa-bars text-3xl"></i>
+    <span>Manage</span>
+  </button>
+</div>
+
+@if (dropdownIsVisible) {	
+	<!-- Close Button -->
+	<div
+		(click)="closeDropdown()"
+		class="fixed top-0 right-0 pt-10 px-10 z-50 cursor-pointer">
+		<i class="fa-solid fa-x text-4xl"></i>
+	</div>
+
+	<!-- Background Overlay -->
+	<div class="fixed left-0 top-0 w-screen h-screen bg-black/80 z-20 backdrop-blur-lg flex flex-col justify-start items-center">
+
+		<!-- Logo and Divider -->
+		<a routerLink="" class="flex flex-col items-center mt-20">
+			<img src="assets/logo.png" alt="Logo" class="w-[200px]" />
+			<hr class="text-white w-8/12 mx-auto border-t-2 border-black mt-6" />
+		</a>
+
+		<!-- Dropdown Links -->
+		<div class="mt-16 px-10 flex gap-y-12 justify-center items-center flex-col overflow-y-auto max-h-screen z-30">
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin">Admin</a>
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-artists">Artists</a>
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-performances">Performances</a>
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-stages">Stages</a>
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-genres">Genres</a>
+			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" target="_blank" rel="noopener noreferrer">Users</a>
+		</div>
+	</div>
+}
+
+
+<div class="fixed hidden md:block left-1/2 transform -translate-x-1/2 mt-[100px] pt-3" style="z-index: 9999;">
+    <nav class="flex flex-col p-4 pb-3 border border-tertiary bg-primary rounded-lg">
+	  <div class="flex flex-row items-center mx-3 nav-list">
+		<a routerLink="/admin" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b-2 border-transparent hover:border-current mx-2">Admin</a>
+		<a routerLink="/admin/manage-artists" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b-2 border-transparent hover:border-current mx-2">Artists</a>
+		<a routerLink="/admin/manage-performances" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Performances</a>
+		<a routerLink="/admin/manage-stages" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Stages</a>
+		<a routerLink="/admin/manage-genres" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Genres</a>
+		<a routerLink="/line-up" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Days</a>
+		<a routerLink="/tickets" 
+		   routerLinkActive="active"
+		   [routerLinkActiveOptions]="{ exact: true }" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Tickets</a>
+		<a href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" 
+		   target="_blank" 
+		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Users</a>
+	  </div>
+    </nav>
+</div>

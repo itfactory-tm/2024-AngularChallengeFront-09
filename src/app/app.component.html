@@ -3,9 +3,19 @@
 <div class="bottom-gradient fixed top-0 h-screen w-screen overflow-hidden"></div>
 
 <div class="min-h-screen flex flex-col">
-  <nav>
-    <app-nav></app-nav>
-  </nav>
+	@if (isAdminPage)
+	{
+		<nav class="admin-nav">
+			<app-nav></app-nav>
+			<app-admin-nav ></app-admin-nav>
+		</nav>
+	}
+	@else {
+		<nav>
+			<app-nav></app-nav>
+		</nav>
+	}
+  
   <main>
     <router-outlet></router-outlet>
     <app-spinner></app-spinner>

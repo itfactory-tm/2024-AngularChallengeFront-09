@@ -15,8 +15,6 @@
     height: 100px;
 }
 
-
-
 /* Blurring effect */
 .nav-blur {
     backdrop-filter: blur(8px);
