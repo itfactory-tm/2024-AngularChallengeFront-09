@@ -1,12 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { AdminButtonComponent } from '../../components/admin-button/admin-button.component';
+import { AdminButtonComponent } from '../../components/admin/admin-button/admin-button.component';
 import { AuthService, User } from '@auth0/auth0-angular';
 import { OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from '../../api/services/Users/user.service';
-import { AsyncPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { AdminModalComponent } from '../../components/admin-modal/admin-modal.component';
+import { AdminModalComponent } from '../../components/admin/admin-modal/admin-modal.component';
 import { UserResponseDto } from '../../api/dtos/User/user-response-dto';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
 
@@ -15,11 +13,9 @@ import { ErrorToastComponent } from '../../components/error-toast/error-toast.co
   standalone: true,
   imports: [
     AdminButtonComponent,
-    AsyncPipe,
-    RouterLink,
     AdminModalComponent,
     ErrorToastComponent,
-  ],
+],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
