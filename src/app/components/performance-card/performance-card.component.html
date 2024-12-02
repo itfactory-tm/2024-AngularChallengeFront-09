@@ -1,0 +1,9 @@
+<div class="performance-card bg-[#3F0A73] p-4 rounded-lg shadow-md hover:scale-105 transform transition-transform duration-200">
+  <h4 class="text-lg font-bold text-[#6BF2E5] mb-2">
+    {{ performance.artist.name }}
+  </h4>
+  <p class="text-sm text-white mb-2">
+    {{ performance.startTime | date: 'shortTime' }} - {{ performance.endTime | date: 'shortTime' }}
+  </p>
+ 
+</div>
