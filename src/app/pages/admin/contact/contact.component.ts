@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ToastComponent } from '../../components/toast/toast.component';
+import { ToastComponent } from '../../../components/toast/toast.component';
 
 
 @Component({
