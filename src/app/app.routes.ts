@@ -4,7 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LineUpComponent } from './pages/line-up/line-up.component';
 import { StagesComponent } from './pages/stages/stages.component';
 import { TicketsComponent } from './pages/tickets/tickets.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { ContactComponent } from './pages/admin/contact/contact.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { StageInfoComponent } from './pages/stage-info/stage-info.component';
 import { ArtistCrudComponent } from './pages/admin/artist-crud/artist-crud.component';
