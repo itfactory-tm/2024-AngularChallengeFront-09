@@ -7,6 +7,10 @@
     <app-nav></app-nav>
   </nav>
   <main>
+	@if (isAdminPage)
+	{
+		<app-admin-nav></app-admin-nav>
+	}
     <router-outlet></router-outlet>
     <app-spinner></app-spinner>
   </main>

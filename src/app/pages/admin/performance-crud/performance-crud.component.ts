@@ -18,7 +18,6 @@ import { ArtistFormComponent } from '../../../components/artist-form/artist-form
 import { StageResponseDto } from '../../../api/dtos/Stage/stage-response-dto';
 import { StageFormComponent } from '../../../components/stage-form/stage-form.component';
 import { DayRequestDto } from '../../../api/dtos/Day/day-request-dto';
-import { AdminNavComponent } from "../../../components/admin/admin-nav/admin-nav.component";
 
 @Component({
   selector: 'app-performance-crud',
@@ -33,7 +32,6 @@ import { AdminNavComponent } from "../../../components/admin/admin-nav/admin-nav
     RouterModule,
     ArtistFormComponent,
     StageFormComponent,
-    AdminNavComponent
 ],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',

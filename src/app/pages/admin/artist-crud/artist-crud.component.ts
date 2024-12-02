@@ -8,7 +8,6 @@ import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArtistFormComponent } from '../../../components/artist-form/artist-form.component';
 import { convertBiographyToHtml } from '../../../lib/utils';
-import { AdminNavComponent } from '../../../components/admin/admin-nav/admin-nav.component';
 
 @Component({
   selector: 'app-artist-crud',
@@ -18,7 +17,6 @@ import { AdminNavComponent } from '../../../components/admin/admin-nav/admin-nav
     ErrorToastComponent,
     CommonModule,
     ArtistFormComponent,
-	AdminNavComponent,
   ],
   templateUrl: './artist-crud.component.html',
   styleUrl: './artist-crud.component.css',
