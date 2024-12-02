@@ -18,7 +18,7 @@
   </nav>
 
   <!-- subfilter -->
-  <nav class="flex flex-wrap gap-0.5 px-1 py-1 sm:py-8 justify-center items-stretch h-full">
+  <nav class="sub-nav-bar">
     @for (filterOption of subfilters; track $index) {
     <button (click)="updateSubFilter($index)" [class.active]="activeSubFilterIndex === $index">{{ filterOption |
       formatLineUpTitle }}</button>
