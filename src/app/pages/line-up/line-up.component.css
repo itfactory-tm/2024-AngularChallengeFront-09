@@ -7,6 +7,19 @@
   gap: 25px;
 }
 
+.search {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(239, 53, 242, 0.4);
+  border-radius: 5px;
+  background-color: rgba(239, 53, 242, 0.1);
+  color: rgba(239, 53, 242, 0.9);
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+}
+
 .day-title {
   color: rgba(107, 242, 229, 255);
   font-size: 2.5rem;
