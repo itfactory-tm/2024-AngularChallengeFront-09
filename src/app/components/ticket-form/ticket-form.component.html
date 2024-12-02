@@ -1,0 +1,53 @@
+<!-- Formulier -->
+<div class="form-container w-full max-h-[480px]">
+    <div>
+      <h1 class="form-title">{{ this.edit ? 'Edit Ticket' : 'Add Ticket' }}</h1>
+  
+      <form (ngSubmit)="submitForm()" #ticketForm="ngForm">
+        <div class="mb-5">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            [(ngModel)]="selectedTicketDto.name" />
+        </div>
+        <div class="mb-5">
+          <label for="capacity">Price</label>
+          <input
+            type="number"
+            pattern="[0-9]*"
+            id="capacity"
+            name="capacity"
+            required
+            [(ngModel)]="selectedTicketDto.price" />
+        </div>
+        <div class="mb-5">
+          <label for="description">Description</label>
+          <textarea
+            class="resize-none"
+            type="textarea"
+            id="description"
+            name="description"
+            [(ngModel)]="selectedTicketDto.description"></textarea>
+        </div>
+        <div class="flex gap-1 justify-start">
+          @if (edit) {
+            <button
+              type="button"
+              (click)="submitEdit()"
+              [disabled]="!ticketForm.form.valid">
+              Edit
+            </button>
+            <button type="button" (click)="cancelEdit()">Cancel</button>
+          } @else {
+            <button type="submit" [disabled]="!ticketForm.form.valid">
+              Create
+            </button>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+  
