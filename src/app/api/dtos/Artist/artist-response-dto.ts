@@ -8,4 +8,5 @@ export interface ArtistResponseDto {
     genres: GenreResponseDto[];
     discogsImage?: Image;
     discogsId: string;
+    showFullBio: boolean;
 }
