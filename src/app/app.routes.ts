@@ -12,6 +12,7 @@ import { ArtistCrudComponent } from './pages/artist-crud/artist-crud.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { StageCrudComponent } from './pages/stage-crud/stage-crud.component';
 import { PerformanceCrudComponent } from './pages/performance-crud/performance-crud.component';
+import { GenreCrudComponent } from './components/genre-crud/genre-crud.component';
 
 
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'manage-artists', component: ArtistCrudComponent, canActivate: [AuthGuard]},
   { path: 'manage-stages', component: StageCrudComponent, canActivate: [AuthGuard]},
+  { path: 'manage-genres', component: GenreCrudComponent, canActivate: [AuthGuard]},
   { path: 'manage-performances', component: PerformanceCrudComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },

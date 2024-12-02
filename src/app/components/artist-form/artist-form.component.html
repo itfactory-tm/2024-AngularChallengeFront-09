@@ -1,9 +1,10 @@
 <!-- Formulier -->
-<div class="form-container w-full max-h-[480px]">
+<div class="form-container">
   <div>
-    <h1 class="form-title">{{ this.edit ? 'Edit artist' : 'Add artist' }}</h1>
+    <h1 class="form-title">{{ edit ? 'Edit artist' : 'Add artist' }}</h1>
 
     <form (ngSubmit)="submitForm()" #artistForm="ngForm">
+      <!-- Naam -->
       <div class="mb-5">
         <label for="name">Name</label>
         <input
@@ -13,38 +14,53 @@
           required
           [(ngModel)]="selectedArtistDto.name" />
       </div>
+
+      <!-- Discogs ID -->
       <div class="mb-5">
-        <label for="spotifyId">Spotify id</label>
+        <label for="discogsId">Discogs ID</label>
         <input
           type="text"
-          id="spotifyId"
-          name="spotifyId"
+          id="discogsId"
+          name="discogsId"
           required
-          [(ngModel)]="selectedArtistDto.spotifyId" />
+          [(ngModel)]="selectedArtistDto.discogsId" />
       </div>
+
+      <!-- Genres -->
       <div class="mb-5">
-        <label for="biography">Biography</label>
-        <textarea
-          class="resize-none"
-          type="textarea"
-          id="biography"
-          name="biography"
-          [(ngModel)]="selectedArtistDto.biography"></textarea>
+        <label for="genres">Genres</label>
+
+        <div class="list-scroll-bar select-checkbox overflow-y-scroll max-h-[100px]">
+          @for (genre of genres$ | async; track $index) {
+            <label>
+              <input
+                #checkbox
+                type="checkbox"
+                [value]="genre.name"
+                [checked]="isGenreSelected(genre.name)"
+                (change)="onCheckboxChange($event)"
+                />
+              {{ genre.name }}
+            </label>
+          }
+        </div>
       </div>
-      <div class="button-container">
+
+      <!-- Knoppen -->
+      <div class="flex gap-4 justify-start">
         @if (edit) {
           <button
-            type="button"
-            (click)="submitEdit()"
-            [disabled]="!artistForm.form.valid">
-            Edit
+              type="button"
+              (click)="submitEdit()"
+              [disabled]="!artistForm.form.valid">
+              Edit
           </button>
           <button type="button" (click)="cancelEdit()">Cancel</button>
-        } @else {
+          } @else {
           <button type="submit" [disabled]="!artistForm.form.valid">
-            Create
+              Create
           </button>
-        }
+          }
       </div>
     </form>
   </div>

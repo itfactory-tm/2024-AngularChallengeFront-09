@@ -17,7 +17,8 @@ export class ArtistService {
   private apiUrl = `${environment.baseUrl}/Artists`;
   private headers: HttpHeaders | undefined;
   private artistsSubject = new BehaviorSubject<ArtistResponseDto[]>([]);
-  artists$: Observable<ArtistResponseDto[]> = this.artistsSubject.asObservable();
+  artists$: Observable<ArtistResponseDto[]> =
+    this.artistsSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -31,7 +32,7 @@ export class ArtistService {
 
   // Methode om artiesten op te halen
   fetchArtists(): void {
-    this.http.get<ArtistResponseDto[]>(this.apiUrl).subscribe((artists) => {
+    this.http.get<ArtistResponseDto[]>(this.apiUrl).subscribe(artists => {
       this.artistsSubject.next(artists);
     });
   }
@@ -53,7 +54,9 @@ export class ArtistService {
   }
 
   updateArtist(id: string, artist: ArtistRequestDto) {
-    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist, { headers: this.headers });
+    return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist, {
+      headers: this.headers,
+    });
   }
 
   deleteArtist(id: string) {
@@ -67,7 +70,7 @@ export class ArtistService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.log(error.error)
+    console.log(error.error);
     const errorMessage =
       error.status === 400
         ? error.error

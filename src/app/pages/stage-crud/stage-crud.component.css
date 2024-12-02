@@ -2,22 +2,3 @@
   font-size: large;
   color: white;
 }
-
-/* Scrollbar */
-.stages-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.stages-container::-webkit-scrollbar-thumb {
-  background-color: #6bf2e5;
-  border-radius: 10px;
-}
-
-.stages-container::-webkit-scrollbar-thumb:hover {
-  background-color: #3f0a73;
-}
-
-.stages-container::-webkit-scrollbar-track {
-  background-color: #3f0a73;
-  border-radius: 10px;
-}
