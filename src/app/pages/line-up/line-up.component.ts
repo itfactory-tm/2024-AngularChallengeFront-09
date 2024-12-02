@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { groupBy, map, mergeMap, toArray } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { ArtistComponent } from '../../components/artist/artist.component';
@@ -13,6 +19,7 @@ import { GenreResponseDto } from '../../api/dtos/Genre/genre-response-dto';
 import { StageService } from '../../api/services/Stages/stage.service';
 import { ErrorToastComponent } from '../../components/error-toast/error-toast.component';
 import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-line-up',
@@ -22,18 +29,21 @@ import { StageResponseDto } from '../../api/dtos/Stage/stage-response-dto';
     FormatLineUpTitlePipe,
     RouterModule,
     ErrorToastComponent,
+    FormsModule,
   ],
   templateUrl: './line-up.component.html',
   styleUrl: './line-up.component.css',
 })
-export class LineUpComponent implements OnInit {
+export class LineUpComponent implements OnInit, OnChanges {
   errorMessage = '';
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
   artistSchedule?: ArtistResponseDto[];
+  filteredSchedule?: ArtistResponseDto[];
   activeFilter?: string = 'all';
 
   subfilters: string[] = [];
   activeSubFilterIndex = 0;
+  searchQuery = '';
 
   constructor(
     private artistService: ArtistService,
@@ -45,13 +55,27 @@ export class LineUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.artistService.getArtists().subscribe({
-      next: artists => (this.artistSchedule = artists),
+      next: artists => {
+        this.artistSchedule = artists;
+        this.filteredSchedule = artists;
+      },
       error: err => {
         console.error(err);
         this.errorMessage = `Error loading artists: ${err.message}`;
         this.errorToast.showToast();
       },
     });
+  }
+
+  ngOnChanges(): void {
+    this.filterArtists(); // Refilter on query change
+    console.log('changes');
+  }
+
+  filterArtists() {
+    this.filteredSchedule = this.artistSchedule?.filter(obj =>
+      obj.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 
   updateSubFilter(n: number) {
@@ -87,7 +111,11 @@ export class LineUpComponent implements OnInit {
           const day = days[this.activeSubFilterIndex];
 
           this.artistService.getArtistsByDay(day.id).subscribe({
-            next: artists => (this.artistSchedule = artists),
+            next: artists => {
+              this.artistSchedule = artists;
+              this.filteredSchedule = artists;
+              this.searchQuery = '';
+            },
             error: err => {
               console.error(err);
               this.errorMessage = `Error loading artists: ${err.message}`;
@@ -102,11 +130,16 @@ export class LineUpComponent implements OnInit {
         this.genreService.getGenres().subscribe(genres => {
           this.subfilters = genres.map((genre: GenreResponseDto) => genre.name);
           const genre = genres[this.activeSubFilterIndex];
+
           const activeGenreArtists = this.artistService.getArtistsByGenre(
             genre.id
           );
           activeGenreArtists.subscribe({
-            next: artist => (this.artistSchedule = artist),
+            next: artist => {
+              this.artistSchedule = artist;
+              this.filteredSchedule = artist;
+              this.searchQuery = '';
+            },
             error: err => {
               this.errorMessage = err.message;
               this.errorToast.showToast();
@@ -138,6 +171,8 @@ export class LineUpComponent implements OnInit {
             .subscribe(({ stageName, artists }) => {
               if (stageName === filter) {
                 this.artistSchedule = artists;
+                this.filteredSchedule = artists;
+                this.searchQuery = '';
               }
             });
         });

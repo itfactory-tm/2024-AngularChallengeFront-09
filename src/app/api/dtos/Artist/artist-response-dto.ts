@@ -5,7 +5,8 @@ export interface ArtistResponseDto {
     id: string;
     name: string;
     biography: string;
-    genres?: GenreResponseDto[];
+    genres: GenreResponseDto[];
     discogsImage?: Image;
     discogsId: string;
+    showFullBio: boolean;
 }

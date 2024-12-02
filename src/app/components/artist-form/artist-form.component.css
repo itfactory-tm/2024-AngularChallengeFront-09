@@ -1,0 +1,7 @@
+input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    accent-color: var(--accent-color);
+    cursor: pointer;
+}

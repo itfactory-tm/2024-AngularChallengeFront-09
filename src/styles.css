@@ -8,6 +8,7 @@
   --medium-purple: #601ba6;
   --text-color: #601ba6;
   --accent-color: #6bf2e5;
+  --mint-green: #b0f2c2;
 }
 
 * {
@@ -368,7 +369,7 @@ a {
   border: 1px solid var(--medium-purple);
   border-radius: 8px;
   background-color: var(--dark-purple);
-  color: var(--text-color);
+  /* color: var(--text-color); */
 }
 
 .artists-list-container ul {
@@ -416,11 +417,27 @@ a {
 .artists-list-container .details p {
   margin: 0.3rem 0;
   font-size: 0.9rem;
-  color: var(--accent-color);
+  /* color: white; */
   word-wrap: break-word;
 }
 
 .artists-list-container .details p strong {
   color: var(--light-purple);
 }
+
+.artists-list-container .biography-container {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  transition: max-height 0.3s ease;
+}
+
+.artists-list-container .biography-container.expanded {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  max-height: none;
+}
+
 /* ARTISTS CONTAINER */

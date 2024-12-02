@@ -8,16 +8,23 @@
     <!-- Artiestenlijst -->
     <div class="artists-list-container list-scroll-bar max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
       <ul>
-        @for (artist of artists; track $index; let index = $index) {
+        @for (artist of artists$ | async; track $index;) {
           <li class="list-item">
             <img
               [src]="artist.discogsImage?.url"
               [alt]="artist.name"
-              class="thumbnail" />
+              class="thumbnail my-auto" />
             <div class="details">
-              <h3>{{ artist.name }}</h3>
-              <p [innerHtml]="artistBios[index]"></p>
+              <h3>{{ artist.name }} <span class="text-sm">{{ artist.genres.length > 0 ? getGenreList(artist.genres) : '' }}</span> </h3>
+
+              <div class="biography-container" [class.expanded]="artist.showFullBio">
+                <p [innerHtml]="artist.biography"></p>
+              </div>
+              <button class="text-accent" (click)="toggleBiography(artist)">
+                {{ artist.showFullBio ? 'Show less' : 'Show more' }}
+              </button>
             </div>
+           <div class="my-auto flex gap-4 text-accent">
             <button class="text-lg" (click)="deleteArtist(artist.id)">
               <i class="fa-regular fa-trash-can"></i>
             </button>
@@ -26,9 +33,10 @@
               [ngClass]="{
                 'icon-button': edit && selectedArtistId === artist.id,
               }"
-              (click)="editArtist(artist)">
+              (click)="editArtist(artist)" [disabled]="edit">
               <i class="fa-solid fa-pen"></i>
             </button>
+           </div>
           </li>
         }
       </ul>
@@ -36,11 +44,9 @@
 
     <app-artist-form
       (ErrorEvent)="onErrorEvent($event)"
-      (ArtistCreatedEvent)="onArtistCreatedEvent()"
       [selectedArtistId]="selectedArtistId"
       [selectedArtistDto]="selectedArtistDto"
       [(edit)]="edit"
       class="w-full max-w-[500px] lg:w-1/3 mx-auto" />
-
   </div>
 </div>
