@@ -14,11 +14,11 @@
     height: 20vh;
   width: 100%;
   margin-bottom: -10px;
-
 }
+
 footer {
   color: white;
-  position: relative;
+  /*position: relative;*/
   flex-shrink: 0; /* Prevent shrinking */
 }
 
@@ -27,7 +27,8 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 1200px;
+  /*max-width: 1200px;*/
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -71,7 +72,7 @@ footer {
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
- 
+
   margin-top: 20px;
 }
 
