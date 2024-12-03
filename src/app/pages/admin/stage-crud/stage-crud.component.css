@@ -1,4 +1,4 @@
 .icon-button {
   font-size: large;
-  color: white;
+  color: var(--light-purple);
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { ArtistInfoComponent } from '../artist-info/artist-info.component';
@@ -13,12 +13,16 @@ import { ArtistInfoComponent } from '../artist-info/artist-info.component';
 export class ArtistComponent {
   @Input() artist!: ArtistResponseDto;
   isModalOpen = false;
+  
+  constructor(private renderer: Renderer2) {}
 
   showArtistInfo(): void {
     this.isModalOpen = true;
+    this.renderer.addClass(document.body, 'overflow-hidden');
   }
 
   closeArtistInfo(): void {
     this.isModalOpen = false;
+    this.renderer.removeClass(document.body, 'overflow-hidden');
   }
 }

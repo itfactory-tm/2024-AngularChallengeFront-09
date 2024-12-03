@@ -14,17 +14,20 @@
           <div class="details">
               <h3>{{ genre.name }}</h3>
           </div>
-          <button class="text-lg" (click)="deleteGenre(genre.id)">
+          <div class="flex gap-4 text-lg">
+            <button class="text-red-600" (click)="deleteGenre(genre.id)">
               <i class="fa-regular fa-trash-can"></i>
           </button>
           <button
-              class="text-lg"
+              class="text-accent"
               [ngClass]="{
               'icon-button': edit && selectedGenreId === genre.id,
               }"
               (click)="enableEdit(genre)">
               <i class="fa-solid fa-pen"></i>
           </button>
+          </div>
+         
           </li>
       }
       </ul>
