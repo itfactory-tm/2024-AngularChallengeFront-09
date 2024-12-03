@@ -24,12 +24,12 @@
                 {{ artist.showFullBio ? 'Show less' : 'Show more' }}
               </button>
             </div>
-           <div class="my-auto flex gap-4 text-accent">
-            <button class="text-lg" (click)="deleteArtist(artist.id)">
+           <div class="my-auto flex gap-4 text-lg">
+            <button class="text-red-600" (click)="deleteArtist(artist.id)">
               <i class="fa-regular fa-trash-can"></i>
             </button>
             <button
-              class="text-lg"
+              class="text-accent"
               [ngClass]="{
                 'icon-button': edit && selectedArtistId === artist.id,
               }"
