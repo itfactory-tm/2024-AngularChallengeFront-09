@@ -1,21 +1,17 @@
 <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
 <h1>Line up</h1>
-<div class="container mx-auto">
-  <div class="block w-3/4 md:hidden mx-auto">
-    <input class="search" type="text" [(ngModel)]="searchQuery" placeholder="Search artist" (input)="filterArtists()" />
+<div class="container mx-auto flex flex-col justify-center items-center">
+  <div class="flex w-full justify-center items-center gap-4 p-[20px] flex-wrap md:flex-nowrap max-w-[350px] md:max-w-none">
+    <input class="search flex-shrink" type="text" [(ngModel)]="searchQuery" placeholder="Search artist" (input)="filterArtists()" />
+    <nav class="nav-bar w-full md:w-2/5 flex flex-col md:flex-row justify-stretch items-stretch gap-2 flex-wrap md:flex-nowrap">
+      <button (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
+      <button (click)="updateFilterContent('byDay')" [class.active]="activeFilter === 'byDay'">By day</button>
+      <button (click)="updateFilterContent('byGenre')" [class.active]="activeFilter === 'byGenre'">By
+        genre</button>
+      <button (click)="updateFilterContent('byStage')" [class.active]="activeFilter === 'byStage'">By
+        stage</button>
+    </nav>
   </div>
-  <nav class="nav-bar">
-    <div class="hidden md:block w-full">
-      <input class="search" type="text" [(ngModel)]="searchQuery" placeholder="Search artist"
-        (input)="filterArtists()" />
-    </div>
-    <button (click)="updateFilterContent('all')" [class.active]="activeFilter === 'all'">All artists</button>
-    <button (click)="updateFilterContent('byDay')" [class.active]="activeFilter === 'byDay'">Artists by day</button>
-    <button (click)="updateFilterContent('byGenre')" [class.active]="activeFilter === 'byGenre'">Artists by
-      genre</button>
-    <button (click)="updateFilterContent('byStage')" [class.active]="activeFilter === 'byStage'">Artists by
-      stage</button>
-  </nav>
 
   <!-- subfilter -->
   <nav class="sub-nav-bar">
