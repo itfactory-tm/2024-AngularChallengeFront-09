@@ -1,69 +1,66 @@
 <div class="container mx-auto">
   @if (stage$ | async; as stage) {
-  <div class="full-screen flex flex-col">
-  
-    <div class="stage-header py-2">
-      <h1>{{ stage?.name }}</h1>
-    </div>
-
-    <div class="stage-details grid grid-cols-2 gap-4 mb-4">
-      <div class="stage-image-wrapper">
-        <img 
-          class="stage-image object-cover w-full h-48" 
-          [src]="baseUrl + stage.imageUrl" 
-          alt="{{stage.name}}" 
-        />
+    <div class="flex flex-col">
+      <div class="stage-header py-2">
+        <h1>{{ stage?.name }}</h1>
       </div>
 
-      <div class="stage-info">
-        <div class="stage-capacity mb-2">
-          <span class="info-label font-semibold">Capacity:</span>
-          <span class="info-value">{{ stage?.capacity }}</span>
+      <div
+        class="stage-details flex-col md:flex-row gap-6 md:gap-16 grid grid-cols-2 mb-4">
+        <div>
+          <img
+            class="stage-image object-cover w-full h-48"
+            [src]="baseUrl + stage.imageUrl"
+            alt="{{ stage.name }}" />
         </div>
-        
-        <div class="stage-description">
-          <span class="info-label font-semibold">Description:</span>
-          <p class="info-value text-sm">{{ stage?.description }}</p>
+
+        <div class="stage-info">
+          <div class="stage-capacity mb-2">
+            <span class="info-label font-semibold text-xl">Capacity:</span>
+            <span class="info-value">{{ stage?.capacity }}</span>
+          </div>
+
+          <div class="stage-description">
+            <span class="info-label font-semibold text-xl">Description:</span>
+            <p class="info-value text-sm">{{ stage?.description }}</p>
+          </div>
         </div>
+      </div>
+
+      <div class="relative min-h-96 w-full">
+        <iframe
+          class="absolute inset-0 w-full h-full"
+          loading="lazy"
+          allowfullscreen
+          [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
+        </iframe>
       </div>
     </div>
 
-    <div class="flex-1 relative"> <!-- Iframe container -->
-      <iframe  
-        class="absolute inset-0 w-full h-full"
-        loading="lazy"  
-        allowfullscreen  
-        [src]="getSanitizedUrl(stage.latitude, stage.longitude)">
-      </iframe>
-    </div>
-  
-  </div>
+    <div class="performance-timetable mt-6">
+      <h2 class="text-2xl font-bold text-white mb-4 text-center">
+        Timetable for {{ stage.name }}
+      </h2>
 
-  <div class="performance-timetable mt-6">
-    <h2 class="text-2xl font-bold text-white mb-4 text-center">
-      Timetable for {{ stage.name }}
-    </h2>
-  
-    <div class="timetable-container bg-[#601BA6] rounded-lg p-4 shadow-lg">
-      <div *ngFor="let data of performances$ | async" class="day-container mb-6">
-        <h3 class="day-header text-xl font-semibold text-[#6BF2E5] border-b border-[#EF35F2] pb-2 mb-4">
-          {{ data.day.date | date: "fullDate" }}
-        </h3>
-  
-        <div class="performances-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div *ngFor="let performance of data.performances">
-            <app-performance-card
-              [performance] = "performance"
-              
-        />
+      <div class="timetable-container bg-[#601BA6] rounded-lg p-4 shadow-lg">
+        <div
+          *ngFor="let data of performances$ | async"
+          class="day-container mb-6">
+          <h3
+            class="day-header text-xl font-semibold text-[#6BF2E5] border-b border-[#EF35F2] pb-2 mb-4">
+            {{ data.day.date | date: 'fullDate' }}
+          </h3>
+
+          <div
+            class="performances-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div *ngFor="let performance of data.performances">
+              <app-performance-card [performance]="performance" />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  }
-  @else {
+  } @else {
     <p class="stage-not-found">Stage not found</p>
   }
 </div>
