@@ -74,7 +74,7 @@ export class LineUpComponent implements OnInit, OnChanges {
 
   filterArtists() {
     this.filteredSchedule = this.artistSchedule?.filter(obj =>
-      obj.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      obj.name.toLowerCase().includes(this.searchQuery.toLowerCase().trim())
     );
   }
 
