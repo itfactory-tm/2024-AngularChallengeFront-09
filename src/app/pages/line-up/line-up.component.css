@@ -44,6 +44,7 @@
 }
 
 .nav-bar button {
+  width: 100%;
   padding: 8px 16px;
   border: 1px solid rgba(239, 53, 242, 0.6);
   border-radius: 20px;
@@ -103,3 +104,4 @@
   background-color: rgba(107, 242, 229, 0.4);
   color: #fff;
 }
+
