@@ -5,9 +5,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerComponent } from './components/loading-spinner/spinner/spinner.component';
 import { AuthService } from '@auth0/auth0-angular';
-import { UserService } from './api/services/Users/user.service';
 import { LoaderService } from './components/loading-spinner/loader.service';
-import { AdminNavComponent } from "./components/admin/admin-nav/admin-nav.component";
+import { AdminNavComponent } from './components/admin/admin-nav/admin-nav.component';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +16,8 @@ import { AdminNavComponent } from "./components/admin/admin-nav/admin-nav.compon
     NavComponent,
     FooterComponent,
     SpinnerComponent,
-    AdminNavComponent
-],
+    AdminNavComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private userService: UserService,
     private loaderService: LoaderService
   ) {
     // Show spinner also for authentication
@@ -44,19 +42,7 @@ export class AppComponent implements OnInit {
 
     this.auth.appState$.subscribe(appState => {
       if (appState && appState.target) {
-        if (
-          this.auth.isAuthenticated$.subscribe(isAuthenticated => {
-            if (isAuthenticated) {
-              // Add user to backend or update it or nothing
-              this.userService.syncUser().subscribe({
-                next: response =>
-                  console.log('User synced successfully:', response),
-                error: err => console.error('Error syncing user:', err),
-              });
-            }
-          })
-        )
-          this.router.navigate([appState.target]); // Redirect to the target URL
+        this.router.navigate([appState.target]); // Redirect to the target URL
       }
     });
   }
