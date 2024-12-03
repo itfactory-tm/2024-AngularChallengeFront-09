@@ -6,9 +6,9 @@
       <h4>Festival Information</h4>
       <ul>
         <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
 
@@ -19,7 +19,9 @@
         <li><a routerLink="/line-up">Lineup</a></li>
         <li><a routerLink="/stages">Stages</a></li>
         <li><a routerLink="/tickets">Tickets</a></li>
-        <li><a routerLink="/admin">Admin</a></li>
+		@if (isAuthenticated) {
+			<li><a routerLink="/admin">Admin</a></li>
+		}
       </ul>
     </div>
 

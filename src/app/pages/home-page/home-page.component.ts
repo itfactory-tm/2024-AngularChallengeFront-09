@@ -12,8 +12,14 @@ import { RouterLink } from '@angular/router';
 	// This will be used to reference the next section
 	@ViewChild('nextSection') nextSection!: ElementRef;
 
-	// This method will be called on button click
 	scrollToNextSection() {
-	  this.nextSection.nativeElement.scrollIntoView({ behavior: 'smooth' });
-	}
+		const offset = 125; // Height of the navbar
+		const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+	  
+		window.scrollTo({
+		  top: targetPosition,
+		  behavior: 'smooth'
+		});
+	  }
+	  
 }

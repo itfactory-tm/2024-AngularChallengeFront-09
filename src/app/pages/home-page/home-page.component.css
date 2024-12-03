@@ -1,7 +1,6 @@
 .hero {
-    height: calc(100vh - 100px);
+    height: 100vh;
     width: 100%;
-    position: relative;
     color: white;
     display: flex;
     flex-direction: column;
@@ -14,35 +13,40 @@
 .hero::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -20px;
+	left: -20px;
+	right: 0;
+	bottom: 0;
     background-image: url("/assets/hero_picture.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(10px);
-    opacity: 0.8;
-	transform: scale(1.05);
+	opacity: 0.8;
+	clip-path: inset(0);
     z-index: -1; /* Ensures it's behind the text content */
+	overflow: hidden;
 }
 
 .hero h1, .hero h2 {
     z-index: 1; /* Keeps text in front */
 	filter: blur(0);
+	position: absolute;
 }
 
 .hero h1 {
     font-size: 10vh; /* Increased size for better visibility */
     font-family: "Impact", sans-serif;
     margin: 0;
+	top: 35vh;
 }
 
 .hero h2 {
     font-size: 3.5vh;
     font-weight: bold;
+	top: 50vh;
 }
+
 .scroll-button {
     position: absolute; /* Position it relative to the .hero */
     bottom: 20px; /* Center vertically */
