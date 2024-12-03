@@ -56,7 +56,7 @@ export class ArtistService {
   updateArtist(id: string, artist: ArtistRequestDto) {
     return this.http.put<ArtistRequestDto>(`${this.apiUrl}/${id}`, artist, {
       headers: this.headers,
-    });
+    }).pipe(catchError(this.handleError));
   }
 
   deleteArtist(id: string) {

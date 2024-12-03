@@ -71,11 +71,17 @@ export class ArtistFormComponent implements OnInit {
   
   submitEdit() {
     this.selectedArtistDto.genres = this.selectedGenres.map(name => ({ name }));
-    this.resetAllCheckboxes();
-    this.artistService
-      .updateArtist(this.selectedArtistId, this.selectedArtistDto)
-      .subscribe(() => this.artistService.fetchArtists());
+    this.artistService.updateArtist(this.selectedArtistId, this.selectedArtistDto)
+      .subscribe({
+        next: () => {
+          this.artistService.fetchArtists();
+        },
+        error: err => {
+          this.ErrorEvent.emit(err.message);
+        },
+      });
 
+    this.resetAllCheckboxes();
     this.cancelEdit();
   }
 
