@@ -1,14 +1,15 @@
 <ul
-  class="fixed flex justify-between items-center px-8 py-0.5 z-20 h-[120px] w-screen bg-primary/40 backdrop-blur-xl md:hidden">
-  <li>
-    <a routerLink=""
-      ><img src="assets/logo.png" alt="Logo" class="w-[100px]"
-    /></a>
-  </li>
-  <i
-    (click)="showDropdown()"
-    class="fa-solid fa-bars text-3xl cursor-pointer"></i>
-</ul>
+	class="fixed flex justify-between items-center px-8 py-0.5 z-20 h-[100px] w-screen bg-primary/40 backdrop-blur-xl md:hidden">
+	<li>
+	  <a routerLink=""
+		><img src="assets/logo.png" alt="Logo" class="w-[100px]"
+	  /></a>
+	</li>
+	<i
+	  (click)="showDropdown()"
+	  class="fa-solid fa-bars text-3xl cursor-pointer"></i>
+  </ul>
+
 
 @if (dropdownIsVisible) {
 	<div
@@ -38,7 +39,6 @@
 		</div>
 	</div>
 }
-
 <ul class="nav-list hidden md:flex fixed" [class.nav-blur]="isScrolled">
   <li class="nav-component">
     <a

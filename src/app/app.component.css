@@ -13,7 +13,11 @@ nav {
   
   @media (max-width: 768px) {
 	nav {
-	  margin-bottom: 150px;
+	  margin-bottom: 100px;
+	}
+
+	nav.admin-nav {
+		margin-bottom: 150px;
 	}
   }
   
