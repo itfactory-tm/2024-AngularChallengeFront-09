@@ -81,7 +81,6 @@ export class ArtistFormComponent implements OnInit {
         },
       });
 
-    this.resetAllCheckboxes();
     this.cancelEdit();
   }
 
@@ -94,6 +93,7 @@ export class ArtistFormComponent implements OnInit {
       genres: [],
       discogsId: '',
     };
+    this.resetAllCheckboxes();
   }
 
   submitForm() {
