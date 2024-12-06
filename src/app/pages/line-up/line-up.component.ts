@@ -2,7 +2,6 @@ import {
   Component,
   OnChanges,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { groupBy, map, mergeMap, toArray } from 'rxjs';
@@ -11,7 +10,7 @@ import { ArtistComponent } from '../../components/artist/artist.component';
 import { ArtistResponseDto } from '../../api/dtos/Artist/artist-response-dto';
 import { ArtistService } from '../../api/services/Artist/artist.service';
 import { DayService } from '../../api/services/Day/day.service';
-import { FormatLineUpTitlePipe } from '../../pipes/format-line-up-title.pipe';
+import { FormatDatePipe } from '../../pipes/format-date.pipe';
 import { GenreService } from '../../api/services/Genres/genre.service';
 import { DayResponseDto } from '../../api/dtos/Day/day-response-dto';
 import { PerformanceService } from '../../api/services/Performance/performance.service';
@@ -26,7 +25,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     ArtistComponent,
-    FormatLineUpTitlePipe,
+    FormatDatePipe,
     RouterModule,
     ErrorToastComponent,
     FormsModule,
