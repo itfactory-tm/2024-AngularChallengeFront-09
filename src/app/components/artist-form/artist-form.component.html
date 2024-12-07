@@ -1,7 +1,7 @@
 <!-- Formulier -->
 <div class="form-container">
   <div>
-    <h1 class="form-title">{{ edit ? 'Edit artist' : 'Add artist' }}</h1>
+    <h1 class="form-title" id="crudFormTitle">{{ edit ? 'Edit artist' : 'Add artist' }}</h1>
 
     <form (ngSubmit)="submitForm()" #artistForm="ngForm">
       <!-- Naam -->

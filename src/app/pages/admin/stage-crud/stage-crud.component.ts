@@ -48,6 +48,18 @@ export class StageCrudComponent {
       .subscribe(() => this.stageService.fetchStages());
   }
 
+  scrollToForm() {
+    const offset = 160; // Height of the navbar
+    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+    const targetPosition = document.getElementById('crudFormTitle');
+
+    if (targetPosition) {
+      window.scrollTo({
+        top: targetPosition.offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
+  }
 
   editStage(stage: StageResponseDto) {
     this.edit = true;
@@ -59,6 +71,7 @@ export class StageCrudComponent {
       longitude: stage.longitude,
       latitude: stage.latitude,
     };
+    this.scrollToForm();
   }
 
   onErrorEvent(message: string) {

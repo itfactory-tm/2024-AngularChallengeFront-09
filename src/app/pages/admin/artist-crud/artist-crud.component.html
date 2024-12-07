@@ -6,44 +6,53 @@
 <div class="container mx-auto mt-10">
   <div class="flex justify-between gap-4 flex-wrap">
     <!-- Artiestenlijst -->
-    <div class="artists-list-container list-scroll-bar max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
+    <div
+      class="artists-list-container list-scroll-bar max-h-[500px] w-full lg:w-1/2 overflow-y-scroll">
       <ul>
-        @for (artist of artists$ | async; track $index;) {
+        @for (artist of artists$ | async; track $index) {
           <li class="list-item">
-          @if (artist.discogsImage) {
-            <img
-              [src]="artist.discogsImage.url"
-              [alt]="artist.name"
-              class="thumbnail my-auto" />
-          } @else {
-            <img
-              src="/assets/placeholder.jpg"
-              [alt]="artist.name"
-              class="thumbnail my-auto" />
-          }
+            @if (artist.discogsImage) {
+              <img
+                [src]="artist.discogsImage.url"
+                [alt]="artist.name"
+                class="thumbnail my-auto" />
+            } @else {
+              <img
+                src="/assets/placeholder.jpg"
+                [alt]="artist.name"
+                class="thumbnail my-auto" />
+            }
             <div class="details">
-              <h3>{{ artist.name }} <span class="text-sm text-accent">{{ artist.genres.length > 0 ? getGenreList(artist.genres) : '' }}</span> </h3>
+              <h3>
+                {{ artist.name }}
+                <span class="text-sm text-accent">{{
+                  artist.genres.length > 0 ? getGenreList(artist.genres) : ''
+                }}</span>
+              </h3>
 
-              <div class="biography-container" [class.expanded]="artist.showFullBio">
+              <div
+                class="biography-container"
+                [class.expanded]="artist.showFullBio">
                 <p [innerHtml]="artist.biography"></p>
               </div>
               <button class="text-accent" (click)="toggleBiography(artist)">
                 {{ artist.showFullBio ? 'Show less' : 'Show more' }}
               </button>
             </div>
-           <div class="my-auto flex gap-4 text-lg">
-            <button class="text-red-600" (click)="deleteArtist(artist.id)">
-              <i class="fa-regular fa-trash-can"></i>
-            </button>
-            <button
-              class="text-accent"
-              [ngClass]="{
-                'icon-button': edit && selectedArtistId === artist.id,
-              }"
-              (click)="editArtist(artist)" [disabled]="edit">
-              <i class="fa-solid fa-pen"></i>
-            </button>
-           </div>
+            <div class="my-auto flex gap-4 text-lg">
+              <button class="text-red-600" (click)="deleteArtist(artist.id)">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+              <button
+                class="text-accent"
+                [ngClass]="{
+                  'icon-button': edit && selectedArtistId === artist.id,
+                }"
+                (click)="editArtist(artist)"
+                [disabled]="edit">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
           </li>
         }
       </ul>
