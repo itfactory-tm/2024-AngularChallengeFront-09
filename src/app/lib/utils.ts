@@ -18,7 +18,7 @@ export function convertBiographyToHtml(biography: string): string {
   biography = biography.replace(/\[b\]/g, '<b>').replace(/\[\/b\]/g, '</b>');
 
   biography = biography.replace(/\[url=(.*?)\](.*?)\[\/url\]/g, (_, p1, p2) => {
-    return `<a href=${p1}>${p2}</a>`;
+    return `<a href=${p1} target="_blank">${p2}</a>`;
   });
 
   // Replace artist links with just names
