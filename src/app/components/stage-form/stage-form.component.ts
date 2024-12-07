@@ -30,7 +30,6 @@ export class StageFormComponent {
     latitude: 0,
   };
   submitForm() {
-    console.log('addming', this.selectedStageDto);
     this.stageService.addStage(this.selectedStageDto).subscribe({
       next: value => {
         this.StageCreatedEvent.emit(value);

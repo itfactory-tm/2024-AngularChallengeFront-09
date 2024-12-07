@@ -38,7 +38,7 @@ export class DayService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.log(error.error);
+    console.error(error.error);
     const errorMessage =
       error.status === 400
         ? error.error

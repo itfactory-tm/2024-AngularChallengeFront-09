@@ -74,7 +74,7 @@ export class PerformanceCrudComponent implements OnInit {
   }
 
   scrollToForm() {
-    const offset = 160; // Height of the navbar
+    const offset = 220; // Height of the navbar
     //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
     const targetPosition = document.getElementById('crudFormTitle');
 
@@ -197,7 +197,6 @@ export class PerformanceCrudComponent implements OnInit {
 
   toTimeString(date: Date): string {
     if (!(date instanceof Date)) {
-      console.log(date);
       throw new Error('Invalid date object');
     }
     return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
@@ -220,7 +219,6 @@ export class PerformanceCrudComponent implements OnInit {
     this.formattedEndTime = this.toTimeString(
       this.selectedPerformanceDto.endTime
     );
-    console.log(this.formattedStartTime, this.formattedEndTime);
     this.artistService
       .getArtistById(this.selectedPerformanceDto.artistId)
       .subscribe({
@@ -289,7 +287,6 @@ export class PerformanceCrudComponent implements OnInit {
     // Subscribe to the final observable
     dayObservable.subscribe({
       next: () => {
-        console.log('PERFORMANCE UPDATED');
         this.refreshPerformances();
       },
       error: err => {

@@ -27,7 +27,7 @@ export class ContactComponent{
   ];
 
   openFaqId: number | null = null;
-  
+
 
   // Toggles FAQ sections
   toggleFaq(faqId: number) {
@@ -42,8 +42,6 @@ export class ContactComponent{
 
   // Handle form submission
   onSubmit() {
-    console.log('Form submitted:', this.contactForm);
-
     this.toastMessage = 'Thank you for your message! We will get back to you soon.';
     this.toast.showToast()
 

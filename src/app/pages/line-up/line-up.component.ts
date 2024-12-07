@@ -68,7 +68,6 @@ export class LineUpComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.filterArtists(); // Refilter on query change
-    console.log('changes');
   }
 
   filterArtists() {

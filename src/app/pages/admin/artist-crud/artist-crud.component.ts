@@ -73,7 +73,7 @@ export class ArtistCrudComponent implements OnInit {
   }
 
   scrollToForm() {
-    const offset = 160; // Height of the navbar
+    const offset = 220; // Height of the navbar
     //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
     const targetPosition = document.getElementById('crudFormTitle');
 
