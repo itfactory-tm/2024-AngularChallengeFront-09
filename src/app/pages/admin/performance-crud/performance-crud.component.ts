@@ -32,7 +32,7 @@ import { DayRequestDto } from '../../../api/dtos/Day/day-request-dto';
     RouterModule,
     ArtistFormComponent,
     StageFormComponent,
-],
+  ],
   templateUrl: './performance-crud.component.html',
   styleUrl: './performance-crud.component.css',
 })
@@ -79,13 +79,14 @@ export class PerformanceCrudComponent implements OnInit {
     const targetPosition = document.getElementById('crudFormTitle');
 
     if (targetPosition) {
-      window.scrollTo({
-        top: targetPosition.offsetTop - offset,
-        behavior: 'smooth',
-      });
+      if (window.outerWidth < 800) {
+        window.scrollTo({
+          top: targetPosition.offsetTop - offset,
+          behavior: 'smooth',
+        });
+      }
     }
   }
-
 
   resetForm() {
     this.edit = false;

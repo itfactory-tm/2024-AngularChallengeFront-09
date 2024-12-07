@@ -38,6 +38,21 @@ export class TicketCrudComponent{
     this.tickets$ = this.ticketService.tickets$;
   }
 
+  scrollToForm() {
+    const offset = 160; // Height of the navbar
+    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+    const targetPosition = document.getElementById('crudFormTitle');
+
+    if (targetPosition) {
+      if (window.outerWidth < 800) {
+        window.scrollTo({
+          top: targetPosition.offsetTop - offset,
+          behavior: 'smooth',
+        });
+      }
+    }
+    this.scrollToForm();
+  }
   editTicket(ticket: TicketResponseDto) {
     this.edit = true;
     this.selectedTicketId = ticket.id;
@@ -46,6 +61,7 @@ export class TicketCrudComponent{
       price: ticket.price,
       description: ticket.description,
     };
+
   }
 
   deleteTicket(id: string) {

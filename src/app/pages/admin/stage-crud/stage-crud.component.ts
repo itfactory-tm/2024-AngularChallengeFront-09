@@ -16,8 +16,8 @@ import { StageFormComponent } from '../../../components/stage-form/stage-form.co
     ErrorToastComponent,
     AsyncPipe,
     CommonModule,
-    StageFormComponent
-],
+    StageFormComponent,
+  ],
   templateUrl: './stage-crud.component.html',
   styleUrl: './stage-crud.component.css',
 })
@@ -54,10 +54,12 @@ export class StageCrudComponent {
     const targetPosition = document.getElementById('crudFormTitle');
 
     if (targetPosition) {
-      window.scrollTo({
-        top: targetPosition.offsetTop - offset,
-        behavior: 'smooth',
-      });
+      if (window.outerWidth < 800) {
+        window.scrollTo({
+          top: targetPosition.offsetTop - offset,
+          behavior: 'smooth',
+        });
+      }
     }
   }
 
