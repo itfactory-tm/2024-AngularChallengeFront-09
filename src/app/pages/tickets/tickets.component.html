@@ -1,4 +1,4 @@
-<h1>Tickets</h1>
+<h1 class="text-center">Tickets</h1>
 <div class="container ticket-container mx-auto flex justify-center items-center flex-wrap gap-4 p-4">
 	@for (ticket of ticketList$ | async; track $index) {
 		<app-ticket [ticket]="ticket" class="ticket-item">

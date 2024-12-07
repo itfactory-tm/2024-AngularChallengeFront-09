@@ -1,5 +1,5 @@
 <app-error-toast [message]="errorMessage" [timeout]="3000" #errorToast></app-error-toast>
-<h1>Line up</h1>
+<h1 class="text-center">Line up</h1>
 <div class="container mx-auto flex flex-col justify-center items-center">
   <div class="flex w-full justify-center items-center gap-4 p-[20px] flex-wrap md:flex-nowrap max-w-[350px] md:max-w-none">
     <input class="search flex-shrink" type="text" [(ngModel)]="searchQuery" placeholder="Search artist" (input)="filterArtists()" />
