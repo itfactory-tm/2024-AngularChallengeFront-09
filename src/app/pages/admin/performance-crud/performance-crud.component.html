@@ -65,7 +65,7 @@
                 >Select Artist
                 <span
                   class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
-                  (click)="createNewArtist = !createNewArtist"
+                  (click)="createArtistToggle()"
                   >Or create a new artist?</span
                 >
               </label>
@@ -131,7 +131,7 @@
               Stage
               <span
                 class="text-sm text-white/30 float-right cursor-pointer underline hover:italic"
-                (click)="createNewStage = !createNewStage"
+                (click)="createStageToggle()"
                 >Or add a new stage?</span
               >
             </label>
@@ -210,24 +210,26 @@
 @if (createNewArtist || createNewStage) {
   <div
     class="w-screen h-screen fixed top-0 left-0 bg-black/20 backdrop-blur-lg flex justify-center items-center">
-    <div
-      (click)="closeModal()"
-      class="fixed top-0 right-0 pt-32 px-32 w-auto h-50 z-50 cursor-pointer">
-      <i class="fa-solid fa-x text-4xl"></i>
+    <div class="relative max-w-[500px] w-full">
+      <div
+        (click)="closeModal()"
+        class="absolute top-0 right-0 w-auto z-50 cursor-pointer p-8">
+        <i class="fa-solid fa-x text-3xl"></i>
+      </div>
+      @if (createNewArtist) {
+        <app-artist-form
+          class="w-full"
+          (ArtistCreatedEvent)="onArtistCreated($event)"
+          (ErrorEvent)="onErrorEvent($event)"
+          [edit]="false" />
+      }
+      @if (createNewStage) {
+        <app-stage-form
+          class="w-full"
+          (StageCreatedEvent)="onStageCreated($event)"
+          (ErrorEvent)="onErrorEvent($event)"
+          [edit]="false" />
+      }
     </div>
-    @if (createNewArtist) {
-      <app-artist-form
-        class="w-full max-w-[500px]"
-        (ArtistCreatedEvent)="onArtistCreated($event)"
-        (ErrorEvent)="onErrorEvent($event)"
-        [edit]="false" />
-    }
-    @if (createNewStage) {
-      <app-stage-form
-        class="w-full max-w-[500px]"
-        (StageCreatedEvent)="onStageCreated($event)"
-        (ErrorEvent)="onErrorEvent($event)"
-        [edit]="false" />
-    }
   </div>
 }

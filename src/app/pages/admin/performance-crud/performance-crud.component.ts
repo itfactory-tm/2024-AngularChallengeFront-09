@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { PerformanceRequestDto } from '../../../api/dtos/Performance/performance-request-dto';
 import { PerformanceService } from '../../../api/services/Performance/performance.service';
 import { FormsModule } from '@angular/forms';
@@ -64,7 +64,8 @@ export class PerformanceCrudComponent implements OnInit {
     private performanceService: PerformanceService,
     private artistService: ArtistService,
     private dayService: DayService,
-    private stageService: StageService
+    private stageService: StageService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -325,7 +326,23 @@ export class PerformanceCrudComponent implements OnInit {
     this.stages$ = this.stageService.getStages();
   }
 
+  createArtistToggle() {
+    this.createNewArtist = !this.createNewArtist;
+    // block scroll
+    if (this.createNewArtist) {
+      this.renderer.addClass(document.body, 'overflow-hidden'); // Lock scrolling when modal is open
+    }
+  }
+
+  createStageToggle() {
+    this.createNewStage = !this.createNewStage;
+    if (this.createNewStage) {
+      this.renderer.addClass(document.body, 'overflow-hidden'); // Lock scrolling when modal is open
+    }
+  }
+
   closeModal() {
+    this.renderer.removeClass(document.body, 'overflow-hidden'); // Unlock scrolling when modal is open
     this.createNewStage = false;
     this.createNewArtist = false;
   }
