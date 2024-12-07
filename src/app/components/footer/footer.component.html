@@ -5,10 +5,8 @@
     <div class="footer-section">
       <h4>Festival Information</h4>
       <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
       </ul>
     </div>
 
@@ -19,9 +17,7 @@
         <li><a routerLink="/line-up">Lineup</a></li>
         <li><a routerLink="/stages">Stages</a></li>
         <li><a routerLink="/tickets">Tickets</a></li>
-		@if (isAuthenticated) {
-			<li><a routerLink="/admin">Admin</a></li>
-		}
+        <li><a routerLink="/admin">Admin</a></li>
       </ul>
     </div>
 
@@ -34,6 +30,7 @@
         <img src="assets/sponsors/stella.png" alt="Stella Artois" />
         <!-- Add more sponsor logos as needed -->
       </div>
+      <hr class="my-2">
       <div class="absolute">
         @if (isAuthenticated) {
           @if (user) {

@@ -8,7 +8,7 @@
   </button>
 </div>
 
-@if (dropdownIsVisible) {	
+@if (dropdownIsVisible) {
 	<!-- Close Button -->
 	<div
 		(click)="closeDropdown()"
@@ -41,36 +41,32 @@
 <div class="fixed hidden md:block left-1/2 transform -translate-x-1/2 mt-[100px] pt-3" style="z-index: 9999;">
     <nav class="flex flex-col p-4 pb-3 border border-tertiary bg-primary rounded-lg">
 	  <div class="flex flex-row items-center mx-3 nav-list">
-		<a routerLink="/admin" 
+		<a routerLink="/admin"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b-2 border-transparent hover:border-current mx-2">Admin</a>
-		<a routerLink="/admin/manage-artists" 
+		<a routerLink="/admin/manage-artists"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b-2 border-transparent hover:border-current mx-2">Artists</a>
-		<a routerLink="/admin/manage-performances" 
+		<a routerLink="/admin/manage-performances"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Performances</a>
-		<a routerLink="/admin/manage-stages" 
+		<a routerLink="/admin/manage-stages"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Stages</a>
-		<a routerLink="/admin/manage-genres" 
+		<a routerLink="/admin/manage-genres"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Genres</a>
-		<a routerLink="/line-up" 
+		<a routerLink="/admin/manage-tickets"
 		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
-		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Days</a>
-		<a routerLink="/admin/manage-tickets" 
-		   routerLinkActive="active"
-		   [routerLinkActiveOptions]="{ exact: true }" 
+		   [routerLinkActiveOptions]="{ exact: true }"
 		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Tickets</a>
-		<a href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" 
-		   target="_blank" 
+		<a href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users"
+		   target="_blank"
 		   class="text-accent no-underline border-b border-transparent hover:border-current mx-2">Users</a>
 	  </div>
     </nav>
