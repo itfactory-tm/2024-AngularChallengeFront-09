@@ -2,20 +2,20 @@
 	display: flex;
 	gap: 20px; /* Optional spacing between cards */
 	align-items: stretch; /* Ensures all cards stretch to the same height */
-  }
+}
 
-  .ticket-item {
-    flex: 1 1 200px; /* Minimum width of 200px */
-    max-width: 300px; /* Optional: Set a maximum width */
-    padding: 16px;
-    border-radius: 8px;
-    background-color: #601ba6;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-	transition: transform 0.2s;
+.ticket-item {
+  flex: 1 1 200px; /* Minimum width of 200px */
+  max-width: 300px; /* Optional: Set a maximum width */
+  /* padding: 16px; */
+  border-radius: 8px;
+  background-color: #601ba6;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
 }
   
-  .ticket-item:hover {
+.ticket-item:hover {
 	transform: translateY(-2px);
-  }
+}
