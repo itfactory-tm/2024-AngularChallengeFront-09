@@ -1,10 +1,10 @@
 <div
-  class="fixed flex justify-between items-center px-6 py-2 z-20 top-[120px] h-[50px] w-screen bg-primary/40 backdrop-blur-xl md:hidden hide-bar">
+  class="fixed flex justify-between items-center px-6 py-2 z-20 top-[100px] h-[50px] w-screen bg-primary/40 backdrop-blur-xl md:hidden hide-bar">
   <button
     class="flex items-center space-x-2 text-xl cursor-pointer"
     (click)="showDropdown()">
     <i class="fa-solid fa-bars text-3xl"></i>
-    <span>Manage</span>
+    <span>View Navigation</span>
   </button>
 </div>
 
@@ -19,20 +19,19 @@
 	<!-- Background Overlay -->
 	<div class="fixed left-0 top-0 w-screen h-screen bg-black/80 z-20 backdrop-blur-lg flex flex-col justify-start items-center">
 
-		<!-- Logo and Divider -->
-		<a routerLink="" class="flex flex-col items-center mt-20">
-			<img src="assets/logo.png" alt="Logo" class="w-[200px]" />
-			<hr class="text-white w-8/12 mx-auto border-t-2 border-black mt-6" />
-		</a>
 
 		<!-- Dropdown Links -->
-		<div class="mt-16 px-10 flex gap-y-12 justify-center items-center flex-col overflow-y-auto max-h-screen z-30">
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin">Admin</a>
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-artists">Artists</a>
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-performances">Performances</a>
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-stages">Stages</a>
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" routerLink="/admin/manage-genres">Genres</a>
-			<a class="text-4xl cursor-pointer" (click)="closeDropdown()" href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" target="_blank" rel="noopener noreferrer">Users</a>
+		<div class="p-4 flex gap-y-8 justify-center items-center flex-col overflow-y-auto max-h-screen z-30">
+      <!-- Logo and Divider -->
+      <a routerLink="" (click)="closeDropdown()" class="flex flex-col items-center mt-20">
+        <img src="assets/logo.png" alt="Logo" class="w-[150px]" />
+      </a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" routerLink="/admin">Admin</a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" routerLink="/admin/manage-artists">Artists</a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" routerLink="/admin/manage-performances">Performances</a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" routerLink="/admin/manage-stages">Stages</a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" routerLink="/admin/manage-genres">Genres</a>
+			<a class="text-4xl cursor-pointer no-underline" (click)="closeDropdown()" href="https://manage.auth0.com/dashboard/us/dev-m6g4o1k40ifixf7v/users" target="_blank" rel="noopener noreferrer">Users</a>
 		</div>
 	</div>
 }

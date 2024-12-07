@@ -1,43 +1,45 @@
 <ul
-	class="fixed flex justify-between items-center px-8 py-0.5 z-20 h-[100px] w-screen bg-primary/40 backdrop-blur-xl md:hidden">
-	<li>
-	  <a routerLink=""
-		><img src="assets/logo.png" alt="Logo" class="w-[100px]"
-	  /></a>
-	</li>
-	<i
-	  (click)="showDropdown()"
-	  class="fa-solid fa-bars text-3xl cursor-pointer"></i>
-  </ul>
-
+  class="fixed flex justify-between items-center px-8 py-0.5 z-20 h-[100px] w-screen bg-primary/40 backdrop-blur-xl md:hidden">
+  <li>
+    <a routerLink=""
+      ><img src="assets/logo.png" alt="Logo" class="w-[100px]"
+    /></a>
+  </li>
+  <i
+    (click)="showDropdown()"
+    class="fa-solid fa-bars text-3xl cursor-pointer"></i>
+</ul>
 
 @if (dropdownIsVisible) {
-	<div
-		(click)="closeDropdown()"
-		class="fixed top-0 right-0 pt-10 px-10 w-auto h-50 z-50 cursor-pointer">
-		<i class="fa-solid fa-x text-4xl"></i>
-	</div>
-	<div
-		class="fixed left-0 top-0 w-screen h-screen bg-black/80 z-20 backdrop-blur-lg flex flex-col justify-center items-center">
-		<a routerLink="" class="w-screen flex justify-center items-center">
-		<img src="assets/logo.png" alt="Logo" class="w-[200px] fixed top-20" />
-		</a>
-		<div
-		class="relative top-10 p-52 flex gap-y-12 justify-center items-center flex-col">
-		<a class="text-4xl" (click)="closeDropdown()" routerLink="/line-up"
-			>Line Up</a
-		>
-		<a class="text-4xl" (click)="closeDropdown()" routerLink="/tickets"
-			>Tickets</a
-		>
-		<a class="text-4xl" (click)="closeDropdown()" routerLink="/stages"
-			>Stages</a
-		>
-		<a class="text-4xl" (click)="closeDropdown()" routerLink="/contact"
-			>Contact</a
-		>
-		</div>
-	</div>
+  <div
+    (click)="closeDropdown()"
+    class="fixed top-0 right-0 pt-10 px-10 w-auto h-50 z-50 cursor-pointer overflow-y-hidden">
+    <i class="fa-solid fa-x text-4xl"></i>
+  </div>
+  <div
+    class="fixed left-0 top-0 w-screen min-h-screen bg-black/80 z-40 backdrop-blur-lg flex flex-col justify-evenly center">
+    <div
+      class="relative top-2 p-4 flex gap-y-12 justify-center items-center flex-col">
+      <a
+        routerLink=""
+        (click)="closeDropdown()"
+        class="w-screen flex justify-center items-center">
+        <img src="assets/logo.png" alt="Logo" class="w-[150px]" />
+      </a>
+      <a class="text-4xl no-underline cursor-pointer" (click)="closeDropdown()" routerLink="/line-up"
+        >Line Up</a
+      >
+      <a class="text-4xl no-underline cursor-pointer" (click)="closeDropdown()" routerLink="/tickets"
+        >Tickets</a
+      >
+      <a class="text-4xl no-underline cursor-pointer" (click)="closeDropdown()" routerLink="/stages"
+        >Stages</a
+      >
+      <a class="text-4xl no-underline cursor-pointer" (click)="closeDropdown()" routerLink="/contact"
+        >Contact</a
+      >
+    </div>
+  </div>
 }
 <ul class="nav-list hidden md:flex fixed" [class.nav-blur]="isScrolled">
   <li class="nav-component">

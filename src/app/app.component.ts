@@ -1,4 +1,4 @@
-import { Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -23,9 +23,8 @@ import { AdminNavComponent } from './components/admin/admin-nav/admin-nav.compon
 })
 export class AppComponent implements OnInit {
   title = '2024-AngularChallengeFront-09';
-  isAdminPage: boolean = false;
+  isAdminPage = false;
 
-  // Redirect to url after login auth0...
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -48,8 +47,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(() => {
+    this.router.events.subscribe(event => {
       this.isAdminPage = this.router.url.includes('/admin');
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0); // Scroll to the top
+      }
     });
   }
 }

@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         ...fontFamily,
-        impact: ['Impact Regular', ...fontFamily['sans']],
+        anton: ['Anton', ...fontFamily['sans']],
       },
       colors: {
         primary: '#3F0A73',
