@@ -17,7 +17,7 @@ export class TicketsComponent implements OnInit{
 	ticketList$!: Observable<TicketResponseDto[]>;
 
 	constructor(private ticketService: TicketService) {}
-  
+
 	ngOnInit(): void {
 	  this.ticketList$ = this.ticketService.getTickets();
 	}

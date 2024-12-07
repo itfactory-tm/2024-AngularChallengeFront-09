@@ -133,32 +133,7 @@
     local('Open Sans Condensed Bold'),
     url('/assets/fonts/OpenSans/OpenSans-CondBold.woff') format('woff');
 }
-@font-face {
-  font-family: 'Impact Regular';
-  font-style: normal;
-  font-weight: normal;
-  src:
-    local('Impact Regular'),
-    url('/assets/fonts/Impact/impact.woff') format('woff');
-}
 
-@font-face {
-  font-family: 'Impact Regular';
-  font-style: normal;
-  font-weight: normal;
-  src:
-    local('Impact Regular'),
-    url('/assets/fonts/Impact/unicode.impact.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Impacted Regular';
-  font-style: normal;
-  font-weight: normal;
-  src:
-    local('Impacted Regular'),
-    url('/assets/fonts/Impact/Impacted.woff') format('woff');
-}
 @font-face {
   font-family: 'Ubuntu';
   src: url('/assets/fonts/Ubuntu/Ubuntu-Regular.ttf') format('truetype');
@@ -225,6 +200,7 @@ h3,
 h4 {
   font-family: 'Ubuntu', sans-serif;
 }
+
 h1 {
   font-size: 3rem;
   margin-top: 20px;
@@ -258,7 +234,8 @@ a {
   margin-bottom: 8px;
 }
 
-.form-container input, textarea {
+.form-container input,
+textarea {
   width: 100%;
   padding: 10px;
   font-size: 0.9rem;
@@ -266,16 +243,19 @@ a {
   border-radius: 5px;
   background-color: rgba(239, 53, 242, 0.1);
   color: rgba(239, 53, 242, 0.9);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
-.form-container input, textarea:focus {
+.form-container input,
+textarea:focus {
   border-color: rgba(239, 53, 242, 1);
   background-color: rgba(239, 53, 242, 0.2);
   outline: none;
 }
 
-.form-container input[type="checkbox"] {
+.form-container input[type='checkbox'] {
   width: auto;
   margin-right: 8px;
 }
