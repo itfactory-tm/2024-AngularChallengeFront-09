@@ -20,7 +20,14 @@
                   }"
                   type="button"
                   (click)="toggleFaq(faq.id)">
-                  {{ faq.question }}
+                  <div class="flex gap-x-2 justify-center items-center">
+                    {{ faq.question }}
+                    @if (openFaqId === faq.id) {
+                      <i class="fa-solid fa-chevron-up text-secondary"></i>
+                    } @else {
+                      <i class="fa-solid fa-chevron-down text-secondary"></i>
+                    }
+                  </div>
                 </button>
               </h2>
               <div

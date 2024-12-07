@@ -2,7 +2,7 @@
 <div class="form-container w-full max-h-[480px]">
     <div>
       <h1 class="form-title">{{ this.edit ? 'Edit Ticket' : 'Add Ticket' }}</h1>
-  
+
       <form (ngSubmit)="submitForm()" #ticketForm="ngForm">
         <div class="mb-5">
           <label for="name">Name</label>
@@ -50,4 +50,4 @@
       </form>
     </div>
   </div>
-  
+

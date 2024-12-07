@@ -12,7 +12,7 @@ import { GenreRequestDto } from '../../../api/dtos/Genre/genre-request-dto';
   standalone: true,
   imports: [FormsModule, ErrorToastComponent, AsyncPipe, CommonModule],
   templateUrl: './genre-crud.component.html',
-  styleUrl: './genre-crud.component.css'
+  styleUrl: './genre-crud.component.css',
 })
 export class GenreCrudComponent {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
@@ -21,7 +21,7 @@ export class GenreCrudComponent {
   edit = false;
   selectedGenreId = '';
   selectedGenreDto: GenreRequestDto = {
-    name: ''
+    name: '',
   };
 
   constructor(private genreService: GenreService) {}
@@ -31,16 +31,31 @@ export class GenreCrudComponent {
     this.genres$ = this.genreService.genres$;
   }
 
+  scrollToForm() {
+    const offset = 160; // Height of the navbar
+    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+    const targetPosition = document.getElementById('crudFormTitle');
+
+    if (targetPosition) {
+      window.scrollTo({
+        top: targetPosition.offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
+  }
+
   deleteGenre(id: string) {
-    this.genreService.deleteGenre(id).subscribe(() =>
-      this.genreService.fetchGenres()
-    );
+    this.genreService
+      .deleteGenre(id)
+      .subscribe(() => this.genreService.fetchGenres());
   }
 
   submitEdit() {
-    this.genreService.updateGenre(this.selectedGenreId, this.selectedGenreDto).subscribe(() => {
-      this.genreService.fetchGenres();
-    });
+    this.genreService
+      .updateGenre(this.selectedGenreId, this.selectedGenreDto)
+      .subscribe(() => {
+        this.genreService.fetchGenres();
+      });
 
     this.disableEdit();
   }
@@ -48,21 +63,22 @@ export class GenreCrudComponent {
   submitForm() {
     this.genreService.addGenre(this.selectedGenreDto).subscribe(() => {
       this.genreService.fetchGenres();
-    })
+    });
   }
 
   enableEdit(stage: GenreResponseDto) {
     this.edit = true;
     this.selectedGenreId = stage.id;
     this.selectedGenreDto = {
-      name: stage.name
+      name: stage.name,
     };
+    this.scrollToForm();
   }
 
   disableEdit() {
     this.edit = false;
     this.selectedGenreDto = {
-      name: ''
+      name: '',
     };
   }
 

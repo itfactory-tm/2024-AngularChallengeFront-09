@@ -1,5 +1,4 @@
 .stage-header {
-  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -9,20 +8,13 @@
 
 .stage-details {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: stretch;
   background-color: rgba(107, 242, 229, 0.05);
   border: 1px solid rgba(107, 242, 229, 0.2);
   border-radius: 8px;
   padding: 15px;
   min-height: 450px;
-}
-
-.stage-image {
-  width: 350px;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
 }
 
 .stage-info {
@@ -32,7 +24,6 @@
 .info-label {
   color: rgba(107, 242, 229, 0.8);
   font-weight: bold;
-  display: block;
   margin-bottom: 5px;
 }
 

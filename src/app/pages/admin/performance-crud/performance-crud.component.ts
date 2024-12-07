@@ -73,6 +73,20 @@ export class PerformanceCrudComponent implements OnInit {
     this.stages$ = this.stageService.getStages();
   }
 
+  scrollToForm() {
+    const offset = 160; // Height of the navbar
+    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+    const targetPosition = document.getElementById('crudFormTitle');
+
+    if (targetPosition) {
+      window.scrollTo({
+        top: targetPosition.offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
+  }
+
+
   resetForm() {
     this.edit = false;
     this.selectedArtist = undefined;
@@ -212,6 +226,7 @@ export class PerformanceCrudComponent implements OnInit {
         next: artist => (this.selectedArtist = artist),
         error: err => console.error('ERROR GETTING ARTIST BY ID', err),
       });
+    this.scrollToForm();
   }
 
   submitPerformanceForm() {

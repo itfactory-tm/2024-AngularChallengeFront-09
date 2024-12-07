@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { ArtistRequestDto } from '../../../api/dtos/Artist/artist-request-dto';
 import { ArtistService } from '../../../api/services/Artist/artist.service';
 import { FormsModule } from '@angular/forms';
@@ -34,39 +34,55 @@ export class ArtistCrudComponent implements OnInit {
     genres: [],
     discogsId: '',
   };
- 
-  constructor(private artistService: ArtistService) {}
+
+  constructor(
+    private artistService: ArtistService,
+    private renderer: Renderer2
+  ) {}
 
   ngOnInit() {
     this.artistService.fetchArtists();
 
     this.artists$ = this.artistService.artists$.pipe(
-      map(artists => 
+      map(artists =>
         artists.map(artist => ({
           ...artist,
           biography: convertBiographyToHtml(artist.biography),
-          showFullBio: false
+          showFullBio: false,
         }))
       )
     );
   }
 
   getGenreList(genres: GenreResponseDto[]): string {
-    return '(' + genres.map((genre) => genre.name).join(', ') + ')';
+    return '(' + genres.map(genre => genre.name).join(', ') + ')';
   }
 
   toggleBiography(artist: ArtistResponseDto) {
     artist.showFullBio = !artist.showFullBio;
   }
-
   editArtist(artist: ArtistResponseDto) {
     this.edit = true;
     this.selectedArtistId = artist.id;
+    this.scrollToForm();
     this.selectedArtistDto = {
       name: artist.name,
       genres: artist.genres,
       discogsId: artist.discogsId,
     };
+  }
+
+  scrollToForm() {
+    const offset = 160; // Height of the navbar
+    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
+    const targetPosition = document.getElementById('crudFormTitle');
+
+    if (targetPosition) {
+      window.scrollTo({
+        top: targetPosition.offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
   }
 
   deleteArtist(id: string) {

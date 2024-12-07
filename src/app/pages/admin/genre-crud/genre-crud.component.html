@@ -35,7 +35,7 @@
     <!-- Formulier -->
     <div class="form-container max-h-[300px] w-full max-w-[500px] mx-auto">
       <div>
-        <h1 class="form-title">{{ this.edit ? 'Edit genre' : 'Add genre' }}</h1>
+        <h1 class="form-title" id="crudFormTitle">{{ this.edit ? 'Edit genre' : 'Add genre' }}</h1>
 
         <form (ngSubmit)="submitForm()" #stageForm="ngForm">
           <div class="mb-5">
