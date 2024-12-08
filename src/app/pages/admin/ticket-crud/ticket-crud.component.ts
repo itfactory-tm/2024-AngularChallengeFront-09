@@ -44,7 +44,6 @@ export class TicketCrudComponent implements OnInit{
 
     if (targetPosition) {
       if (window.outerWidth < 800) {
-        console.log("SCROLLLLING");
         window.scrollTo({
           top: targetPosition.offsetTop - offset,
           behavior: 'smooth',

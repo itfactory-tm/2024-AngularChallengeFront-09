@@ -63,7 +63,8 @@
         }
         <label for="imageUpload">Image</label>
         <input
-          id="imageUpload"
+          #imageUpload
+          required
           name="imageUpload"
           type="file"
           (change)="fileChange($event)"
