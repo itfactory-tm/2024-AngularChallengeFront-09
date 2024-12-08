@@ -42,7 +42,11 @@ export class StageFormComponent {
   };
   fileData: FormData = new FormData();
   submitForm() {
-    console.log('adding', this.selectedStageDto);
+    if (!this.selectedStageDto.image) {
+      this.ErrorEvent.emit('Please upload an image.');
+      return; // Prevent form submission if no file is selected
+    }
+
     this.stageService.addStage(this.selectedStageDto).subscribe({
       next: value => {
         this.StageCreatedEvent.emit(value);
