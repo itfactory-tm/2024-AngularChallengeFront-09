@@ -1,28 +1,82 @@
+# Laser Llama Frontend
 
-# 2024-2025-Angular-FE
+## Beschrijving
+De Laser Llama frontend is een Angular-applicatie die deel uitmaakt van het festival plannings- en voorstellingssysteem. Deze applicatie werkt samen met de .NET Core backend en gebruikt Auth0 voor authenticatie.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
+## Vereisten
+- Node.js
+- npm
+- Git
 
-## Development server
+## Installatie
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Repository Klonen
+```bash
+git clone https://github.com/itfactory-tm/2024-AngularChallengeFront-09
+cd 2024-AngularChallengeFront-09
+```
 
-## Code scaffolding
+### Afhankelijkheden Installeren
+```bash
+npm install
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Configuratie
+Maak een `environment.ts` bestand aan in de `src/environments/` map met de volgende configuratie:
 
-## Build
+```typescript
+export const environment = {
+  baseUrl: '{BACKEND_URL}/api',
+  auth0Domain: '{YOUR_AUTH0_DOMAIN}',
+  auth0ClientId: '{YOUR_AUTH0_CLIENT_ID}',
+  auth0Audience: '{YOUR_AUTH0_CLIENT_AUDIENCE}'
+};
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Er zijn twee omgevingsconfiguraties mogelijk:
+- `environment.ts`: Productie-instellingen
+- `environment.development.ts`: Ontwikkelingsinstellingen
 
-## Running unit tests
+Angular zal automatisch het juiste bestand selecteren op basis van de gebruikte opdracht.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Ontwikkelen
+De applicatie starten in ontwikkelingsmodus:
+```bash
+ng serve
+```
+De applicatie is nu beschikbaar op `http://localhost:4200/`
 
-## Running end-to-end tests
+## Testen
+Unit tests uitvoeren:
+```bash
+ng test
+```
+Dit zal de Karma test runner starten en alle unit tests in het project uitvoeren.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Bouwen voor Productie
+Een productie-build genereren:
+```bash
+ng build
+```
+De gebouwde bestanden zullen zich bevinden in de `dist/` map.
 
-## Further help
+### Na de Build: .htaccess Configuratie
+Na het bouwen van de applicatie, maak een `.htaccess` bestand aan in de `dist/` map met de volgende inhoud:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*) /index.html [L]
+</IfModule>
+```
+
+Dit .htaccess bestand zorgt ervoor dat alle navigatie correct wordt afgehandeld in een Single Page Application (SPA), waardoor directe navigatie naar geneste routes correct werkt.
+
+## Authenticatie
+De applicatie gebruikt Auth0 voor authenticatie. Zorg ervoor dat je de juiste Auth0-configuratie hebt ingesteld in je environment-bestand.
+
+
+## Ondersteuning
+Voor vragen of problemen, neem contact op met het ontwikkelteam.
