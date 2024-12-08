@@ -122,27 +122,6 @@ export class PerformanceCrudComponent implements OnInit {
       .split(':')
       .map(Number);
     const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
-    const now = new Date();
-
-    // Set startTime and endTime for the performance
-    this.selectedPerformanceDto.startTime = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(), // Fix here: use getUTCDate() for day, not getUTCDay()
-        startHours,
-        startMinutes
-      )
-    );
-    this.selectedPerformanceDto.endTime = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        endHours,
-        endMinutes
-      )
-    );
 
     let dayObservable;
 
@@ -153,13 +132,34 @@ export class PerformanceCrudComponent implements OnInit {
         isActive: true,
       };
 
-      // Observable to handle adding the new day
+      // Add the new day to the database and then associate it with the performance
       dayObservable = this.dayService.addDay(newDateDto).pipe(
         switchMap(day => {
           this.newDayId = day.id;
 
           // Assign the new day ID to the performance DTO
           this.selectedPerformanceDto.dayId = this.newDayId;
+
+          // Calculate start and end times based on the newly created day
+          const selectedDate = new Date(newDateDto.date);
+          this.selectedPerformanceDto.startTime = new Date(
+            Date.UTC(
+              selectedDate.getUTCFullYear(),
+              selectedDate.getUTCMonth(),
+              selectedDate.getUTCDate(),
+              startHours,
+              startMinutes
+            )
+          );
+          this.selectedPerformanceDto.endTime = new Date(
+            Date.UTC(
+              selectedDate.getUTCFullYear(),
+              selectedDate.getUTCMonth(),
+              selectedDate.getUTCDate(),
+              endHours,
+              endMinutes
+            )
+          );
 
           // Return the edit performance observable
           return this.performanceService.editPerformance(
@@ -168,12 +168,43 @@ export class PerformanceCrudComponent implements OnInit {
           );
         })
       );
+    } else if (this.selectedPerformanceDto.dayId) {
+      // Fetch the day object using the dayId (observable)
+      dayObservable = this.dayService
+        .getDayById(this.selectedPerformanceDto.dayId)
+        .pipe(
+          switchMap(selectedDay => {
+            const selectedDate = new Date(selectedDay.date);
+
+            // Set the start and end times based on the existing day
+            this.selectedPerformanceDto.startTime = new Date(
+              Date.UTC(
+                selectedDate.getUTCFullYear(),
+                selectedDate.getUTCMonth(),
+                selectedDate.getUTCDate(),
+                startHours,
+                startMinutes
+              )
+            );
+            this.selectedPerformanceDto.endTime = new Date(
+              Date.UTC(
+                selectedDate.getUTCFullYear(),
+                selectedDate.getUTCMonth(),
+                selectedDate.getUTCDate(),
+                endHours,
+                endMinutes
+              )
+            );
+
+            // Return the edit performance observable
+            return this.performanceService.editPerformance(
+              this.selectedPerformanceId,
+              this.selectedPerformanceDto
+            );
+          })
+        );
     } else {
-      // If no new day is created, directly edit the performance
-      dayObservable = this.performanceService.editPerformance(
-        this.selectedPerformanceId,
-        this.selectedPerformanceDto
-      );
+      throw new Error('No day is selected or created for the performance.');
     }
 
     // Subscribe to the final observable
@@ -234,27 +265,6 @@ export class PerformanceCrudComponent implements OnInit {
       .split(':')
       .map(Number);
     const [endHours, endMinutes] = this.formattedEndTime.split(':').map(Number);
-    const now = new Date();
-
-    // Set startTime and endTime for the performance
-    this.selectedPerformanceDto.startTime = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(), // Fix here: use getUTCDate() for day, not getUTCDay()
-        startHours,
-        startMinutes
-      )
-    );
-    this.selectedPerformanceDto.endTime = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        endHours,
-        endMinutes
-      )
-    );
 
     let dayObservable;
 
@@ -265,7 +275,7 @@ export class PerformanceCrudComponent implements OnInit {
         isActive: true,
       };
 
-      // Observable to handle adding the new day
+      // Add the new day to the database and then associate it with the performance
       dayObservable = this.dayService.addDay(newDateDto).pipe(
         switchMap(day => {
           this.newDayId = day.id;
@@ -273,16 +283,69 @@ export class PerformanceCrudComponent implements OnInit {
           // Assign the new day ID to the performance DTO
           this.selectedPerformanceDto.dayId = this.newDayId;
 
+          // Calculate start and end times based on the newly created day
+          const selectedDate = new Date(newDateDto.date);
+          this.selectedPerformanceDto.startTime = new Date(
+            Date.UTC(
+              selectedDate.getUTCFullYear(),
+              selectedDate.getUTCMonth(),
+              selectedDate.getUTCDate(),
+              startHours,
+              startMinutes
+            )
+          );
+          this.selectedPerformanceDto.endTime = new Date(
+            Date.UTC(
+              selectedDate.getUTCFullYear(),
+              selectedDate.getUTCMonth(),
+              selectedDate.getUTCDate(),
+              endHours,
+              endMinutes
+            )
+          );
+
+          // Return the add performance observable
           return this.performanceService.addPerformance(
             this.selectedPerformanceDto
           );
         })
       );
+    } else if (this.selectedPerformanceDto.dayId) {
+      // Fetch the existing day using the dayId (observable)
+      dayObservable = this.dayService
+        .getDayById(this.selectedPerformanceDto.dayId)
+        .pipe(
+          switchMap(selectedDay => {
+            const selectedDate = new Date(selectedDay.date);
+
+            // Set the start and end times based on the existing day
+            this.selectedPerformanceDto.startTime = new Date(
+              Date.UTC(
+                selectedDate.getUTCFullYear(),
+                selectedDate.getUTCMonth(),
+                selectedDate.getUTCDate(),
+                startHours,
+                startMinutes
+              )
+            );
+            this.selectedPerformanceDto.endTime = new Date(
+              Date.UTC(
+                selectedDate.getUTCFullYear(),
+                selectedDate.getUTCMonth(),
+                selectedDate.getUTCDate(),
+                endHours,
+                endMinutes
+              )
+            );
+
+            // Return the add performance observable
+            return this.performanceService.addPerformance(
+              this.selectedPerformanceDto
+            );
+          })
+        );
     } else {
-      // If no new day is created, directly edit the performance
-      dayObservable = this.performanceService.addPerformance(
-        this.selectedPerformanceDto
-      );
+      throw new Error('No day is selected or created for the performance.');
     }
 
     // Subscribe to the final observable
@@ -328,7 +391,7 @@ export class PerformanceCrudComponent implements OnInit {
 
   createArtistToggle() {
     this.createNewArtist = !this.createNewArtist;
-    const adminNavEl =document.getElementById('adminNav');
+    const adminNavEl = document.getElementById('adminNav');
     if (adminNavEl) {
       this.renderer.addClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
     }
@@ -340,7 +403,7 @@ export class PerformanceCrudComponent implements OnInit {
 
   createStageToggle() {
     this.createNewStage = !this.createNewStage;
-    const adminNavEl =document.getElementById('adminNav');
+    const adminNavEl = document.getElementById('adminNav');
     if (adminNavEl) {
       this.renderer.addClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
     }
@@ -351,7 +414,7 @@ export class PerformanceCrudComponent implements OnInit {
 
   closeModal() {
     this.renderer.removeClass(document.body, 'overflow-hidden'); // Unlock scrolling when modal is open
-    const adminNavEl =document.getElementById('adminNav');
+    const adminNavEl = document.getElementById('adminNav');
     if (adminNavEl) {
       this.renderer.removeClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
     }

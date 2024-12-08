@@ -31,6 +31,11 @@ export class DayService {
     return this.http.get<DayResponseDto[]>(this.apiUrl);
   }
 
+  getDayById(id: string): Observable<DayResponseDto> {
+    return this.http.get<DayResponseDto>(`${this.apiUrl}/${id}`);
+  }
+
+
   addDay(day: DayRequestDto): Observable<DayResponseDto> {
     return this.http
       .post<DayResponseDto>(this.apiUrl, day, { headers: this.headers })
