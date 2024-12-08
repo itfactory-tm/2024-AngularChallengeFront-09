@@ -1,60 +1,9 @@
 <app-error-toast [message]="'Failed to update user.'" [timeout]="3000" #errorToast></app-error-toast>
 
 <div class="container mx-auto">
-  <h2 class="py-4 text-center text-6xl my-8 text-white">User Info</h2>
-  @if (user) {
-	<div class="flex justify-center">
-	<div class="p-6 border border-tertiary bg-primary rounded-lg shadow-lg text-secondary w-full md:w-1/2">
-	  <div class="grid grid-cols-1 gap-4">
-		<div>
-		  <label class="block text-md font-medium mb-1" for="name">Name</label>
-		  <input
-			id="name"
-			type="text"
-			value="{{ user.name }}"
-			disabled
-			class="w-full px-4 py-2 bg-tertiary text-accent border border-primary rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-		  />
-		</div>
-		<div class="grid grid-cols-8 gap-4">
-			<div class="col-span-6 xl:col-span-7">
-			  <label class="block text-md font-medium mb-1" for="email">Email</label>
-			  <input
-				id="email"
-				type="email"
-				value="{{ user.email }}"
-				disabled
-				class="w-full px-4 py-2 bg-tertiary text-accent border border-primary rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-			  />
-			</div>
-			<div class="col-span-2 xl:col-span-1">
-			  <label class="block text-md font-medium mb-1 text-center" for="email_verified">Verified</label>
-			  <input
-				id="email_verified"
-				type="text"
-				value="{{ user.email_verified ? '✔' : '✖' }}"
-				disabled
-				class="w-full px-4 py-2 bg-tertiary text-accent border border-primary rounded focus:outline-none focus:ring-2 focus:ring-gray-500 text-center"
-			  />
-			</div>
-		  </div>
-		<div>
-		  <label class="block text-md font-medium mb-1" for="gender">Gender</label>
-		  <input
-			id="gender"
-			type="text"
-			value="{{ user.gender ? user.gender : 'Not specified' }}"
-			disabled
-			class="w-full px-4 py-2 bg-tertiary text-accent border border-primary rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
-		  />
-		</div>
-	  </div>
-	</div>
-</div>
-  }
 
-  <h2 class="py-4 text-center text-6xl my-8 text-white">Manage Content</h2>
-  <div class="flex flex-wrap gap-4 justify-center mx-32">
+  <h2 class="py-8 text-center text-6xl my-8 text-white font-anton mt-6">Manage Content</h2>
+  <div class="flex flex-wrap gap-4 justify-center mx-auto max-w-[1024px]">
 	<app-admin-button
 	  [text]="'Manage Artists'"
 	  [destination]="'/admin/manage-artists'"

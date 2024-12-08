@@ -40,9 +40,9 @@ export class StageInfoComponent implements OnInit {
     this.days$ = this.dayService.getDays();
 
     this.performances$ = this.days$.pipe(
-      switchMap(days => 
+      switchMap(days =>
         this.stage$.pipe(
-          switchMap(stage => 
+          switchMap(stage =>
             // Map through each day to fetch performances for the stage and day
             forkJoin(
               days.map(day =>
@@ -56,10 +56,8 @@ export class StageInfoComponent implements OnInit {
       ),
       map(results => results.flat()) // Flatten the array if needed
     );
-    this.performances$.subscribe(data => console.log(data));
-
-    
   }
+
   getSanitizedUrl(latitude: number, longitude: number) {
     const url = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=14&output=embed`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

@@ -1,7 +1,7 @@
 <!-- Formulier -->
 <div class="form-container w-full max-h-[480px]">
     <div>
-      <h1 class="form-title">{{ this.edit ? 'Edit Ticket' : 'Add Ticket' }}</h1>
+      <h1 class="form-title" id="crudFormTitle">{{ this.edit ? 'Edit Ticket' : 'Add Ticket' }}</h1>
 
       <form (ngSubmit)="submitForm()" #ticketForm="ngForm">
         <div class="mb-5">

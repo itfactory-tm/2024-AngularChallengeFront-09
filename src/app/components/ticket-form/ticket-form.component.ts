@@ -29,7 +29,6 @@ export class TicketFormComponent {
   };
 
   submitForm() {
-    console.log('addming', this.selectedTicketDto);
     this.ticketService.addTicket(this.selectedTicketDto).subscribe({
       next: value => {
         this.TicketCreatedEvent.emit(value);
