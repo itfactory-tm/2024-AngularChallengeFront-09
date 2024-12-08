@@ -20,6 +20,8 @@ export class StageFormComponent {
   @Output()
   editChange = new EventEmitter<boolean>();
   @Input()
+  selectedStageImageUrl = '';
+  @Input()
   selectedStageId = '';
   @Input()
   selectedStageDto: StageRequestDto = {
@@ -28,8 +30,11 @@ export class StageFormComponent {
     capacity: 0,
     longitude: 0,
     latitude: 0,
+    image: null,
   };
+  fileData: FormData = new FormData();
   submitForm() {
+    console.log('adding', this.selectedStageDto);
     this.stageService.addStage(this.selectedStageDto).subscribe({
       next: value => {
         this.StageCreatedEvent.emit(value);
@@ -39,6 +44,8 @@ export class StageFormComponent {
         this.ErrorEvent.emit(err.message);
       },
     });
+    this.selectedStageImageUrl = '';
+    this.cancelEdit();
   }
 
   submitEdit() {
@@ -51,12 +58,25 @@ export class StageFormComponent {
   cancelEdit() {
     this.edit = false;
     this.editChange.emit(this.edit);
+    this.selectedStageImageUrl = '';
     this.selectedStageDto = {
       name: '',
       description: '',
       capacity: 0,
       longitude: 0,
       latitude: 0,
+      image: null,
     };
+  }
+  fileChange(event) {
+    const fileList: FileList = event.target.files;
+
+    if (fileList.length < 1) {
+      return;
+    }
+
+    const file: File = fileList[0];
+    this.selectedStageDto.image = file; // Assign the selected file to the DTO
+    console.log('FILE DATAT', this.fileData);
   }
 }

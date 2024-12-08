@@ -31,7 +31,7 @@ export class StageService {
   }
 
   fetchStages(): void {
-    this.http.get<StageResponseDto[]>(this.apiUrl).subscribe((stages) => {
+    this.http.get<StageResponseDto[]>(this.apiUrl).subscribe(stages => {
       this.stagesSubject.next(stages);
     });
   }
@@ -40,8 +40,25 @@ export class StageService {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
 
-  updateStage(id: string, stage: StageRequestDto): Observable<StageResponseDto> {
-    return this.http.put<StageResponseDto>(`${this.apiUrl}/${id}`, stage, { headers: this.headers });
+  updateStage(
+    id: string,
+    stage: StageRequestDto
+  ): Observable<StageResponseDto> {
+    this.headers?.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData();
+    formData.append('name', stage.name);
+    formData.append('description', stage.description);
+    formData.append('capacity', stage.capacity.toString());
+    formData.append('latitude', stage.latitude.toString());
+    formData.append('longitude', stage.longitude.toString());
+
+    // Append the file correctly
+    if (stage.image) {
+      formData.append('image', stage.image, stage.image.name);
+    }
+    return this.http.put<StageResponseDto>(`${this.apiUrl}/${id}`, formData, {
+      headers: this.headers,
+    });
   }
 
   getStages(): Observable<StageResponseDto[]> {
@@ -53,8 +70,20 @@ export class StageService {
   }
 
   addStage(stage: StageRequestDto): Observable<StageResponseDto> {
+    this.headers?.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData();
+    formData.append('name', stage.name);
+    formData.append('description', stage.description);
+    formData.append('capacity', stage.capacity.toString());
+    formData.append('latitude', stage.latitude.toString());
+    formData.append('longitude', stage.longitude.toString());
+
+    // Append the file correctly
+    if (stage.image) {
+      formData.append('image', stage.image, stage.image.name);
+    }
     return this.http
-      .post<StageResponseDto>(this.apiUrl, stage, { headers: this.headers })
+      .post<StageResponseDto>(this.apiUrl, formData, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -71,9 +100,10 @@ export class StageService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    const errorMessage = error.status === 400
-      ? error.error
-      : 'Er is een onverwachte fout opgetreden.';
+    const errorMessage =
+      error.status === 400
+        ? error.error
+        : 'Er is een onverwachte fout opgetreden.';
     return throwError(() => new Error(errorMessage));
   }
 }

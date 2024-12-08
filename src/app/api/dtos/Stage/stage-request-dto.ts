@@ -4,4 +4,5 @@ export interface StageRequestDto {
     capacity: number;
     longitude: number;
     latitude: number;
+    image: File | null;
 }
