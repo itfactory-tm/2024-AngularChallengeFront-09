@@ -17,7 +17,7 @@ import { TicketFormComponent } from "../../../components/ticket-form/ticket-form
   templateUrl: './ticket-crud.component.html',
   styleUrl: './ticket-crud.component.css'
 })
-export class TicketCrudComponent{
+export class TicketCrudComponent implements OnInit{
 
 
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
@@ -40,19 +40,19 @@ export class TicketCrudComponent{
 
   scrollToForm() {
     const offset = 220; // Height of the navbar
-    //const targetPosition = this.nextSection.nativeElement.offsetTop - offset;
     const targetPosition = document.getElementById('crudFormTitle');
 
     if (targetPosition) {
       if (window.outerWidth < 800) {
+        console.log("SCROLLLLING");
         window.scrollTo({
           top: targetPosition.offsetTop - offset,
           behavior: 'smooth',
         });
       }
     }
-    this.scrollToForm();
   }
+
   editTicket(ticket: TicketResponseDto) {
     this.edit = true;
     this.selectedTicketId = ticket.id;
@@ -61,7 +61,7 @@ export class TicketCrudComponent{
       price: ticket.price,
       description: ticket.description,
     };
-
+    this.scrollToForm();
   }
 
   deleteTicket(id: string) {
