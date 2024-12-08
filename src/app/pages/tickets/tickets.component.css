@@ -1,21 +1,32 @@
 .ticket-container {
 	display: flex;
-	gap: 20px; /* Optional spacing between cards */
-	align-items: stretch; /* Ensures all cards stretch to the same height */
-}
-
-.ticket-item {
-  flex: 1 1 200px; /* Minimum width of 200px */
-  max-width: 300px; /* Optional: Set a maximum width */
-  /* padding: 16px; */
-  border-radius: 8px;
-  background-color: #601ba6;
-  color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.2s;
-}
+	justify-content: center; /* Center the content */
+	align-items: stretch; /* Ensure all cards stretch to the same height */
+	flex-wrap: wrap; /* Allow wrapping */
+	gap: 20px; /* Spacing between cards */
+  }
   
-.ticket-item:hover {
+  .ticket-item {
+	width: 300px; /* Fixed width of 300px */
+	max-width: 300px; /* Ensure that the max-width stays at 300px */
+	flex: 0 1 300px; /* Flexbox rule to allow flexibility while keeping the width fixed */
+	min-height: 100%; /* Ensures that all items have the same minimum height */
+	border-radius: 8px;
+	background-color: #601ba6;
+	color: #ffffff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.2s;
+  }
+  
+  .ticket-item:hover {
 	transform: translateY(-2px);
-}
+  }
+  
+  /* Optional: Use a media query to adjust layout for smaller screens */
+  @media (max-width: 992px) {
+	.ticket-item {
+	  width: 100%; /* Adjust the width for smaller screens */
+	}
+  }
+  
