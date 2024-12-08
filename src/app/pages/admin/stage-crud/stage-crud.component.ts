@@ -25,6 +25,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StageCrudComponent {
   @ViewChild('errorToast') errorToast!: ErrorToastComponent;
+  @ViewChild('sForm') stageForm!: StageFormComponent;
   errorMessage = '';
   stages$!: Observable<StageResponseDto[]>;
   edit = false;
@@ -80,6 +81,7 @@ export class StageCrudComponent {
     this.selectedStageId = stage.id;
     this.selectedStageImageUrl = `${environment.backendUrl}/${stage.imageUrl}`;
 
+    this.stageForm.clearImageInput();
     // Download the image as a Blob and convert to File
     this.downloadImageAsBlob(this.selectedStageImageUrl).subscribe({
       next: blob => {
