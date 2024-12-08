@@ -7,6 +7,7 @@ import { StageService } from '../../../api/services/Stages/stage.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StageFormComponent } from '../../../components/stage-form/stage-form.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-stage-crud',
@@ -26,6 +27,8 @@ export class StageCrudComponent {
   errorMessage = '';
   stages$!: Observable<StageResponseDto[]>;
   edit = false;
+  backendUrl = environment.backendUrl;
+  selectedStageImageUrl = '';
   selectedStageId = '';
   selectedStageDto: StageRequestDto = {
     name: '',
@@ -33,6 +36,7 @@ export class StageCrudComponent {
     capacity: 0,
     longitude: 0,
     latitude: 0,
+    image: null,
   };
 
   constructor(private stageService: StageService) {}
@@ -66,12 +70,14 @@ export class StageCrudComponent {
   editStage(stage: StageResponseDto) {
     this.edit = true;
     this.selectedStageId = stage.id;
+    this.selectedStageImageUrl = `${environment.backendUrl}/${stage.imageUrl}`;
     this.selectedStageDto = {
       name: stage.name,
       description: stage.description,
       capacity: stage.capacity,
       longitude: stage.longitude,
       latitude: stage.latitude,
+      image: null,
     };
     this.scrollToForm();
   }

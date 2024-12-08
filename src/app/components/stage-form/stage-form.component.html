@@ -1,7 +1,9 @@
 <!-- Formulier -->
-<div class="form-container w-full max-h-[480px]">
+<div class="form-container w-full max-h-[1280px]">
   <div>
-    <h1 class="form-title" id="crudFormTitle">{{ this.edit ? 'Edit stage' : 'Add stage' }}</h1>
+    <h1 class="form-title" id="crudFormTitle">
+      {{ this.edit ? 'Edit stage' : 'Add stage' }}
+    </h1>
 
     <form (ngSubmit)="submitForm()" #stageForm="ngForm">
       <div class="mb-5">
@@ -23,6 +25,26 @@
           required
           [(ngModel)]="selectedStageDto.capacity" />
       </div>
+      <div class="flex flex-row gap-4 mb-5">
+        <div class="w-full">
+          <label for="long">Long</label>
+          <input
+            type="number"
+            id="long"
+            name="long"
+            required
+            [(ngModel)]="selectedStageDto.longitude" />
+        </div>
+        <div class="w-full">
+          <label for="Lat">Lat</label>
+          <input
+            type="number"
+            id="lat"
+            name="lat"
+            required
+            [(ngModel)]="selectedStageDto.latitude" />
+        </div>
+      </div>
       <div class="mb-5">
         <label for="description">Description</label>
         <textarea
@@ -31,6 +53,22 @@
           id="description"
           name="description"
           [(ngModel)]="selectedStageDto.description"></textarea>
+      </div>
+      <div class="mb-5">
+        @if (selectedStageImageUrl) {
+          <img
+            [src]="selectedStageImageUrl"
+            alt="image"
+            class="max-w-52 mx-auto object-cover rounded-lg" />
+        }
+        <label for="imageUpload">Image</label>
+        <input
+          id="imageUpload"
+          name="imageUpload"
+          type="file"
+          (change)="fileChange($event)"
+          placeholder="Upload image"
+          accept=".jpg,.png,.webp" />
       </div>
       <div class="flex gap-1 justify-start">
         @if (edit) {
