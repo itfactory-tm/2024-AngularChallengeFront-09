@@ -8,6 +8,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StageFormComponent } from '../../../components/stage-form/stage-form.component';
 import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-stage-crud',
@@ -39,7 +40,10 @@ export class StageCrudComponent {
     image: null,
   };
 
-  constructor(private stageService: StageService) {}
+  constructor(
+    private stageService: StageService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     this.stageService.fetchStages();
@@ -67,19 +71,38 @@ export class StageCrudComponent {
     }
   }
 
+  downloadImageAsBlob(url: string): Observable<Blob> {
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
   editStage(stage: StageResponseDto) {
     this.edit = true;
     this.selectedStageId = stage.id;
     this.selectedStageImageUrl = `${environment.backendUrl}/${stage.imageUrl}`;
-    this.selectedStageDto = {
-      name: stage.name,
-      description: stage.description,
-      capacity: stage.capacity,
-      longitude: stage.longitude,
-      latitude: stage.latitude,
-      image: null,
-    };
-    this.scrollToForm();
+
+    // Download the image as a Blob and convert to File
+    this.downloadImageAsBlob(this.selectedStageImageUrl).subscribe({
+      next: blob => {
+        // Convert the Blob to a File object
+        const file = new File([blob], 'image.jpg', { type: blob.type });
+
+        // Create the selectedStageDto with the File
+        this.selectedStageDto = {
+          name: stage.name,
+          description: stage.description,
+          capacity: stage.capacity,
+          longitude: stage.longitude,
+          latitude: stage.latitude,
+          image: file, // Attach the image here
+        };
+
+        // Proceed with form scroll (or any other logic)
+        this.scrollToForm();
+      },
+      error: error => {
+        console.error('Error fetching image:', error);
+      },
+    });
   }
 
   onErrorEvent(message: string) {
