@@ -328,6 +328,10 @@ export class PerformanceCrudComponent implements OnInit {
 
   createArtistToggle() {
     this.createNewArtist = !this.createNewArtist;
+    const adminNavEl =document.getElementById('adminNav');
+    if (adminNavEl) {
+      this.renderer.addClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
+    }
     // block scroll
     if (this.createNewArtist) {
       this.renderer.addClass(document.body, 'overflow-hidden'); // Lock scrolling when modal is open
@@ -336,6 +340,10 @@ export class PerformanceCrudComponent implements OnInit {
 
   createStageToggle() {
     this.createNewStage = !this.createNewStage;
+    const adminNavEl =document.getElementById('adminNav');
+    if (adminNavEl) {
+      this.renderer.addClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
+    }
     if (this.createNewStage) {
       this.renderer.addClass(document.body, 'overflow-hidden'); // Lock scrolling when modal is open
     }
@@ -343,6 +351,10 @@ export class PerformanceCrudComponent implements OnInit {
 
   closeModal() {
     this.renderer.removeClass(document.body, 'overflow-hidden'); // Unlock scrolling when modal is open
+    const adminNavEl =document.getElementById('adminNav');
+    if (adminNavEl) {
+      this.renderer.removeClass(adminNavEl, 'md:hidden'); // Lock scrolling when modal is open
+    }
     this.createNewStage = false;
     this.createNewArtist = false;
   }
