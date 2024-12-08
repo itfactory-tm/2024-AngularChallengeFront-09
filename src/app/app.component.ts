@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
-      this.isAdminPage = this.router.url.includes('/admin');
+      this.isAdminPage = this.router.url.includes('/admin/');
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0); // Scroll to the top
       }
